@@ -19,6 +19,7 @@ module.exports = {
     'prettier/prettier': 'error',
     indent: ['error', 2, { SwitchCase: 1 }],
     'linebreak-style': ['error', 'unix'],
+    allowAllPropertiesOnSameLine: 'off',
     quotes: ['error', 'single', { avoidEscape: true }],
     semi: ['error', 'always'],
     eqeqeq: 'error',
