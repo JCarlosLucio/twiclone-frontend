@@ -1,12 +1,13 @@
 import { useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { login } from '../services/auth';
 
 export const Auth = () => {
+  const queryClient = useQueryClient();
   const { register, handleSubmit, formState: { errors } } = useForm(); // prettier-ignore
   const { mutateAsync, isLoading } = useMutation(login, {
     onSuccess: (data) => {
-      // TODO: Add user data to global state
+      queryClient.invalidateQueries('currentUser');
       console.log(data);
       // TODO: Navigate to Homepage
     },
