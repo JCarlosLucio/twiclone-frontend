@@ -1,9 +1,5 @@
-let token = null;
-
-export const setToken = (newToken) => {
-  token = `Bearer ${newToken}`;
-};
+import storage from '../utils/storage';
 
 export const authHeader = () => {
-  return { headers: { Authorization: token } };
+  return { headers: { Authorization: `Bearer ${storage.loadUser().token}` } };
 };
