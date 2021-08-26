@@ -1,4 +1,5 @@
 import { useQueryClient } from 'react-query';
+import { Switch, Route } from 'react-router-dom';
 import { Feed } from './Feed';
 import { Auth } from './Auth';
 import storage from './utils/storage';
@@ -23,13 +24,24 @@ const App = () => {
 
   if (isError) return <p>Error: {error.message}</p>;
 
+  if (!user) {
+    return <Auth />;
+  }
+
   return (
     <div>
       <h1>Twiclone Frontend</h1>
-      <button onClick={logout}>logout</button>
-      {!user && <p>PLEASE LOGIN!</p>}
-      <Auth />
-      <Feed />
+      {user && (
+        <div>
+          {user.name}
+          <button onClick={logout}>logout</button>
+        </div>
+      )}
+      <Switch>
+        <Route path="/">
+          <Feed />
+        </Route>
+      </Switch>
     </div>
   );
 };
