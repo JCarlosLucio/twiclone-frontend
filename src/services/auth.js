@@ -11,3 +11,11 @@ export const login = async (credentials) => {
 
   return response.data;
 };
+
+export const register = async (credentials) => {
+  const response = await axios.post(`${baseUrl}/register`, credentials);
+
+  storage.saveUser(response.data);
+
+  return response.data;
+};
