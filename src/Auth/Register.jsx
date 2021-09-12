@@ -27,6 +27,27 @@ export const Register = () => {
     <div>
       <h1>Register</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          placeholder="username"
+          {...register('username', {
+            required: true,
+            pattern: /^[a-zA-Z0-9_]+$/,
+            minLength: 5,
+            maxLength: 15,
+          })}
+        />
+        <p style={{ color: 'red' }}>
+          {errors.username?.type === 'required' && 'username is required'}
+          {errors.username?.type === 'minLength' &&
+            'username should be more than 4 characters'}
+          {errors.username?.type === 'maxLength' &&
+            'username must be 15 characters or less'}
+          {errors.username?.type === 'pattern' &&
+            'username must contain only letters, numbers, underscores and no spaces'}
+        </p>
+
         <label htmlFor="email">Email</label>
         <input
           type="text"
