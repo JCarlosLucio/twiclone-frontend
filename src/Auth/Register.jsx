@@ -27,6 +27,21 @@ export const Register = () => {
     <div>
       <h1>Register</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="name">Name</label>
+        <input
+          type="text"
+          placeholder="name"
+          {...register('name', {
+            required: true,
+            maxLength: 128,
+          })}
+        />
+        <p style={{ color: 'red' }}>
+          {errors.name?.type === 'required' && 'name is required'}
+          {errors.name?.type === 'maxLength' &&
+            'name must be 128 characters or less'}
+        </p>
+
         <label htmlFor="username">Username</label>
         <input
           type="text"
