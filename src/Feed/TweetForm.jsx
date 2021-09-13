@@ -12,9 +12,10 @@ export const TweetForm = () => {
     },
   });
 
-  const onSubmit = async (formData) => {
+  const onSubmit = async (formData, e) => {
     console.log(formData);
     await mutateAsync({ ...formData });
+    e.target.reset();
   };
 
   return (
