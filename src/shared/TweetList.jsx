@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query';
+import { Tweet } from './Tweet';
 import { getAllTweets } from '../services/tweets';
 
 export const TweetList = () => {
@@ -9,10 +10,10 @@ export const TweetList = () => {
   if (isError) return <p>Error: {error.message}</p>;
 
   return (
-    <ul>
+    <div>
       {data.map((tweet) => (
-        <li key={tweet.id}>{tweet.content}</li>
+        <Tweet key={tweet.id} tweet={tweet} />
       ))}
-    </ul>
+    </div>
   );
 };
