@@ -13,3 +13,12 @@ export const getCurrentUser = async () => {
   }
   return null;
 };
+
+export const getUser = async ({ queryKey }) => {
+  const [, { username }] = queryKey;
+  if (username) {
+    const response = await axios.get(`${baseUrl}/${username}`);
+    return response.data;
+  }
+  return null;
+};
