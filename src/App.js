@@ -1,10 +1,10 @@
-import { useQueryClient } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { Switch, Route } from 'react-router-dom';
-import { Feed } from './Feed';
 import { Auth } from './Auth';
-import storage from './utils/storage';
-import { useQuery } from 'react-query';
+import { Feed } from './Feed';
+import { Profile } from './Profile';
 import { getCurrentUser } from './services/user';
+import storage from './utils/storage';
 
 const App = () => {
   const queryClient = useQueryClient();
@@ -38,8 +38,11 @@ const App = () => {
         </div>
       )}
       <Switch>
-        <Route path="/">
+        <Route exact path="/">
           <Feed />
+        </Route>
+        <Route exact path="/:username">
+          <Profile />
         </Route>
       </Switch>
     </div>
