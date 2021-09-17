@@ -9,11 +9,11 @@ import storage from './utils/storage';
 const App = () => {
   const queryClient = useQueryClient();
   const {
-    data: user,
+    data: user = storage.loadUser(),
     error,
     isLoading,
     isError,
-  } = useQuery('currentUser', getCurrentUser, { initialData: null });
+  } = useQuery('currentUser', getCurrentUser);
 
   const logout = () => {
     storage.clearUser();
