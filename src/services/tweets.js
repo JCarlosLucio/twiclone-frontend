@@ -4,8 +4,8 @@ import { authHeader } from './auth-header';
 
 const baseUrl = `${API_URL}/tweets`;
 
-export const getAllTweets = async () => {
-  const response = await axios.get(baseUrl);
+export const getTweets = async (page) => {
+  const response = await axios.get(`${baseUrl}/?page=${page}`);
   return response.data;
 };
 
