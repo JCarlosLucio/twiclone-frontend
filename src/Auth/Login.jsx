@@ -7,14 +7,12 @@ export const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm(); // prettier-ignore
   const { mutateAsync, isLoading } = useMutation(login, {
     onSuccess: (data) => {
-      queryClient.invalidateQueries('currentUser');
-      console.log(data);
+      queryClient.setQueryData('currentUser', data);
       // TODO: Navigate to Homepage
     },
   });
 
   const onSubmit = async (formData) => {
-    console.log(formData);
     await mutateAsync({ ...formData });
   };
 
