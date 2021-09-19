@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { authHeader } from './auth-header';
 import { API_URL } from '../constants';
 import storage from '../utils/storage';
 
@@ -18,4 +19,14 @@ export const register = async (credentials) => {
   storage.saveUser(response.data);
 
   return response.data;
+};
+
+export const getCurrentUser = async () => {
+  const user = storage.loadUser();
+  if (user) {
+    const response = await axios.get(`${baseUrl}/me`, authHeader());
+    return response.data;
+  }
+
+  return null;
 };

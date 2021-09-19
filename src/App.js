@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { Auth } from './Auth';
 import { Feed } from './Feed';
 import { Profile } from './Profile';
-import { getCurrentUser } from './services/user';
+import { getCurrentUser } from './services/auth';
 import storage from './utils/storage';
 
 const App = () => {
