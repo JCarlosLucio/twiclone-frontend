@@ -9,7 +9,7 @@ export const Profile = () => {
     error,
     isLoading,
     isError,
-  } = useQuery(['user', { username }], getUser);
+  } = useQuery(['user', username], () => getUser(username));
 
   if (isLoading) return <p>Loading ...</p>;
 

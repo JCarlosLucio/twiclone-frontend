@@ -14,8 +14,7 @@ export const getCurrentUser = async () => {
   return null;
 };
 
-export const getUser = async ({ queryKey }) => {
-  const [, { username }] = queryKey;
+export const getUser = async (username) => {
   if (username) {
     const response = await axios.get(`${baseUrl}/${username}`);
     return response.data;
