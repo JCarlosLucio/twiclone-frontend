@@ -5,10 +5,14 @@ import { getTweets } from '../services/tweets';
 
 export const TweetList = () => {
   const { data, fetchNextPage, hasNextPage, isLoading, isError, error } =
-    useInfiniteQuery('tweets', ({ pageParam = 1 }) => getTweets(pageParam), {
-      getNextPageParam: (page) =>
-        page.currentPage >= page.lastPage ? undefined : page.currentPage + 1,
-    });
+    useInfiniteQuery(
+      'tweets',
+      ({ pageParam = 1 }) => getTweets(pageParam, 10),
+      {
+        getNextPageParam: (page) =>
+          page.currentPage >= page.lastPage ? undefined : page.currentPage + 1,
+      }
+    );
 
   if (isLoading) return <p>Loading ...</p>;
 
