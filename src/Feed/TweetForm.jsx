@@ -8,13 +8,19 @@ export const TweetForm = () => {
   const { mutateAsync, isLoading } = useMutation(createTweet, {
     onSuccess: (data) => {
       queryClient.invalidateQueries('tweets');
-      console.log(data);
+      console.log('returnedData', data);
     },
   });
 
-  const onSubmit = async (formData, e) => {
-    console.log(formData);
-    await mutateAsync({ ...formData });
+  const onSubmit = async (data, e) => {
+    const formData = new FormData();
+    formData.append('content', data.content);
+
+    [...data.images].forEach((image) => {
+      formData.append('images', image);
+    });
+
+    await mutateAsync(formData);
     e.target.reset();
   };
 
@@ -27,6 +33,8 @@ export const TweetForm = () => {
         {...register('content', { required: true, maxLength: 280 })}
       />
       {errors.email?.type === 'required' && 'Content is required'}
+
+      <input {...register('images')} type="file" name="images" multiple />
 
       <button type="submit">{isLoading ? 'Tweeting...' : 'Tweet'}</button>
     </form>
