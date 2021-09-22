@@ -3,19 +3,21 @@ import PropTypes from 'prop-types';
 
 export const Tweet = ({ tweet }) => {
   return (
-    <div>
+    <div style={{ border: '1px solid blue' }}>
       <Link to={`/${tweet.user.username}`}>
         <h3>
           {tweet.user.name}
           <span>{`@${tweet.user.username}`}</span>
         </h3>
       </Link>
-      <img
-        style={{ width: '504px' }}
-        src={tweet.images[0].url}
-        alt="tweet image"
-      />
       <p>{tweet.content}</p>
+      {tweet.images && tweet.images.length > 0 && (
+        <img
+          style={{ width: '504px' }}
+          src={tweet.images[0].url}
+          alt="tweet image"
+        />
+      )}
     </div>
   );
 };
