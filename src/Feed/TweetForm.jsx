@@ -32,9 +32,30 @@ export const TweetForm = () => {
         placeholder="content"
         {...register('content', { required: true, maxLength: 280 })}
       />
-      {errors.email?.type === 'required' && 'Content is required'}
+      <p style={{ color: 'red' }}>
+        {errors.content?.type === 'required' && 'Content is required'}
+      </p>
 
-      <input {...register('images')} type="file" name="images" multiple />
+      <input
+        {...register('images', {
+          validate: {
+            maxFiles: (files) => files.length <= 4 || 'Max 4 images',
+            maxSize: (files) =>
+              [...files].every((file) => file?.size < 3 * 1024 * 1024) ||
+              'Max 3MB',
+            acceptedFormats: (files) =>
+              [...files].every((file) =>
+                ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'].includes(
+                  file?.type
+                )
+              ) || 'Only PNG, JPG, JPEG e GIF',
+          },
+        })}
+        type="file"
+        name="images"
+        multiple
+      />
+      <p style={{ color: 'red' }}>{errors?.images && errors?.images.message}</p>
 
       <button type="submit">{isLoading ? 'Tweeting...' : 'Tweet'}</button>
     </form>
