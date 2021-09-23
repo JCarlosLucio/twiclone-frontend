@@ -1,7 +1,27 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useMutation, useQueryClient } from 'react-query';
+import { likeTweet } from '../services/tweets';
 
 export const Tweet = ({ tweet }) => {
+  const queryClient = useQueryClient();
+  const user = queryClient.getQueryData('currentUser');
+  const [isLiked, setIsLiked] = useState(tweet.likes.includes(user.id));
+  const { mutate, isLoading } = useMutation(likeTweet, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries('tweets');
+      console.log('returnedData', data);
+      setIsLiked(!isLiked);
+      // probably needs to be made into an optimistic update
+    },
+  });
+
+  const handleLike = (e) => {
+    e.preventDefault();
+    mutate(tweet.id);
+  };
+
   return (
     <div style={{ border: '1px solid blue' }}>
       <Link to={`/${tweet.user.username}`}>
@@ -18,6 +38,9 @@ export const Tweet = ({ tweet }) => {
           alt="tweet image"
         />
       )}
+      <button onClick={handleLike} disabled={isLoading}>
+        {isLoading ? 'liking...' : isLiked ? 'unlike' : 'like'}
+      </button>
     </div>
   );
 };
