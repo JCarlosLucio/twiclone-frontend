@@ -10,6 +10,7 @@ export const Tweet = ({ tweet }) => {
   const user = queryClient.getQueryData(queryKeys.currentUser);
 
   const [isLiked, setIsLiked] = useState(tweet.likes.includes(user.id));
+  const [likesCount, setLikesCount] = useState(tweet.likes.length);
 
   const { mutate, isLoading } = useMutation(likeTweet, {
     onSuccess: (data) => {
@@ -31,6 +32,10 @@ export const Tweet = ({ tweet }) => {
       // added in the meantime, also saves a call to the server
       queryClient.setQueryData(queryKeys.tweets, updatedTweets);
 
+      // updates tweet state locally so if there were other likes
+      // from the moment the tweet was loaded to when the like button was clicked
+      // the likesCount doesnt look like the action gave more likes than 1
+      setLikesCount((prevVal) => prevVal + (isLiked ? -1 : 1));
       setIsLiked(!isLiked);
       // probably needs to be made into an optimistic update
     },
@@ -58,6 +63,7 @@ export const Tweet = ({ tweet }) => {
         />
       )}
       <div>
+        {likesCount}
         <button onClick={handleLike} disabled={isLoading}>
           {isLoading ? 'liking...' : isLiked ? 'unlike' : 'like'}
         </button>
