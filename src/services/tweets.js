@@ -13,3 +13,8 @@ export const createTweet = async (newTweet) => {
   const response = await axios.post(baseUrl, newTweet, authHeader());
   return response.data;
 };
+
+export const likeTweet = async (id) => {
+  const response = await axios.put(`${baseUrl}/${id}/like`, null, authHeader());
+  return response.data;
+};
