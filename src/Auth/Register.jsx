@@ -13,14 +13,11 @@ export const Register = () => {
   } = useForm();
   const { mutateAsync, isLoading } = useMutation(registerUser, {
     onSuccess: (data) => {
-      queryClient.invalidateQueries(queryKeys.me);
-      console.log(data);
-      // TODO: Navigate to Homepage
+      queryClient.setQueryData(queryKeys.me, data);
     },
   });
 
   const onSubmit = async (formData) => {
-    console.log(formData);
     await mutateAsync({ ...formData });
   };
 
