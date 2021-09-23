@@ -4,4 +4,5 @@ export const USER_STORAGE_KEY = 'loggedTwicloneUser';
 export const queryKeys = {
   tweets: 'tweets',
   currentUser: 'currentUser',
+  user: 'user',
 };
