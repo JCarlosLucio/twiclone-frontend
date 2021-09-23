@@ -3,15 +3,34 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useMutation, useQueryClient } from 'react-query';
 import { likeTweet } from '../services/tweets';
+import { queryKeys } from '../constants';
 
 export const Tweet = ({ tweet }) => {
   const queryClient = useQueryClient();
-  const user = queryClient.getQueryData('currentUser');
+  const user = queryClient.getQueryData(queryKeys.currentUser);
+
   const [isLiked, setIsLiked] = useState(tweet.likes.includes(user.id));
+
   const { mutate, isLoading } = useMutation(likeTweet, {
     onSuccess: (data) => {
-      queryClient.invalidateQueries('tweets');
-      console.log('returnedData', data);
+      // queryClient.invalidateQueries('tweets');
+
+      const tweets = queryClient.getQueryData(queryKeys.tweets);
+      const updatedTweets = {
+        ...tweets,
+        pages: tweets.pages.map((page) => {
+          return {
+            ...page,
+            tweets: page.tweets.map((t) => (t.id === tweet.id ? data : t)),
+          };
+        }),
+      };
+
+      // updates tweets query in cache, it better than invalidating queries
+      // because it doesn't move the TweetList with more tweets that were probably
+      // added in the meantime, also saves a call to the server
+      queryClient.setQueryData(queryKeys.tweets, updatedTweets);
+
       setIsLiked(!isLiked);
       // probably needs to be made into an optimistic update
     },
@@ -38,9 +57,11 @@ export const Tweet = ({ tweet }) => {
           alt="tweet image"
         />
       )}
-      <button onClick={handleLike} disabled={isLoading}>
-        {isLoading ? 'liking...' : isLiked ? 'unlike' : 'like'}
-      </button>
+      <div>
+        <button onClick={handleLike} disabled={isLoading}>
+          {isLoading ? 'liking...' : isLiked ? 'unlike' : 'like'}
+        </button>
+      </div>
     </div>
   );
 };
