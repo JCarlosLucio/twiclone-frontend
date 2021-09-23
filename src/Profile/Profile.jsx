@@ -1,9 +1,10 @@
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { getUser } from '../services/user';
 
 export const Profile = () => {
   const { username } = useParams();
+  const { goBack } = useHistory();
   const {
     data: user,
     error,
@@ -27,6 +28,7 @@ export const Profile = () => {
 
   return (
     <div>
+      <button onClick={goBack}>back</button>
       <h1>Profile</h1>
       <h2>{user.name}</h2>
       <h3>{`@${user.username}`}</h3>
