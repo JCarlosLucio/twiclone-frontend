@@ -9,7 +9,6 @@ export const Login = () => {
   const { mutateAsync, isLoading } = useMutation(login, {
     onSuccess: (data) => {
       queryClient.setQueryData(queryKeys.me, data);
-      // TODO: Navigate to Homepage
     },
   });
 
