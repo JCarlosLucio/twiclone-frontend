@@ -1,14 +1,25 @@
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { createTweet } from '../services/tweets';
+import { queryKeys } from '../constants';
 
 export const TweetForm = () => {
   const queryClient = useQueryClient();
   const { register, handleSubmit, formState: { errors } } = useForm(); // prettier-ignore
   const { mutateAsync, isLoading } = useMutation(createTweet, {
     onSuccess: (data) => {
-      queryClient.invalidateQueries('tweets');
-      console.log('returnedData', data);
+      const tweets = queryClient.getQueryData(queryKeys.tweets);
+      const updatedTweets = {
+        ...tweets,
+        pages: tweets.pages.map((page) => {
+          return {
+            ...page,
+            tweets: [data, ...page.tweets],
+          };
+        }),
+      };
+
+      queryClient.setQueryData(queryKeys.tweets, updatedTweets);
     },
   });
 
