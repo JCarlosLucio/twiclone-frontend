@@ -21,7 +21,7 @@ export const register = async (credentials) => {
   return response.data;
 };
 
-export const getCurrentUser = async () => {
+export const getMe = async () => {
   const user = storage.loadUser();
   if (user) {
     const response = await axios.get(`${baseUrl}/me`, authHeader());

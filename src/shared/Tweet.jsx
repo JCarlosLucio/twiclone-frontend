@@ -7,15 +7,13 @@ import { queryKeys } from '../constants';
 
 export const Tweet = ({ tweet }) => {
   const queryClient = useQueryClient();
-  const user = queryClient.getQueryData(queryKeys.currentUser);
+  const user = queryClient.getQueryData(queryKeys.me);
 
   const [isLiked, setIsLiked] = useState(tweet.likes.includes(user.id));
   const [likesCount, setLikesCount] = useState(tweet.likes.length);
 
   const { mutate, isLoading } = useMutation(likeTweet, {
     onSuccess: (data) => {
-      // queryClient.invalidateQueries('tweets');
-
       const tweets = queryClient.getQueryData(queryKeys.tweets);
       const updatedTweets = {
         ...tweets,

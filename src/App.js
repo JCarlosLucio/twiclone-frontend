@@ -3,8 +3,9 @@ import { Switch, Route } from 'react-router-dom';
 import { Auth } from './Auth';
 import { Feed } from './Feed';
 import { Profile } from './Profile';
-import { getCurrentUser } from './services/auth';
+import { getMe } from './services/auth';
 import storage from './utils/storage';
+import { queryKeys } from './constants';
 
 const App = () => {
   const queryClient = useQueryClient();
@@ -13,11 +14,11 @@ const App = () => {
     error,
     isLoading,
     isError,
-  } = useQuery('currentUser', getCurrentUser);
+  } = useQuery(queryKeys.me, getMe);
 
   const logout = () => {
     storage.clearUser();
-    queryClient.resetQueries('currentUser');
+    queryClient.resetQueries(queryKeys.me);
   };
 
   if (isLoading) return <p>Loading ...</p>;

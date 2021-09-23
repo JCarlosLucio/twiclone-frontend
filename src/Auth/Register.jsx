@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { register as registerUser } from '../services/auth';
+import { queryKeys } from '../constants';
 
 export const Register = () => {
   const queryClient = useQueryClient();
@@ -12,7 +13,7 @@ export const Register = () => {
   } = useForm();
   const { mutateAsync, isLoading } = useMutation(registerUser, {
     onSuccess: (data) => {
-      queryClient.invalidateQueries('currentUser');
+      queryClient.invalidateQueries(queryKeys.me);
       console.log(data);
       // TODO: Navigate to Homepage
     },
