@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import { getUser } from '../services/user';
+import { queryKeys } from '../constants';
 
 export const Profile = () => {
   const { username } = useParams();
@@ -10,7 +11,7 @@ export const Profile = () => {
     error,
     isLoading,
     isError,
-  } = useQuery(['user', username], () => getUser(username));
+  } = useQuery([queryKeys.user, username], () => getUser(username));
 
   if (isLoading) return <p>Loading ...</p>;
 
