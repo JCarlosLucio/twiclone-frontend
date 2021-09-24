@@ -1,5 +1,4 @@
-import { TweetForm } from './TweetForm';
-import { TweetList } from '../shared';
+import { TweetForm, TweetList } from '../shared';
 
 export const Feed = () => {
   return (

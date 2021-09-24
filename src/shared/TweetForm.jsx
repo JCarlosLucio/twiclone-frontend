@@ -25,6 +25,7 @@ export const TweetForm = () => {
 
   const onSubmit = async (data, e) => {
     const formData = new FormData();
+
     formData.append('content', data.content);
 
     [...data.images].forEach((image) => {
