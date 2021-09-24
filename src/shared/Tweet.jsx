@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useMutation, useQueryClient } from 'react-query';
 import { likeTweet } from '../services/tweets';
 import { queryKeys } from '../constants';
+import { TweetForm } from '../shared';
 
 export const Tweet = ({ tweet }) => {
   const queryClient = useQueryClient();
@@ -11,6 +12,7 @@ export const Tweet = ({ tweet }) => {
 
   const [isLiked, setIsLiked] = useState(tweet.likes.includes(user.id));
   const [likesCount, setLikesCount] = useState(tweet.likes.length);
+  const [showTweetForm, setShowTweetForm] = useState(false);
 
   const { mutate, isLoading } = useMutation(likeTweet, {
     onSuccess: (data) => {
@@ -44,6 +46,10 @@ export const Tweet = ({ tweet }) => {
     mutate(tweet.id);
   };
 
+  const toggleTweetForm = () => {
+    setShowTweetForm(!showTweetForm);
+  };
+
   return (
     <div style={{ border: '1px solid blue' }}>
       <Link to={`/${tweet.user.username}`}>
@@ -61,11 +67,13 @@ export const Tweet = ({ tweet }) => {
         />
       )}
       <div>
-        {likesCount}
+        <button onClick={toggleTweetForm}>Reply</button>
         <button onClick={handleLike} disabled={isLoading}>
           {isLoading ? 'liking...' : isLiked ? 'unlike' : 'like'}
         </button>
+        {likesCount}
       </div>
+      {showTweetForm && <TweetForm tweet={tweet} />}
     </div>
   );
 };
