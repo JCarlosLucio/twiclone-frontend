@@ -52,12 +52,17 @@ export const Tweet = ({ tweet }) => {
 
   return (
     <div style={{ border: '1px solid blue' }}>
-      <Link to={`/${tweet.user.username}`}>
-        <h3>
+      <div>
+        <img
+          style={{ width: 40 }}
+          src={tweet.user.avatar.url}
+          alt={`${tweet.user.name} avatar`}
+        />
+        <Link to={`/${tweet.user.username}`}>
           {tweet.user.name}
           <span>{`@${tweet.user.username}`}</span>
-        </h3>
-      </Link>
+        </Link>
+      </div>
       <p>{tweet.content}</p>
       {tweet.images && tweet.images.length > 0 && (
         <img
