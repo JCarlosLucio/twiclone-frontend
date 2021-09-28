@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-import { getUser } from '../services/user';
+import { followUser, getUser } from '../services/user';
 import { queryKeys } from '../constants';
 import { EditProfile } from './EditProfile';
 
@@ -18,12 +18,28 @@ export const Profile = () => {
   const queryClient = useQueryClient();
   const me = queryClient.getQueryData(queryKeys.me);
 
-  const isMe = me.id === user?.id;
+  const { mutate, isLoading: isMutating } = useMutation(followUser, {
+    onSuccess: (data) => {
+      queryClient.setQueryData(queryKeys.me, {
+        ...data.updatedMe,
+        token: me.token,
+      });
+      queryClient.setQueryData(
+        [queryKeys.user, user.username],
+        data.updatedUser
+      );
+      // needs to invalidate/refetch tweets(?)
+    },
+  });
 
   const [showEditForm, setShowEditForm] = useState(false);
 
   const toggleEditForm = () => {
     setShowEditForm(!showEditForm);
+  };
+
+  const handleFollow = () => {
+    mutate(user?.id);
   };
 
   if (isLoading) return <p>Loading ...</p>;
@@ -40,6 +56,9 @@ export const Profile = () => {
     );
   }
 
+  const isMe = me.id === user?.id;
+  const following = me.following.includes(user?.id);
+
   return (
     <div>
       <button onClick={goBack}>back</button>
@@ -51,7 +70,14 @@ export const Profile = () => {
       <h1>Profile</h1>
       <h2>{user.name}</h2>
       <h3>{`@${user.username}`}</h3>
-      {isMe && <button onClick={toggleEditForm}>Edit Profile</button>}
+      <h2>{`${user.following.length} Following   ${user.followers.length} Followers`}</h2>
+      {isMe ? (
+        <button onClick={toggleEditForm}>Edit Profile</button>
+      ) : (
+        <button onClick={handleFollow}>
+          {isMutating ? 'Following...' : following ? 'Following' : 'Follow'}
+        </button>
+      )}
       {showEditForm && <EditProfile me={me} />}
     </div>
   );
