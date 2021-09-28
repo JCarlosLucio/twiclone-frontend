@@ -30,3 +30,13 @@ export const getMe = async () => {
 
   return null;
 };
+
+export const updateMe = async (updatedMe) => {
+  const user = storage.loadUser();
+  if (user) {
+    const response = await axios.put(`${baseUrl}/me`, updatedMe, authHeader());
+    return response.data;
+  }
+
+  return null;
+};
