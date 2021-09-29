@@ -1,15 +1,12 @@
 import { Switch, Route } from 'react-router-dom';
 import { Auth } from './Auth';
 import { Feed } from './Feed';
+import { Menu } from './Menu';
 import { Profile } from './Profile';
 import { useMe } from './shared/hooks/useMe';
 
 const App = () => {
-  const { me, clearUser } = useMe();
-
-  const logout = () => {
-    clearUser();
-  };
+  const { me } = useMe();
 
   if (!me) {
     return <Auth />;
@@ -17,13 +14,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Twiclone Frontend</h1>
-      {me && (
-        <div>
-          {me.name}
-          <button onClick={logout}>logout</button>
-        </div>
-      )}
+      <Menu />
       <Switch>
         <Route exact path="/">
           <Feed />
