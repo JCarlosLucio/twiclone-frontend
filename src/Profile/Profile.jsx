@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router';
 import { followUser, getUser } from '../services/user';
 import { queryKeys } from '../constants';
 import { EditProfile } from './EditProfile';
+import { useMe } from '../shared/hooks/useMe';
 
 export const Profile = () => {
   const { username } = useParams();
@@ -16,7 +17,7 @@ export const Profile = () => {
   } = useQuery([queryKeys.user, username], () => getUser(username));
 
   const queryClient = useQueryClient();
-  const me = queryClient.getQueryData(queryKeys.me);
+  const { me } = useMe();
 
   const { mutate, isLoading: isMutating } = useMutation(followUser, {
     onSuccess: (data) => {
