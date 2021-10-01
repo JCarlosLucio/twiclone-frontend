@@ -2,17 +2,19 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useMutation, useQueryClient } from 'react-query';
+import { useMe } from './hooks/useMe';
 import { likeTweet } from '../services/tweets';
 import { queryKeys } from '../constants';
 import { TweetForm } from '../shared';
 
 export const Tweet = ({ tweet }) => {
-  const queryClient = useQueryClient();
-  const user = queryClient.getQueryData(queryKeys.me);
+  const { me } = useMe();
 
-  const [isLiked, setIsLiked] = useState(tweet.likes.includes(user.id));
+  const [isLiked, setIsLiked] = useState(tweet.likes.includes(me.id));
   const [likesCount, setLikesCount] = useState(tweet.likes.length);
   const [showTweetForm, setShowTweetForm] = useState(false);
+
+  const queryClient = useQueryClient();
 
   const { mutate, isLoading } = useMutation(likeTweet, {
     onSuccess: (data) => {
