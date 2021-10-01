@@ -16,12 +16,8 @@ const App = () => {
     <div>
       <Menu />
       <Switch>
-        <Route exact path="/">
-          <Feed />
-        </Route>
-        <Route exact path="/:username">
-          <Profile />
-        </Route>
+        <Route path="/:username" component={Profile} />
+        <Route path="/" component={Feed} />
       </Switch>
     </div>
   );
