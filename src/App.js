@@ -1,4 +1,5 @@
 import { Switch, Route } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
 import { Auth } from './Auth';
 import { Feed } from './Feed';
 import { Menu } from './Menu';
@@ -13,13 +14,29 @@ const App = () => {
   }
 
   return (
-    <div>
-      <Menu />
-      <Switch>
-        <Route path="/:username" component={Profile} />
-        <Route path="/" component={Feed} />
-      </Switch>
-    </div>
+    <Grid container justifyContent="center">
+      <Grid
+        item
+        lg={4}
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          minHeight: '100%',
+          positon: 'relative',
+        }}
+      >
+        <Menu />
+      </Grid>
+      <Grid item lg={4}>
+        <Switch>
+          <Route path="/:username" component={Profile} />
+          <Route path="/" component={Feed} />
+        </Switch>
+      </Grid>
+      <Grid item lg={4}>
+        <h1>News</h1>
+      </Grid>
+    </Grid>
   );
 };
 
