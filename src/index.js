@@ -7,7 +7,6 @@ import { SnackbarProvider } from 'notistack';
 import ColorModeProvider from './utils/ColorModeProvider';
 import { queryClient } from './utils/query-client';
 import { SnackbarUtilsConfigurator } from './utils/SnackbarUtils';
-import './index.css';
 import App from './App';
 
 ReactDOM.render(
