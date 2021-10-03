@@ -1,9 +1,10 @@
-import { amber, blue, grey } from '@mui/material/colors';
+import blue from '@mui/material/colors/blue';
+import grey from '@mui/material/colors/grey';
 
 const lightTheme = {
   // palette values for light mode
-  primary: amber,
-  divider: amber[200],
+  primary: blue,
+  divider: blue[200],
   text: {
     primary: grey[900],
     secondary: grey[800],
@@ -15,12 +16,12 @@ const darkTheme = {
   primary: blue,
   divider: blue[700],
   background: {
-    default: '#001E3C',
-    paper: '#0A1929',
+    default: '#000',
+    paper: '#000',
   },
   text: {
-    primary: '#fff',
-    secondary: grey[500],
+    primary: '#d9d9d9',
+    secondary: '#6e767d',
   },
 };
 
