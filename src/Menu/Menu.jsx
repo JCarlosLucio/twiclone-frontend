@@ -1,8 +1,10 @@
 import { useContext } from 'react';
+import { BsHouse, BsTornado } from 'react-icons/bs';
+import { FaRegBell, FaHashtag, FaEllipsisH, FaRegUser } from 'react-icons/fa';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
 import { useMe } from '../shared/hooks/useMe';
 import { ColorModeContext } from '../utils/ColorModeProvider';
 
@@ -15,76 +17,64 @@ export const Menu = () => {
   };
 
   return (
-    <Container
+    <Stack
+      justifyContent="space-between"
+      alignItems="flex-end"
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-        justifyContent: 'space-between',
-        height: '100%',
         position: 'fixed',
+        height: '100%',
         width: '275px',
+        p: '0 1rem',
       }}
     >
-      <Container
-        disableGutters
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
+      <Stack spacing={2} sx={{ width: '100%' }}>
         <Box>
-          <IconButton>A</IconButton>
+          <IconButton size="large" color="secondary">
+            <BsTornado />
+          </IconButton>
         </Box>
-        <Container
-          disableGutters
+        <Stack
+          alignItems="flex-start"
+          spacing={2}
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            justifyContent: 'space-between',
             '& button': {
               fontSize: 20,
-              p: 1,
-              m: '8px',
-              textTransform: 'capitalize',
+              fontWeight: 400,
             },
           }}
         >
-          <Button color="secondary">Home</Button>
-          <Button color="secondary">Explore</Button>
-          <Button color="secondary">Notifications</Button>
-          <Button color="secondary">Profile</Button>
-          <Button color="secondary">More</Button>
+          <Button color="secondary" size="large" startIcon={<BsHouse />}>
+            Home
+          </Button>
+          <Button color="secondary" size="large" startIcon={<FaHashtag />}>
+            Explore
+          </Button>
+          <Button color="secondary" size="large" startIcon={<FaRegBell />}>
+            Notifications
+          </Button>
+          <Button color="secondary" size="large" startIcon={<FaRegUser />}>
+            Profile
+          </Button>
+          <Button color="secondary" size="large" startIcon={<FaEllipsisH />}>
+            More
+          </Button>
           <Button onClick={colorMode.toggleColorMode}>
             toggle {colorMode.mode}
           </Button>
-        </Container>
+          <Button size="large" variant="contained" fullWidth>
+            Tweet
+          </Button>
+        </Stack>
+      </Stack>
 
-        <Button
-          size="large"
-          variant="contained"
-          sx={{
-            fontSize: 20,
-            p: 1,
-            m: '8px',
-            textTransform: 'capitalize',
-          }}
-        >
-          Tweet
-        </Button>
-      </Container>
-
-      <Container>
-        {me && (
-          <div>
-            {me.name}
-            <Button variant="contained" onClick={logout}>
-              logout
-            </Button>
-          </div>
-        )}
-      </Container>
-    </Container>
+      {me && (
+        <div>
+          {me.name}
+          <Button variant="contained" onClick={logout}>
+            Logout
+          </Button>
+        </div>
+      )}
+    </Stack>
   );
 };
