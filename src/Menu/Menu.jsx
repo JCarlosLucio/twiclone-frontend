@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { BsHouse, BsTornado } from 'react-icons/bs';
 import { FaRegBell, FaHashtag, FaEllipsisH, FaRegUser } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -29,7 +30,12 @@ export const Menu = () => {
     >
       <Stack spacing={2} sx={{ width: '100%' }}>
         <Box>
-          <IconButton size="large" color="secondary">
+          <IconButton
+            component={Link}
+            to={'/home'}
+            color="secondary"
+            size="large"
+          >
             <BsTornado />
           </IconButton>
         </Box>
@@ -37,13 +43,19 @@ export const Menu = () => {
           alignItems="flex-start"
           spacing={2}
           sx={{
-            '& button': {
+            '& a, & button': {
               fontSize: 20,
               fontWeight: 400,
             },
           }}
         >
-          <Button color="secondary" size="large" startIcon={<BsHouse />}>
+          <Button
+            component={Link}
+            to={'/home'}
+            color="secondary"
+            size="large"
+            startIcon={<BsHouse />}
+          >
             Home
           </Button>
           <Button color="secondary" size="large" startIcon={<FaHashtag />}>
@@ -52,7 +64,13 @@ export const Menu = () => {
           <Button color="secondary" size="large" startIcon={<FaRegBell />}>
             Notifications
           </Button>
-          <Button color="secondary" size="large" startIcon={<FaRegUser />}>
+          <Button
+            component={Link}
+            to={`/${me.username}`}
+            color="secondary"
+            size="large"
+            startIcon={<FaRegUser />}
+          >
             Profile
           </Button>
           <Button color="secondary" size="large" startIcon={<FaEllipsisH />}>
