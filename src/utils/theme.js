@@ -33,7 +33,7 @@ const darkTheme = {
 
 export const getDesignTokens = (mode) => ({
   shape: {
-    borderRadius: 50,
+    borderRadius: 16,
   },
   palette: {
     mode,
@@ -45,6 +45,7 @@ export const getDesignTokens = (mode) => ({
         root: {
           textTransform: 'none',
           padding: '8px 16px',
+          borderRadius: 50,
         },
       },
     },
