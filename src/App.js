@@ -29,8 +29,8 @@ const App = () => {
       </Grid>
       <Grid item lg={4}>
         <Switch>
+          <Route exact path={['/', '/home']} component={Feed} />
           <Route path="/:username" component={Profile} />
-          <Route path="/" component={Feed} />
         </Switch>
       </Grid>
       <Grid item lg={4}>
