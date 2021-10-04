@@ -39,4 +39,14 @@ export const getDesignTokens = (mode) => ({
     mode,
     ...(mode === 'light' ? lightTheme : darkTheme),
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          padding: '8px 16px',
+        },
+      },
+    },
+  },
 });
