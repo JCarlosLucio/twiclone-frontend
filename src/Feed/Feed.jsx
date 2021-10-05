@@ -1,10 +1,17 @@
+import Stack from '@mui/material/Stack';
 import { TweetForm, TweetList } from '../shared';
 
 export const Feed = () => {
   return (
-    <div>
+    <Stack
+      sx={{
+        borderRight: '1px solid',
+        borderLeft: '1px solid',
+        borderColor: 'divider',
+      }}
+    >
       <TweetForm />
       <TweetList />
-    </div>
+    </Stack>
   );
 };
