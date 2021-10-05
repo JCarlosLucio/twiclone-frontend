@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BsChat, BsHeart, BsHeartFill, BsUpload } from 'react-icons/bs';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
@@ -31,11 +32,7 @@ export const Tweet = ({ tweet }) => {
       spacing={2}
       sx={{ borderBottom: '1px solid', borderColor: 'divider', p: 2 }}
     >
-      <img
-        style={{ width: 40 }}
-        src={tweet.user.avatar.url}
-        alt={`${tweet.user.name} avatar`}
-      />
+      <Avatar src={tweet.user.avatar.url} alt={`${tweet.user.name}`} />
 
       <Stack spacing={2} sx={{ width: '100%' }}>
         <Stack direction="row" alignItems="flex-start" spacing={1}>
