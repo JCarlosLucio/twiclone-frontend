@@ -1,51 +1,19 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useMutation, useQueryClient } from 'react-query';
-import { useMe } from './hooks/useMe';
-import { likeTweet } from '../services/tweets';
-import { queryKeys } from '../constants';
 import { TweetForm } from '../shared';
+import { useLikeTweet } from '../shared/hooks/useLikeTweet';
 
 export const Tweet = ({ tweet }) => {
-  const { me } = useMe();
-
-  const [isLiked, setIsLiked] = useState(tweet.likes.includes(me.id));
-  const [likesCount, setLikesCount] = useState(tweet.likes.length);
   const [showTweetForm, setShowTweetForm] = useState(false);
-
-  const queryClient = useQueryClient();
-
-  const { mutate, isLoading } = useMutation(likeTweet, {
-    onSuccess: (data) => {
-      const tweets = queryClient.getQueryData(queryKeys.tweets);
-      const updatedTweets = {
-        ...tweets,
-        pages: tweets.pages.map((page) => {
-          return {
-            ...page,
-            tweets: page.tweets.map((t) => (t.id === tweet.id ? data : t)),
-          };
-        }),
-      };
-
-      // updates tweets query in cache, it better than invalidating queries
-      // because it doesn't move the TweetList with more tweets that were probably
-      // added in the meantime, also saves a call to the server
-      queryClient.setQueryData(queryKeys.tweets, updatedTweets);
-
-      // updates tweet state locally so if there were other likes
-      // from the moment the tweet was loaded to when the like button was clicked
-      // the likesCount doesnt look like the action gave more likes than 1
-      setLikesCount((prevVal) => prevVal + (isLiked ? -1 : 1));
-      setIsLiked(!isLiked);
-      // probably needs to be made into an optimistic update
-    },
-  });
+  const { like, isLiked, likesCount, isLoading } = useLikeTweet(
+    tweet.id,
+    tweet.likes
+  );
 
   const handleLike = (e) => {
     e.preventDefault();
-    mutate(tweet.id);
+    like();
   };
 
   const toggleTweetForm = () => {
