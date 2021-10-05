@@ -9,7 +9,7 @@ const lightTheme = {
     light: grey[500],
     dark: grey[900],
   },
-  divider: blue[200],
+  divider: '#eff3f4',
   text: {
     primary: grey[900],
     secondary: grey[900],
@@ -20,7 +20,7 @@ const darkTheme = {
   // palette values for dark mode
   primary: blue,
   secondary: grey,
-  divider: blue[700],
+  divider: '#2f3336',
   background: {
     default: '#000',
     paper: '#000',
