@@ -1,5 +1,8 @@
 import { useState } from 'react';
+import { BsChat, BsHeart, BsHeartFill, BsUpload } from 'react-icons/bs';
+import { AiOutlineRetweet } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
 import { TweetForm } from '../shared';
@@ -49,16 +52,51 @@ export const Tweet = ({ tweet }) => {
             alt="tweet image"
           />
         )}
+
         <Stack
           direction="row"
           justifyContent="space-around"
           alignItems="center"
         >
-          <button onClick={toggleTweetForm}>Reply</button>
-          <button onClick={handleLike} disabled={isLoading}>
-            {isLoading ? 'liking...' : isLiked ? 'unlike' : 'like'}
-          </button>
-          {likesCount}
+          <span>
+            <IconButton
+              onClick={toggleTweetForm}
+              color="secondary"
+              size="small"
+            >
+              <BsChat />
+            </IconButton>
+            {tweet.replies.length > 0 && tweet.replies.length}
+          </span>
+          <span>
+            <IconButton
+              onClick={toggleTweetForm}
+              color="secondary"
+              size="small"
+            >
+              <AiOutlineRetweet />
+            </IconButton>
+          </span>
+          <span>
+            <IconButton
+              onClick={handleLike}
+              disabled={isLoading}
+              color={isLiked ? 'error' : 'secondary'}
+              size="small"
+            >
+              {isLiked ? <BsHeartFill /> : <BsHeart />}
+            </IconButton>
+            {likesCount > 0 && likesCount}
+          </span>
+          <span>
+            <IconButton
+              onClick={toggleTweetForm}
+              color="secondary"
+              size="small"
+            >
+              <BsUpload />
+            </IconButton>
+          </span>
         </Stack>
         {showTweetForm && <TweetForm tweet={tweet} />}
       </Stack>
