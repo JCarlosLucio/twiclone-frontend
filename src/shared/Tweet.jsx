@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import { TweetForm } from '../shared';
 import { useLikeTweet } from '../shared/hooks/useLikeTweet';
 import { prepareForImageList } from '../utils/images';
+import { dateFromNow } from '../utils/date';
 
 export const Tweet = ({ tweet }) => {
   const [showTweetForm, setShowTweetForm] = useState(false);
@@ -44,7 +45,7 @@ export const Tweet = ({ tweet }) => {
         <Stack
           direction="row"
           alignItems="flex-start"
-          spacing={1}
+          spacing={0.5}
           sx={{
             '& a': {
               textDecoration: 'none',
@@ -67,8 +68,9 @@ export const Tweet = ({ tweet }) => {
           <Typography color="text.secondary">
             {`@${tweet.user.username}`}
           </Typography>
+          <Typography color="text.secondary">·</Typography>
           <Typography color="text.secondary">
-            {tweet.createdAt.toString()}
+            {dateFromNow(tweet.createdAt)}
           </Typography>
         </Stack>
 
