@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import { TweetForm } from '../shared';
 import { useLikeTweet } from '../shared/hooks/useLikeTweet';
@@ -39,77 +40,106 @@ export const Tweet = ({ tweet }) => {
     >
       <Avatar src={tweet.user.avatar.url} alt={`${tweet.user.name}`} />
 
-      <Stack spacing={2} sx={{ width: '100%' }}>
-        <Stack direction="row" alignItems="flex-start" spacing={1}>
-          <Link to={`/${tweet.user.username}`}>{tweet.user.name}</Link>
-          <span>{`@${tweet.user.username}`}</span>
-        </Stack>
-
-        <p>{tweet.content}</p>
-        {images && (
-          <ImageList
-            cols={2}
-            variant="quilted"
-            gap={2}
-            rowHeight={139}
-            sx={{ borderRadius: '16px', height: 280 }}
-          >
-            {images.map(({ url, filename, cols, rows }) => {
-              return (
-                <ImageListItem key={filename} cols={cols} rows={rows}>
-                  <img src={url} alt="Image" loading="lazy" />
-                </ImageListItem>
-              );
-            })}
-          </ImageList>
-        )}
-
+      <Stack sx={{ width: '100%' }}>
         <Stack
           direction="row"
-          justifyContent="space-around"
-          alignItems="center"
+          alignItems="flex-start"
+          spacing={1}
+          sx={{
+            '& a': {
+              textDecoration: 'none',
+              fontWeight: 700,
+            },
+            '&:hover': {
+              '& a': {
+                textDecoration: 'underline',
+              },
+            },
+          }}
         >
-          <span>
-            <IconButton
-              onClick={toggleTweetForm}
-              color="secondary"
-              size="small"
-            >
-              <BsChat />
-            </IconButton>
-            {tweet.replies.length > 0 && tweet.replies.length}
-          </span>
-          <span>
-            <IconButton
-              onClick={toggleTweetForm}
-              color="secondary"
-              size="small"
-            >
-              <AiOutlineRetweet />
-            </IconButton>
-          </span>
-          <span>
-            <IconButton
-              onClick={handleLike}
-              disabled={isLoading}
-              color={isLiked ? 'error' : 'secondary'}
-              size="small"
-            >
-              {isLiked ? <BsHeartFill /> : <BsHeart />}
-            </IconButton>
-            {likesCount > 0 && likesCount}
-          </span>
-          <span>
-            <IconButton
-              onClick={toggleTweetForm}
-              color="secondary"
-              size="small"
-            >
-              <BsUpload />
-            </IconButton>
-          </span>
+          <Typography
+            color="text.primary"
+            to={`/${tweet.user.username}`}
+            component={Link}
+          >
+            {tweet.user.name}
+          </Typography>
+          <Typography color="text.secondary">
+            {`@${tweet.user.username}`}
+          </Typography>
+          <Typography color="text.secondary">
+            {tweet.createdAt.toString()}
+          </Typography>
         </Stack>
-        {showTweetForm && <TweetForm tweet={tweet} />}
+
+        <Stack spacing={1.5}>
+          <Typography>{tweet.content}</Typography>
+
+          {images && (
+            <ImageList
+              cols={2}
+              variant="quilted"
+              gap={2}
+              rowHeight={139}
+              sx={{ borderRadius: '16px', height: 280 }}
+            >
+              {images.map(({ url, filename, cols, rows }) => {
+                return (
+                  <ImageListItem key={filename} cols={cols} rows={rows}>
+                    <img src={url} alt="Image" loading="lazy" />
+                  </ImageListItem>
+                );
+              })}
+            </ImageList>
+          )}
+
+          <Stack
+            direction="row"
+            justifyContent="space-around"
+            alignItems="center"
+          >
+            <span>
+              <IconButton
+                onClick={toggleTweetForm}
+                color="secondary"
+                size="small"
+              >
+                <BsChat />
+              </IconButton>
+              {tweet.replies.length > 0 && tweet.replies.length}
+            </span>
+            <span>
+              <IconButton
+                onClick={toggleTweetForm}
+                color="secondary"
+                size="small"
+              >
+                <AiOutlineRetweet />
+              </IconButton>
+            </span>
+            <span>
+              <IconButton
+                onClick={handleLike}
+                disabled={isLoading}
+                color={isLiked ? 'error' : 'secondary'}
+                size="small"
+              >
+                {isLiked ? <BsHeartFill /> : <BsHeart />}
+              </IconButton>
+              {likesCount > 0 && likesCount}
+            </span>
+            <span>
+              <IconButton
+                onClick={toggleTweetForm}
+                color="secondary"
+                size="small"
+              >
+                <BsUpload />
+              </IconButton>
+            </span>
+          </Stack>
+          {showTweetForm && <TweetForm tweet={tweet} />}
+        </Stack>
       </Stack>
     </Stack>
   );
