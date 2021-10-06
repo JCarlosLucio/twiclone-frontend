@@ -40,6 +40,14 @@ export const getDesignTokens = (mode) => ({
     ...(mode === 'light' ? lightTheme : darkTheme),
   },
   components: {
+    MuiAvatar: {
+      styleOverrides: {
+        root: {
+          width: 48,
+          height: 48,
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
