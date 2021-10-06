@@ -76,7 +76,6 @@ export const Tweet = ({ tweet }) => {
 
         <Stack spacing={1.5}>
           <Typography>{tweet.content}</Typography>
-
           {images && (
             <ImageList
               cols={2}
@@ -95,50 +94,77 @@ export const Tweet = ({ tweet }) => {
             </ImageList>
           )}
 
+          {/** TODO: Refactor buttons into separate component(s) */}
           <Stack
             direction="row"
             justifyContent="space-around"
             alignItems="center"
+            sx={{ fontSize: '13px' }}
           >
-            <span>
+            <Stack
+              direction="row"
+              alignItems="center"
+              spacing={2}
+              sx={{
+                '& button ': { color: 'secondary.main' },
+                '&:hover, &:hover button': { color: 'primary.main' },
+              }}
+            >
               <IconButton
                 onClick={toggleTweetForm}
-                color="secondary"
+                color="primary"
                 size="small"
               >
                 <BsChat />
               </IconButton>
               {tweet.replies.length > 0 && tweet.replies.length}
-            </span>
-            <span>
-              <IconButton
-                onClick={toggleTweetForm}
-                color="secondary"
-                size="small"
-              >
+            </Stack>
+            <Stack
+              direction="row"
+              alignItems="center"
+              spacing={2}
+              sx={{
+                '& button ': { color: 'secondary.main' },
+                '&:hover, &:hover button': { color: 'success.main' },
+              }}
+            >
+              <IconButton color="success" size="small">
                 <AiOutlineRetweet />
               </IconButton>
-            </span>
-            <span>
+            </Stack>
+            <Stack
+              direction="row"
+              alignItems="center"
+              spacing={2}
+              sx={{
+                color: isLiked ? 'error.main' : 'secondary.main',
+                '& button ': {
+                  color: isLiked ? 'error.main' : 'secondary.main',
+                },
+                '&:hover, &:hover button': { color: 'error.main' },
+              }}
+            >
               <IconButton
                 onClick={handleLike}
                 disabled={isLoading}
-                color={isLiked ? 'error' : 'secondary'}
+                color={'error'}
                 size="small"
               >
                 {isLiked ? <BsHeartFill /> : <BsHeart />}
               </IconButton>
               {likesCount > 0 && likesCount}
-            </span>
-            <span>
-              <IconButton
-                onClick={toggleTweetForm}
-                color="secondary"
-                size="small"
-              >
-                <BsUpload />
-              </IconButton>
-            </span>
+            </Stack>
+
+            <IconButton
+              color="primary"
+              size="small"
+              sx={{
+                color: 'secondary.main',
+                '&:hover': { color: 'primary.main' },
+              }}
+            >
+              <BsUpload />
+            </IconButton>
           </Stack>
           {showTweetForm && <TweetForm tweet={tweet} />}
         </Stack>
