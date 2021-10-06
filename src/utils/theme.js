@@ -57,6 +57,14 @@ export const getDesignTokens = (mode) => ({
         },
       },
     },
+    MuiIconButton: {
+      styleOverrides: {
+        sizeSmall: {
+          fontSize: '1rem',
+          padding: '10px',
+        },
+      },
+    },
     MuiTypography: {
       defaultProps: {
         variantMapping: {
