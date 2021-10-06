@@ -12,7 +12,7 @@ const lightTheme = {
   divider: '#eff3f4',
   text: {
     primary: grey[900],
-    secondary: grey[900],
+    secondary: '#536471',
   },
 };
 
@@ -46,6 +46,16 @@ export const getDesignTokens = (mode) => ({
           textTransform: 'none',
           padding: '8px 16px',
           borderRadius: 50,
+        },
+      },
+    },
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          subtitle1: 'h2',
+          subtitle2: 'span',
+          body1: 'span',
+          body2: 'span',
         },
       },
     },
