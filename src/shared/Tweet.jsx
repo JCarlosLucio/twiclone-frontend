@@ -4,10 +4,13 @@ import { AiOutlineRetweet } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
 import { TweetForm } from '../shared';
 import { useLikeTweet } from '../shared/hooks/useLikeTweet';
+import { prepareForImageList } from '../utils/images';
 
 export const Tweet = ({ tweet }) => {
   const [showTweetForm, setShowTweetForm] = useState(false);
@@ -25,6 +28,8 @@ export const Tweet = ({ tweet }) => {
     setShowTweetForm(!showTweetForm);
   };
 
+  const images = prepareForImageList(tweet.images);
+
   return (
     <Stack
       direction="row"
@@ -41,13 +46,22 @@ export const Tweet = ({ tweet }) => {
         </Stack>
 
         <p>{tweet.content}</p>
-
-        {tweet.images && tweet.images.length > 0 && (
-          <img
-            style={{ width: '100%' }}
-            src={tweet.images[0].url}
-            alt="tweet image"
-          />
+        {images && (
+          <ImageList
+            cols={2}
+            variant="quilted"
+            gap={2}
+            rowHeight={139}
+            sx={{ borderRadius: '16px', height: 280 }}
+          >
+            {images.map(({ url, filename, cols, rows }) => {
+              return (
+                <ImageListItem key={filename} cols={cols} rows={rows}>
+                  <img src={url} alt="Image" loading="lazy" />
+                </ImageListItem>
+              );
+            })}
+          </ImageList>
         )}
 
         <Stack
