@@ -4,6 +4,7 @@ import { useMe } from './hooks/useMe';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
 
 export const TweetForm = ({ tweet }) => {
   const { me } = useMe();
@@ -43,9 +44,11 @@ export const TweetForm = ({ tweet }) => {
           </div>
         )}
         <Stack component="form" onSubmit={handleSubmit(onSubmit)}>
-          <input
-            type="text"
-            placeholder="content"
+          <TextField
+            multiline
+            rows={4}
+            placeholder="What's happening?"
+            variant="standard"
             {...register('content', { required: true, maxLength: 280 })}
           />
           <p style={{ color: 'red' }}>
