@@ -1,27 +1,9 @@
 import { useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from 'react-query';
-import { createTweet } from '../services/tweets';
-import { queryKeys } from '../constants';
+import { useCreateTweet } from './hooks/useCreateTweet';
 
 export const TweetForm = ({ tweet }) => {
-  const queryClient = useQueryClient();
+  const { create, isLoading } = useCreateTweet();
   const { register, handleSubmit, formState: { errors } } = useForm(); // prettier-ignore
-  const { mutateAsync, isLoading } = useMutation(createTweet, {
-    onSuccess: (data) => {
-      const tweets = queryClient.getQueryData(queryKeys.tweets);
-      const updatedTweets = {
-        ...tweets,
-        pages: tweets.pages.map((page) => {
-          return {
-            ...page,
-            tweets: [data, ...page.tweets],
-          };
-        }),
-      };
-
-      queryClient.setQueryData(queryKeys.tweets, updatedTweets);
-    },
-  });
 
   const onSubmit = async (data, e) => {
     const formData = new FormData();
@@ -34,7 +16,7 @@ export const TweetForm = ({ tweet }) => {
       formData.append('images', image);
     });
 
-    await mutateAsync(formData);
+    await create(formData);
     e.target.reset();
   };
 
