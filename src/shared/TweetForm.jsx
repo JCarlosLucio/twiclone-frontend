@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useCreateTweet } from './hooks/useCreateTweet';
+import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
 export const TweetForm = ({ tweet }) => {
@@ -69,9 +70,9 @@ export const TweetForm = ({ tweet }) => {
               multiple
             />
 
-            <button type="submit">
+            <Button type="submit" size="medium" variant="contained">
               {isLoading ? 'Tweeting...' : tweet ? 'Reply' : 'Tweet'}
-            </button>
+            </Button>
           </Stack>
         </Stack>
       </Stack>
