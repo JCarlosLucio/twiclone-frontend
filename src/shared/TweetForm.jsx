@@ -1,9 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { useCreateTweet } from './hooks/useCreateTweet';
+import { useMe } from './hooks/useMe';
+import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
 export const TweetForm = ({ tweet }) => {
+  const { me } = useMe();
   const { create, isLoading } = useCreateTweet();
   const { register, handleSubmit, formState: { errors } } = useForm(); // prettier-ignore
 
@@ -29,6 +32,9 @@ export const TweetForm = ({ tweet }) => {
       spacing={2}
       sx={{ borderBottom: '1px solid', borderColor: 'divider', p: 2 }}
     >
+      <Stack>
+        <Avatar src={me.avatar.url} alt={`${me.name}`} />
+      </Stack>
       <Stack sx={{ width: '100%' }}>
         {tweet && (
           <div>
