@@ -1,10 +1,12 @@
 import { useForm } from 'react-hook-form';
-import { useCreateTweet } from './hooks/useCreateTweet';
-import { useMe } from './hooks/useMe';
+import { BsImage } from 'react-icons/bs';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import { useCreateTweet } from './hooks/useCreateTweet';
+import { useMe } from './hooks/useMe';
 
 export const TweetForm = ({ tweet }) => {
   const { me } = useMe();
@@ -56,28 +58,41 @@ export const TweetForm = ({ tweet }) => {
             {errors.content?.type === 'required' && 'Content is required'}
           </p>
           <Stack direction="row" alignItems="flex-start" spacing={2}>
-            <input
-              {...register('images', {
-                validate: {
-                  maxFiles: (files) => files.length <= 4 || 'Max 4 images',
-                  maxSize: (files) =>
-                    [...files].every((file) => file?.size < 3 * 1024 * 1024) ||
-                    'Max 3MB',
-                  acceptedFormats: (files) =>
-                    [...files].every((file) =>
-                      [
-                        'image/png',
-                        'image/jpeg',
-                        'image/jpg',
-                        'image/gif',
-                      ].includes(file?.type)
-                    ) || 'Only PNG, JPG, JPEG e GIF',
-                },
-              })}
-              type="file"
-              name="images"
-              multiple
-            />
+            <label htmlFor="icon-button-file">
+              <input
+                {...register('images', {
+                  validate: {
+                    maxFiles: (files) => files.length <= 4 || 'Max 4 images',
+                    maxSize: (files) =>
+                      [...files].every(
+                        (file) => file?.size < 3 * 1024 * 1024
+                      ) || 'Max 3MB',
+                    acceptedFormats: (files) =>
+                      [...files].every((file) =>
+                        [
+                          'image/png',
+                          'image/jpeg',
+                          'image/jpg',
+                          'image/gif',
+                        ].includes(file?.type)
+                      ) || 'Only PNG, JPG, JPEG e GIF',
+                  },
+                })}
+                id="icon-button-file"
+                type="file"
+                name="images"
+                multiple
+                accept="image/*"
+                style={{ display: 'none' }}
+              />
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="span"
+              >
+                <BsImage />
+              </IconButton>
+            </label>
 
             <Button type="submit" size="medium" variant="contained">
               {isLoading ? 'Tweeting...' : tweet ? 'Reply' : 'Tweet'}
