@@ -51,11 +51,10 @@ export const TweetForm = ({ tweet }) => {
             rows={4}
             placeholder="What's happening?"
             variant="standard"
-            {...register('content', { required: true, maxLength: 280 })}
+            {...register('content', { maxLength: 280 })}
           />
           <p style={{ color: 'red' }}>
             {errors?.images && errors?.images.message}
-            {errors.content?.type === 'required' && 'Content is required'}
           </p>
           <Stack direction="row" alignItems="flex-start" spacing={2}>
             <label htmlFor="icon-button-file">
