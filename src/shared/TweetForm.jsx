@@ -1,5 +1,6 @@
-import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 import { BsImage } from 'react-icons/bs';
+import { useForm } from 'react-hook-form';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -7,11 +8,13 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import { useCreateTweet } from './hooks/useCreateTweet';
 import { useMe } from './hooks/useMe';
+import SnackbarUtils from '../utils/SnackbarUtils';
 
 export const TweetForm = ({ tweet }) => {
   const { me } = useMe();
+  const [imageList, setImageList] = useState([]);
   const { create, isLoading } = useCreateTweet();
-  const { register, handleSubmit, formState: { errors } } = useForm(); // prettier-ignore
+  const { register, handleSubmit, setValue } = useForm();
 
   const onSubmit = async (data, e) => {
     const formData = new FormData();
@@ -20,11 +23,12 @@ export const TweetForm = ({ tweet }) => {
     }
     formData.append('content', data.content);
 
-    [...data.images].forEach((image) => {
+    imageList.forEach((image) => {
       formData.append('images', image);
     });
 
     await create(formData);
+    setImageList([]);
     e.target.reset();
   };
 
@@ -53,40 +57,58 @@ export const TweetForm = ({ tweet }) => {
             variant="standard"
             {...register('content', { maxLength: 280 })}
           />
-          <p style={{ color: 'red' }}>
-            {errors?.images && errors?.images.message}
-          </p>
           <Stack direction="row" alignItems="flex-start" spacing={2}>
             <label htmlFor="icon-button-file">
               <input
                 {...register('images', {
-                  validate: {
-                    maxFiles: (files) => files.length <= 4 || 'Max 4 images',
-                    maxSize: (files) =>
-                      [...files].every(
-                        (file) => file?.size < 3 * 1024 * 1024
-                      ) || 'Max 3MB',
-                    acceptedFormats: (files) =>
-                      [...files].every((file) =>
-                        [
+                  onChange: ({ target }) => {
+                    const files = [...target.files];
+                    // resets value of files so it doesn't duplicate values in imageList
+                    setValue('images', undefined);
+
+                    const maxFiles =
+                      files.length > 4 || files.length + imageList.length > 4;
+
+                    const maxSize = files.some(
+                      (file) => file?.size > 3 * 1024 * 1024
+                    );
+
+                    const acceptedFormats = files.some(
+                      (file) =>
+                        ![
                           'image/png',
                           'image/jpeg',
                           'image/jpg',
                           'image/gif',
                         ].includes(file?.type)
-                      ) || 'Only PNG, JPG, JPEG e GIF',
+                    );
+
+                    if (maxSize) {
+                      SnackbarUtils.error('Please choose photos up to 3MB.');
+                    }
+                    if (acceptedFormats) {
+                      SnackbarUtils.error(
+                        'Please choose PNG, JPG, JPEG or GIF photos'
+                      );
+                    }
+                    if (maxFiles) {
+                      SnackbarUtils.error('Please choose up to 4 photos.');
+                    }
+                    if (maxSize || acceptedFormats || maxFiles) return;
+
+                    setImageList([...imageList, ...files]);
                   },
                 })}
                 id="icon-button-file"
                 type="file"
                 name="images"
                 multiple
-                accept="image/*"
+                accept="image/jpeg,image/png,image/gif"
                 style={{ display: 'none' }}
               />
               <IconButton
                 color="primary"
-                aria-label="upload picture"
+                aria-label="Add photos"
                 component="span"
               >
                 <BsImage />
