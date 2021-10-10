@@ -1,20 +1,38 @@
-import { useState } from 'react';
-import { BsImage } from 'react-icons/bs';
+import { useEffect, useState } from 'react';
+import { BsImage, BsXCircleFill } from 'react-icons/bs';
 import { useForm } from 'react-hook-form';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import { useCreateTweet } from './hooks/useCreateTweet';
 import { useMe } from './hooks/useMe';
+import { prepareForImageList } from '../utils/images';
 import SnackbarUtils from '../utils/SnackbarUtils';
 
 export const TweetForm = ({ tweet }) => {
   const { me } = useMe();
   const [imageList, setImageList] = useState([]);
+  const [previews, setPreviews] = useState([]);
   const { create, isLoading } = useCreateTweet();
   const { register, handleSubmit, setValue } = useForm();
+
+  useEffect(() => {
+    const objectUrls = imageList.map((image) => ({
+      objUrl: URL.createObjectURL(image),
+    }));
+    setPreviews(prepareForImageList(objectUrls));
+    // createdObjectURLs remain in memory if not revoked
+    return () => objectUrls.map(({ objUrl }) => URL.revokeObjectURL(objUrl));
+  }, [imageList]);
+
+  const removeImage = (index) => {
+    const withoutImage = imageList.filter((_, i) => i !== index);
+    setImageList(withoutImage);
+  };
 
   const onSubmit = async (data, e) => {
     const formData = new FormData();
@@ -29,6 +47,7 @@ export const TweetForm = ({ tweet }) => {
 
     await create(formData);
     setImageList([]);
+    setPreviews([]);
     e.target.reset();
   };
 
@@ -57,13 +76,41 @@ export const TweetForm = ({ tweet }) => {
             variant="standard"
             {...register('content', { maxLength: 280 })}
           />
+          {previews?.length > 0 && (
+            <ImageList
+              cols={2}
+              variant="quilted"
+              gap={12}
+              rowHeight={134}
+              sx={{ height: 280 }}
+            >
+              {previews.map(({ objUrl, cols, rows }, i) => {
+                return (
+                  <ImageListItem
+                    key={objUrl}
+                    cols={cols}
+                    rows={rows}
+                    sx={{ borderRadius: '16px', overflow: 'hidden' }}
+                  >
+                    <IconButton
+                      sx={{ position: 'absolute' }}
+                      onClick={() => removeImage(i)}
+                    >
+                      <BsXCircleFill />
+                    </IconButton>
+                    <img src={objUrl} alt="" loading="lazy" />
+                  </ImageListItem>
+                );
+              })}
+            </ImageList>
+          )}
           <Stack direction="row" alignItems="flex-start" spacing={2}>
             <label htmlFor="icon-button-file">
               <input
                 {...register('images', {
                   onChange: ({ target }) => {
                     const files = [...target.files];
-                    // resets value of files so it doesn't duplicate values in imageList
+                    // resets value of images so it doesn't duplicate values in imageList
                     setValue('images', undefined);
 
                     const maxFiles =
