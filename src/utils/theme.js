@@ -52,9 +52,20 @@ export const getDesignTokens = (mode) => ({
       styleOverrides: {
         root: {
           textTransform: 'none',
-          padding: '8px 16px',
           borderRadius: 50,
+          fontWeight: 700,
         },
+        sizeSmall: {
+          padding: '6px 18px',
+        },
+        sizeLarge: {
+          padding: '8px 16px',
+        },
+      },
+    },
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
       },
     },
     MuiIconButton: {
