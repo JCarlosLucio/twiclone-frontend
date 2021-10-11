@@ -6,8 +6,8 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import Input from '@mui/material/Input';
 import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
 import { useCreateTweet } from './hooks/useCreateTweet';
 import { useMe } from './hooks/useMe';
 import { prepareForImageList } from '../utils/images';
@@ -68,14 +68,17 @@ export const TweetForm = ({ tweet }) => {
             <p>{tweet.content}</p>
           </div>
         )}
-        <Stack component="form" onSubmit={handleSubmit(onSubmit)}>
-          <TextField
+
+        <Stack component="form" onSubmit={handleSubmit(onSubmit)} spacing={2}>
+          <Input
             multiline
-            rows={4}
             placeholder="What's happening?"
             variant="standard"
+            disableUnderline
+            sx={{ fontSize: '20px', paddingTop: '10px' }}
             {...register('content', { maxLength: 280 })}
           />
+
           {previews?.length > 0 && (
             <ImageList
               cols={2}
@@ -104,6 +107,7 @@ export const TweetForm = ({ tweet }) => {
               })}
             </ImageList>
           )}
+
           <Stack direction="row" alignItems="flex-start" spacing={2}>
             <label htmlFor="icon-button-file">
               <input
