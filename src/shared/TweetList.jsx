@@ -1,5 +1,7 @@
 import { useInfiniteQuery } from 'react-query';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import CircularProgress from '@mui/material/CircularProgress';
+import Stack from '@mui/material/Stack';
 import { Tweet } from './Tweet';
 import { getTweets } from '../services/tweets';
 
@@ -14,7 +16,13 @@ export const TweetList = () => {
       }
     );
 
-  if (isLoading) return <p>Loading ...</p>;
+  if (isLoading) {
+    return (
+      <Stack direction="row" justifyContent="center" sx={{ padding: '16px' }}>
+        <CircularProgress />
+      </Stack>
+    );
+  }
 
   if (isError) return <p>Error: {error.message}</p>;
 
@@ -23,7 +31,7 @@ export const TweetList = () => {
       dataLength={data.pages.length} //This is important field to render the next data
       next={fetchNextPage}
       hasMore={hasNextPage}
-      loader={<h4>Loading...</h4>}
+      loader={<h4>LOADING...</h4>}
       endMessage={
         <p style={{ textAlign: 'center' }}>
           <b>Yay! You have seen it all</b>
