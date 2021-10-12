@@ -3,11 +3,13 @@ import { BsImage, BsXCircleFill } from 'react-icons/bs';
 import { useForm } from 'react-hook-form';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Input from '@mui/material/Input';
 import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import { useCreateTweet } from './hooks/useCreateTweet';
 import { useMe } from './hooks/useMe';
 import { prepareForImageList } from '../utils/images';
@@ -17,6 +19,7 @@ export const TweetForm = ({ tweet }) => {
   const { me } = useMe();
   const [imageList, setImageList] = useState([]);
   const [previews, setPreviews] = useState([]);
+  const [charCount, setCharCount] = useState(0);
   const { create, isLoading } = useCreateTweet();
   const { register, handleSubmit, setValue } = useForm();
 
@@ -76,7 +79,12 @@ export const TweetForm = ({ tweet }) => {
             variant="standard"
             disableUnderline
             sx={{ fontSize: '20px', paddingTop: '10px' }}
-            {...register('content', { maxLength: 280 })}
+            {...register('content', {
+              onChange: ({ target }) => {
+                setCharCount(target.value.length);
+              },
+              maxLength: 280,
+            })}
           />
 
           {previews?.length > 0 && (
@@ -108,7 +116,7 @@ export const TweetForm = ({ tweet }) => {
             </ImageList>
           )}
 
-          <Stack direction="row" alignItems="flex-start" spacing={2}>
+          <Stack direction="row" alignItems="center" spacing={2}>
             <label htmlFor="icon-button-file">
               <input
                 {...register('images', {
@@ -166,6 +174,47 @@ export const TweetForm = ({ tweet }) => {
               </IconButton>
             </label>
 
+            <Stack sx={{ position: 'relative' }}>
+              {280 - charCount < 21 && (
+                <Typography
+                  variant="caption"
+                  align="center"
+                  color={280 - charCount < 1 ? 'error' : 'text.secondary'}
+                  sx={{ position: 'absolute', left: 10, top: 6 }}
+                >
+                  {280 - charCount}
+                </Typography>
+              )}
+
+              <CircularProgress
+                variant="determinate"
+                size={280 - charCount > 20 ? 20 : 30}
+                thickness={280 - charCount > 20 ? 4 : 3}
+                value={100}
+                sx={{
+                  position: 'absolute',
+                  left: 0,
+                  color: (theme) =>
+                    280 - charCount > -10
+                      ? theme.palette.divider
+                      : 'transparent',
+                }}
+              />
+              <CircularProgress
+                variant="determinate"
+                size={280 - charCount > 20 ? 20 : 30}
+                thickness={280 - charCount > 20 ? 4 : 3}
+                value={280 - charCount < 1 ? 100 : charCount / 2.8}
+                color={
+                  (280 - charCount < 1 && 'error') ||
+                  (280 - charCount <= 20 && 'warning') ||
+                  (280 - charCount > 20 && 'primary')
+                }
+                sx={{
+                  visibility: 280 - charCount > -10 ? 'visible' : 'hidden',
+                }}
+              />
+            </Stack>
             <Button type="submit" size="medium" variant="contained">
               {isLoading ? 'Tweeting...' : tweet ? 'Reply' : 'Tweet'}
             </Button>
