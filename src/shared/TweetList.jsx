@@ -1,20 +1,12 @@
-import { useInfiniteQuery } from 'react-query';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
+import { useInfiniteTweets } from './hooks/useInfiniteTweets';
 import { Tweet } from './Tweet';
-import { getTweets } from '../services/tweets';
 
 export const TweetList = () => {
   const { data, fetchNextPage, hasNextPage, isLoading, isError, error } =
-    useInfiniteQuery(
-      'tweets',
-      ({ pageParam = 1 }) => getTweets(pageParam, 10),
-      {
-        getNextPageParam: (page) =>
-          page.currentPage >= page.lastPage ? undefined : page.currentPage + 1,
-      }
-    );
+    useInfiniteTweets();
 
   if (isLoading) {
     return (
