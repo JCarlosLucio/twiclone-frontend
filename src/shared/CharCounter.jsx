@@ -1,6 +1,7 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
 
 export const CharCounter = ({ count }) => {
   const MAX_COUNT = 280;
@@ -55,4 +56,8 @@ export const CharCounter = ({ count }) => {
       />
     </Stack>
   );
+};
+
+CharCounter.propTypes = {
+  count: PropTypes.number.isRequired,
 };
