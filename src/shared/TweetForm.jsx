@@ -137,7 +137,7 @@ export const TweetForm = ({ tweet }) => {
               </IconButton>
             </label>
 
-            <CharCounter count={charCount} />
+            {charCount > 0 && <CharCounter count={charCount} />}
 
             <Button
               type="submit"
