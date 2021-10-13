@@ -1,35 +1,23 @@
-import { useEffect, useState } from 'react';
-import { BsImage, BsXCircleFill } from 'react-icons/bs';
+import { useState } from 'react';
+import { BsImage } from 'react-icons/bs';
 import { useForm } from 'react-hook-form';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import Input from '@mui/material/Input';
 import Stack from '@mui/material/Stack';
 import { CharCounter } from './CharCounter';
 import { useCreateTweet } from './hooks/useCreateTweet';
 import { useMe } from './hooks/useMe';
-import { prepareForImageList } from '../utils/images';
 import SnackbarUtils from '../utils/SnackbarUtils';
+import { ImagePreviews } from './ImagePreviews';
 
 export const TweetForm = ({ tweet }) => {
   const { me } = useMe();
   const [imageList, setImageList] = useState([]);
-  const [previews, setPreviews] = useState([]);
   const [charCount, setCharCount] = useState(0);
   const { create, isLoading } = useCreateTweet();
   const { register, handleSubmit, setValue } = useForm();
-
-  useEffect(() => {
-    const objectUrls = imageList.map((image) => ({
-      objUrl: URL.createObjectURL(image),
-    }));
-    setPreviews(prepareForImageList(objectUrls));
-    // createdObjectURLs remain in memory if not revoked
-    return () => objectUrls.map(({ objUrl }) => URL.revokeObjectURL(objUrl));
-  }, [imageList]);
 
   const removeImage = (index) => {
     const withoutImage = imageList.filter((_, i) => i !== index);
@@ -51,7 +39,6 @@ export const TweetForm = ({ tweet }) => {
     setValue('content', '');
     setCharCount(0);
     setImageList([]);
-    setPreviews([]);
   };
 
   return (
@@ -86,34 +73,7 @@ export const TweetForm = ({ tweet }) => {
             })}
           />
 
-          {previews?.length > 0 && (
-            <ImageList
-              cols={2}
-              variant="quilted"
-              gap={12}
-              rowHeight={134}
-              sx={{ height: 280 }}
-            >
-              {previews.map(({ objUrl, cols, rows }, i) => {
-                return (
-                  <ImageListItem
-                    key={objUrl}
-                    cols={cols}
-                    rows={rows}
-                    sx={{ borderRadius: '16px', overflow: 'hidden' }}
-                  >
-                    <IconButton
-                      sx={{ position: 'absolute' }}
-                      onClick={() => removeImage(i)}
-                    >
-                      <BsXCircleFill />
-                    </IconButton>
-                    <img src={objUrl} alt="" loading="lazy" />
-                  </ImageListItem>
-                );
-              })}
-            </ImageList>
-          )}
+          <ImagePreviews imageList={imageList} removeImage={removeImage} />
 
           <Stack direction="row" alignItems="center" spacing={2}>
             <label htmlFor="icon-button-file">
