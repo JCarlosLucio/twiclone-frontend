@@ -36,7 +36,7 @@ export const TweetForm = ({ tweet }) => {
     setImageList(withoutImage);
   };
 
-  const onSubmit = async (data, e) => {
+  const onSubmit = async (data) => {
     const formData = new FormData();
     if (tweet?.id) {
       formData.append('parent', tweet.id);
@@ -48,9 +48,10 @@ export const TweetForm = ({ tweet }) => {
     });
 
     await create(formData);
+    setValue('content', '');
+    setCharCount(0);
     setImageList([]);
     setPreviews([]);
-    e.target.reset();
   };
 
   return (
