@@ -36,6 +36,9 @@ export const getDesignTokens = (mode) => ({
     borderRadius: 16,
   },
   palette: {
+    action: {
+      disabledBackground: 'rgba(33, 150, 243,0.5)',
+    },
     mode,
     ...(mode === 'light' ? lightTheme : darkTheme),
   },
