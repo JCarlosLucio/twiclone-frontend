@@ -13,7 +13,7 @@ import { useCreateTweet } from './hooks/useCreateTweet';
 import { useMe } from './hooks/useMe';
 import SnackbarUtils from '../utils/SnackbarUtils';
 
-export const TweetForm = ({ tweet, fileInputId }) => {
+export const TweetForm = ({ tweet, fileInputId, handleClose }) => {
   const { me } = useMe();
   const [imageList, setImageList] = useState([]);
   const [charCount, setCharCount] = useState(0);
@@ -40,6 +40,7 @@ export const TweetForm = ({ tweet, fileInputId }) => {
     setValue('content', '');
     setCharCount(0);
     setImageList([]);
+    handleClose && handleClose();
   };
 
   return (
@@ -160,4 +161,5 @@ export const TweetForm = ({ tweet, fileInputId }) => {
 TweetForm.propTypes = {
   tweet: PropTypes.object,
   fileInputId: PropTypes.string.isRequired,
+  handleClose: PropTypes.func,
 };
