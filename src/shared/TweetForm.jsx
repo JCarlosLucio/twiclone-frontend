@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import Stack from '@mui/material/Stack';
+import PropTypes from 'prop-types';
 import { CharCounter } from './CharCounter';
 import { ImagePreviews } from './ImagePreviews';
 import { useCreateTweet } from './hooks/useCreateTweet';
@@ -154,4 +155,9 @@ export const TweetForm = ({ tweet, fileInputId }) => {
       </Stack>
     </Stack>
   );
+};
+
+TweetForm.propTypes = {
+  tweet: PropTypes.object,
+  fileInputId: PropTypes.string.isRequired,
 };
