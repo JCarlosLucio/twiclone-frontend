@@ -73,6 +73,11 @@ export const getDesignTokens = (mode) => ({
     },
     MuiIconButton: {
       styleOverrides: {
+        root: {
+          '&:disabled, &.Mui-disabled': {
+            color: 'rgba(33, 150, 243,0.5)',
+          },
+        },
         sizeSmall: {
           fontSize: '1rem',
           padding: '10px',
