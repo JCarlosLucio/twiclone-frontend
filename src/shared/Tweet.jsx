@@ -76,7 +76,7 @@ export const Tweet = ({ tweet }) => {
 
         <Stack spacing={1.5}>
           <Typography>{tweet.content}</Typography>
-          {images && (
+          {images?.length > 0 && (
             <ImageList
               cols={2}
               variant="quilted"

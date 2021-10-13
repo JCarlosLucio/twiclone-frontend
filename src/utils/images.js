@@ -23,8 +23,8 @@ const imageProps = {
 };
 
 export const prepareForImageList = (images) => {
-  if (!images || !(images.length > 0)) {
-    return null;
+  if (!images) {
+    return [];
   }
 
   return images.map((image, i, arr) => {
