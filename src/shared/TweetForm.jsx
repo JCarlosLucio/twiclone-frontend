@@ -44,12 +44,7 @@ export const TweetForm = ({ tweet, fileInputId, handleClose }) => {
   };
 
   return (
-    <Stack
-      direction="row"
-      alignItems="flex-start"
-      spacing={2}
-      sx={{ borderBottom: '1px solid', borderColor: 'divider', p: 2 }}
-    >
+    <Stack direction="row" alignItems="flex-start" spacing={2} sx={{ p: 2 }}>
       <Stack>
         <Avatar src={me.avatar.url} alt={`${me.name}`} />
       </Stack>

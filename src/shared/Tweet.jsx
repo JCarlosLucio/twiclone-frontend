@@ -37,7 +37,7 @@ export const Tweet = ({ tweet }) => {
       direction="row"
       alignItems="flex-start"
       spacing={2}
-      sx={{ borderBottom: '1px solid', borderColor: 'divider', p: 2 }}
+      sx={{ borderTop: '1px solid', borderColor: 'divider', p: 2 }}
     >
       <Avatar src={tweet.user.avatar.url} alt={`${tweet.user.name}`} />
 
