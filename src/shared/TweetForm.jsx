@@ -163,15 +163,18 @@ export const TweetForm = ({ tweet }) => {
                 multiple
                 accept="image/jpeg,image/png,image/gif"
                 style={{ display: 'none' }}
+                disabled={imageList?.length >= 4}
               />
               <IconButton
                 color="primary"
                 aria-label="Add photos"
                 component="span"
+                disabled={imageList?.length >= 4}
               >
                 <BsImage />
               </IconButton>
             </label>
+
             <CharCounter count={charCount} />
 
             <Button
