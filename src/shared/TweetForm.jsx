@@ -215,7 +215,14 @@ export const TweetForm = ({ tweet }) => {
                 }}
               />
             </Stack>
-            <Button type="submit" size="medium" variant="contained">
+            <Button
+              type="submit"
+              size="medium"
+              variant="contained"
+              disabled={
+                !((charCount > 0 && charCount <= 280) || imageList.length > 0)
+              }
+            >
               {isLoading ? 'Tweeting...' : tweet ? 'Reply' : 'Tweet'}
             </Button>
           </Stack>
