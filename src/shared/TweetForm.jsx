@@ -7,12 +7,12 @@ import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import Stack from '@mui/material/Stack';
 import { CharCounter } from './CharCounter';
+import { ImagePreviews } from './ImagePreviews';
 import { useCreateTweet } from './hooks/useCreateTweet';
 import { useMe } from './hooks/useMe';
 import SnackbarUtils from '../utils/SnackbarUtils';
-import { ImagePreviews } from './ImagePreviews';
 
-export const TweetForm = ({ tweet }) => {
+export const TweetForm = ({ tweet, fileInputId }) => {
   const { me } = useMe();
   const [imageList, setImageList] = useState([]);
   const [charCount, setCharCount] = useState(0);
@@ -78,8 +78,15 @@ export const TweetForm = ({ tweet }) => {
           )}
 
           <Stack direction="row" alignItems="center" spacing={2}>
-            <label htmlFor="icon-button-file">
+            <label htmlFor={fileInputId}>
               <input
+                id={fileInputId}
+                type="file"
+                name="images"
+                multiple
+                accept="image/jpeg,image/png,image/gif"
+                style={{ display: 'none' }}
+                disabled={imageList?.length >= 4}
                 {...register('images', {
                   onChange: ({ target }) => {
                     const files = [...target.files];
@@ -119,13 +126,6 @@ export const TweetForm = ({ tweet }) => {
                     setImageList([...imageList, ...files]);
                   },
                 })}
-                id="icon-button-file"
-                type="file"
-                name="images"
-                multiple
-                accept="image/jpeg,image/png,image/gif"
-                style={{ display: 'none' }}
-                disabled={imageList?.length >= 4}
               />
               <IconButton
                 color="primary"

@@ -45,7 +45,7 @@ export const Feed = () => {
           <BsStars />
         </IconButton>
       </Stack>
-      <TweetForm />
+      <TweetForm fileInputId="feed-file-input" />
       <TweetList />
     </Stack>
   );
