@@ -166,7 +166,12 @@ export const Tweet = ({ tweet }) => {
               <BsUpload />
             </IconButton>
           </Stack>
-          {showTweetForm && <TweetForm tweet={tweet} />}
+          {showTweetForm && (
+            <TweetForm
+              tweet={tweet}
+              fileInputId={`reply-file-input-${tweet.id}`}
+            />
+          )}
         </Stack>
       </Stack>
     </Stack>
