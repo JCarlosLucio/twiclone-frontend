@@ -73,7 +73,9 @@ export const TweetForm = ({ tweet }) => {
             })}
           />
 
-          <ImagePreviews imageList={imageList} removeImage={removeImage} />
+          {imageList?.length > 0 && (
+            <ImagePreviews imageList={imageList} removeImage={removeImage} />
+          )}
 
           <Stack direction="row" alignItems="center" spacing={2}>
             <label htmlFor="icon-button-file">
