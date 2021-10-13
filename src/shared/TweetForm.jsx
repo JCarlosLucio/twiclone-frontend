@@ -82,7 +82,6 @@ export const TweetForm = ({ tweet }) => {
               onChange: ({ target }) => {
                 setCharCount(target.value.length);
               },
-              maxLength: 280,
             })}
           />
 
