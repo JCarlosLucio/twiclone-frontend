@@ -6,11 +6,14 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import { CustomModal, TweetForm } from '../shared';
 import { useMe } from '../shared/hooks/useMe';
+import { useModal } from '../shared/hooks/useModal';
 import { ColorModeContext } from '../utils/ColorModeProvider';
 
 export const Menu = () => {
   const { me, clearUser } = useMe();
+  const { open, handleOpen, handleClose } = useModal(false);
   const colorMode = useContext(ColorModeContext);
 
   const logout = () => {
@@ -79,11 +82,20 @@ export const Menu = () => {
           <Button onClick={colorMode.toggleColorMode}>
             toggle {colorMode.mode}
           </Button>
-          <Button size="large" variant="contained" fullWidth>
+          <Button
+            onClick={handleOpen}
+            size="large"
+            variant="contained"
+            fullWidth
+          >
             Tweet
           </Button>
         </Stack>
       </Stack>
+
+      <CustomModal open={open} handleClose={handleClose}>
+        <TweetForm fileInputId="modal-file-input" handleClose={handleClose} />
+      </CustomModal>
 
       {me && (
         <div>
