@@ -78,6 +78,25 @@ export const getDesignTokens = (mode) => ({
         disableRipple: true,
       },
     },
+    MuiDialog: {
+      styleOverrides: {
+        root: {
+          '& .MuiPaper-root': {
+            backgroundImage: 'none',
+          },
+        },
+        container: {
+          alignItems: 'flex-start',
+        },
+      },
+    },
+    MuiDialogContent: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        },
+      },
+    },
     MuiIconButton: {
       styleOverrides: {
         root: {
