@@ -14,6 +14,7 @@ const lightTheme = {
     primary: grey[900],
     secondary: '#536471',
   },
+  backdrop: 'rgba(0, 0, 0, 0.4)',
 };
 
 const darkTheme = {
@@ -29,6 +30,7 @@ const darkTheme = {
     primary: '#d9d9d9',
     secondary: '#6e767d',
   },
+  backdrop: 'rgba(91, 112, 131, 0.4)',
 };
 
 export const getDesignTokens = (mode) => ({
