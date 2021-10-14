@@ -58,6 +58,11 @@ export const getDesignTokens = (mode) => ({
           borderRadius: 50,
           fontWeight: 700,
         },
+        contained: {
+          '&:disabled, &.Mui-disabled': {
+            color: 'rgba(255, 255, 255, 0.7)',
+          },
+        },
         sizeSmall: {
           padding: '6px 18px',
         },
