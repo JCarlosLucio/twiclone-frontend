@@ -14,8 +14,8 @@ export const Register = () => {
 
   const { registerUser, isLoading } = useRegister();
 
-  const onSubmit = async (formData) => {
-    await registerUser({ ...formData });
+  const onSubmit = (formData) => {
+    registerUser(formData);
   };
 
   return (
