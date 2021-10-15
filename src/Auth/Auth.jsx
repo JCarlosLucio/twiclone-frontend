@@ -10,6 +10,10 @@ import { Register } from './Register';
 export const Auth = () => {
   const [mode, setMode] = useState('login');
 
+  const toggleMode = () => {
+    setMode(mode === 'login' ? 'register' : 'login');
+  };
+
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
       <Grid
@@ -41,27 +45,28 @@ export const Auth = () => {
             >
               Happening now
             </Typography>
+
             <Typography variant="h4" sx={{ fontWeight: 700 }}>
               {mode === 'login' ? 'Log in to Twiclone' : 'Join Twiclone today.'}
             </Typography>
-            {mode === 'login' && (
-              <>
-                <Login />
-                <p>
-                  Don’t have an account?
-                  <button onClick={() => setMode('register')}>Register</button>
-                </p>
-              </>
-            )}
-            {mode === 'register' && (
-              <>
-                <Register />
-                <p>
-                  Already have an account?
-                  <button onClick={() => setMode('login')}>Log in</button>
-                </p>
-              </>
-            )}
+
+            {mode === 'login' ? <Login /> : <Register />}
+
+            <Stack direction="row" spacing={1}>
+              <Typography>
+                {mode === 'login'
+                  ? 'Don’t have an account?'
+                  : 'Already have an account?'}
+              </Typography>
+
+              <Typography
+                color="primary"
+                onClick={toggleMode}
+                sx={{ cursor: 'pointer' }}
+              >
+                {mode === 'login' ? 'Log in' : 'Register'}
+              </Typography>
+            </Stack>
           </Stack>
         </Stack>
       </Grid>
