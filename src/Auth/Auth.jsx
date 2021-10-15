@@ -64,7 +64,7 @@ export const Auth = () => {
                 onClick={toggleMode}
                 sx={{ cursor: 'pointer' }}
               >
-                {mode === 'login' ? 'Log in' : 'Register'}
+                {mode === 'login' ? 'Register' : 'Log in'}
               </Typography>
             </Stack>
           </Stack>
