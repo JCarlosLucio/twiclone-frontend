@@ -1,19 +1,12 @@
 import { useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from 'react-query';
-import { login } from '../services/auth';
-import { queryKeys } from '../constants';
+import { useLogin } from './hooks/useLogin';
 
 export const Login = () => {
-  const queryClient = useQueryClient();
   const { register, handleSubmit, formState: { errors } } = useForm(); // prettier-ignore
-  const { mutateAsync, isLoading } = useMutation(login, {
-    onSuccess: (data) => {
-      queryClient.setQueryData(queryKeys.me, data);
-    },
-  });
+  const { loginUser, isLoading } = useLogin();
 
   const onSubmit = async (formData) => {
-    await mutateAsync({ ...formData });
+    await loginUser({ ...formData });
   };
 
   return (
