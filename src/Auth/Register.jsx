@@ -1,4 +1,7 @@
 import { useForm } from 'react-hook-form';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
 import { useRegister } from './hooks/useRegister';
 
 export const Register = () => {
@@ -16,87 +19,108 @@ export const Register = () => {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          placeholder="name"
-          {...register('name', {
-            required: true,
-            maxLength: 128,
-          })}
-        />
-        <p style={{ color: 'red' }}>
-          {errors.name?.type === 'required' && 'name is required'}
-          {errors.name?.type === 'maxLength' &&
-            'name must be 128 characters or less'}
-        </p>
+    <Stack
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+      spacing={2}
+      my={2}
+    >
+      <TextField
+        type="text"
+        variant="outlined"
+        label="Name"
+        placeholder="Name"
+        error={!!errors.name}
+        helperText={
+          (errors.name?.type === 'required' && 'Name is required') ||
+          (errors.name?.type === 'maxLength' &&
+            'Name must be 128 characters or less')
+        }
+        {...register('name', {
+          required: true,
+          maxLength: 128,
+        })}
+      />
 
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          placeholder="username"
-          {...register('username', {
-            required: true,
-            pattern: /^[a-zA-Z0-9_]+$/,
-            minLength: 5,
-            maxLength: 15,
-          })}
-        />
-        <p style={{ color: 'red' }}>
-          {errors.username?.type === 'required' && 'username is required'}
-          {errors.username?.type === 'minLength' &&
-            'username should be more than 4 characters'}
-          {errors.username?.type === 'maxLength' &&
-            'username must be 15 characters or less'}
-          {errors.username?.type === 'pattern' &&
-            'username must contain only letters, numbers, underscores and no spaces'}
-        </p>
+      <TextField
+        type="text"
+        variant="outlined"
+        label="Username"
+        placeholder="Username"
+        error={!!errors.username}
+        helperText={
+          (errors.username?.type === 'required' && 'Username is required') ||
+          (errors.username?.type === 'minLength' &&
+            'Username should be more than 4 characters') ||
+          (errors.username?.type === 'maxLength' &&
+            'Username must be 15 characters or less') ||
+          (errors.username?.type === 'pattern' &&
+            'Username must contain only letters, numbers, underscores and no spaces')
+        }
+        {...register('username', {
+          required: true,
+          pattern: /^[a-zA-Z0-9_]+$/,
+          minLength: 5,
+          maxLength: 15,
+        })}
+      />
 
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          placeholder="email"
-          {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
-        />
-        <p>
-          {errors.email?.type === 'required' && 'Email is required'}
-          {errors.email?.type === 'pattern' && 'Email must be a valid email'}
-        </p>
+      <TextField
+        type="text"
+        variant="outlined"
+        label="Email"
+        placeholder="Email"
+        error={!!errors.email}
+        helperText={
+          (errors.email?.type === 'required' && 'Email is required') ||
+          (errors.email?.type === 'pattern' && 'Must be a valid email')
+        }
+        {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+      />
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          placeholder="password"
-          {...register('password', { required: true, maxLength: 128 })}
-        />
-        <p>{errors.password?.type === 'required' && 'Password is required'}</p>
+      <TextField
+        type="password"
+        variant="outlined"
+        label="Password"
+        placeholder="Password"
+        error={!!errors.password}
+        helperText={
+          (errors.password?.type === 'required' && 'Password is required') ||
+          (errors.password?.type === 'maxLength' &&
+            'Password must be 128 characters or less')
+        }
+        {...register('password', {
+          required: true,
+          maxLength: 128,
+        })}
+      />
 
-        <label htmlFor="passwordConfirm">Confirm Password</label>
-        <input
-          type="password"
-          placeholder="confirm password"
-          {...register('passwordConfirm', {
-            required: true,
-            maxLength: 128,
-            validate: {
-              matchesPassword: (value) =>
-                value === getValues().password || 'Passwords must match',
-            },
-          })}
-        />
-        <p>
-          {errors.passwordConfirm?.type === 'required' &&
-            'Password Confirmation is required'}
-          {errors.passwordConfirm && errors.passwordConfirm.message}
-        </p>
+      <TextField
+        type="password"
+        variant="outlined"
+        label="Confirm password"
+        placeholder="Confirm password"
+        error={!!errors.passwordConfirm}
+        helperText={
+          (errors.passwordConfirm?.type === 'required' &&
+            'Password Confirmation is required') ||
+          (errors.passwordConfirm?.type === 'maxLength' &&
+            'Password Confirmation must be 128 characters or less') ||
+          errors.passwordConfirm?.message
+        }
+        {...register('passwordConfirm', {
+          required: true,
+          maxLength: 128,
+          validate: {
+            matchesPassword: (value) =>
+              value === getValues().password || 'Passwords must match',
+          },
+        })}
+      />
 
-        <button type="submit">
-          {isLoading ? 'Registering...' : 'Register'}
-        </button>
-      </form>
-    </div>
+      <Button type="submit" size="large" variant="contained">
+        {isLoading ? 'Registering...' : 'Register'}
+      </Button>
+    </Stack>
   );
 };
