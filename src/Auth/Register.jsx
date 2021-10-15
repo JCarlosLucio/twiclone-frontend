@@ -1,24 +1,18 @@
 import { useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from 'react-query';
-import { register as registerUser } from '../services/auth';
-import { queryKeys } from '../constants';
+import { useRegister } from './hooks/useRegister';
 
 export const Register = () => {
-  const queryClient = useQueryClient();
   const {
     register,
     getValues,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { mutateAsync, isLoading } = useMutation(registerUser, {
-    onSuccess: (data) => {
-      queryClient.setQueryData(queryKeys.me, data);
-    },
-  });
+
+  const { registerUser, isLoading } = useRegister();
 
   const onSubmit = async (formData) => {
-    await mutateAsync({ ...formData });
+    await registerUser({ ...formData });
   };
 
   return (
