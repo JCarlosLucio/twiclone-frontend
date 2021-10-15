@@ -1,4 +1,7 @@
 import { useForm } from 'react-hook-form';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
 import { useLogin } from './hooks/useLogin';
 
 export const Login = () => {
@@ -10,28 +13,42 @@ export const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          placeholder="email"
-          {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
-        />
-        {errors.email?.type === 'required' && 'Email is required'}
-        {errors.email?.type === 'pattern' && 'Email must be a valid email'}
+    <Stack
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+      spacing={2}
+      my={2}
+    >
+      <TextField
+        type="text"
+        variant="outlined"
+        size="large"
+        label="Email"
+        placeholder="Email"
+        error={!!errors.email}
+        helperText={
+          errors.email?.type === 'required'
+            ? 'Email is required'
+            : errors.email?.type === 'pattern' && 'Must be a valid email'
+        }
+        {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+      />
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          placeholder="password"
-          {...register('password', { required: true, maxLength: 128 })}
-        />
-        {errors.password?.type === 'required' && 'Password is required'}
+      <TextField
+        type="password"
+        variant="outlined"
+        label="Password"
+        placeholder="Password"
+        error={!!errors.password}
+        helperText={
+          errors.password?.type === 'required' && 'Password is required'
+        }
+        {...register('password', { required: true, maxLength: 128 })}
+      />
 
-        <button type="submit">{isLoading ? 'Logging in...' : 'Login'}</button>
-      </form>
-    </div>
+      <Button type="submit" size="large" variant="contained">
+        {isLoading ? 'Logging in...' : 'Login'}
+      </Button>
+    </Stack>
   );
 };
