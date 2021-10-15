@@ -14,9 +14,9 @@ export const Auth = () => {
     <Grid container component="main" sx={{ height: '100vh' }}>
       <Grid
         item
-        xs={0}
         sm={3}
         md={7}
+        lg={8}
         sx={{
           backgroundImage: 'url(https://source.unsplash.com/random)',
           backgroundRepeat: 'no-repeat',
@@ -24,7 +24,7 @@ export const Auth = () => {
           backgroundPosition: 'center',
         }}
       />
-      <Grid item xs={12} sm={9} md={5}>
+      <Grid item xs={12} sm={9} md={5} lg={4}>
         <Stack justifyContent="center" sx={{ height: '100vh' }}>
           <Stack p={5}>
             <Box sx={{ fontSize: '3rem' }}>
