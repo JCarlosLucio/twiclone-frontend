@@ -27,9 +27,8 @@ export const Login = () => {
         placeholder="Email"
         error={!!errors.email}
         helperText={
-          errors.email?.type === 'required'
-            ? 'Email is required'
-            : errors.email?.type === 'pattern' && 'Must be a valid email'
+          (errors.email?.type === 'required' && 'Email is required') ||
+          (errors.email?.type === 'pattern' && 'Must be a valid email')
         }
         {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
       />
@@ -41,7 +40,9 @@ export const Login = () => {
         placeholder="Password"
         error={!!errors.password}
         helperText={
-          errors.password?.type === 'required' && 'Password is required'
+          (errors.password?.type === 'required' && 'Password is required') ||
+          (errors.password?.type === 'maxLength' &&
+            'Password must be 128 characters or less')
         }
         {...register('password', { required: true, maxLength: 128 })}
       />
