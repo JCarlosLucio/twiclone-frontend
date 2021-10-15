@@ -5,7 +5,7 @@ import { useMe } from '../../shared/hooks/useMe';
 export const useLogin = () => {
   const { updateUser } = useMe();
 
-  const { mutateAsync: loginUser, isLoading } = useMutation(login, {
+  const { mutate: loginUser, isLoading } = useMutation(login, {
     onSuccess: (data) => {
       updateUser(data);
     },

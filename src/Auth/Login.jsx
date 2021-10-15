@@ -8,8 +8,8 @@ export const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm(); // prettier-ignore
   const { loginUser, isLoading } = useLogin();
 
-  const onSubmit = async (formData) => {
-    await loginUser({ ...formData });
+  const onSubmit = (formData) => {
+    loginUser(formData);
   };
 
   return (
