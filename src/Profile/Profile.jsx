@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
+import Stack from '@mui/material/Stack';
 import { EditProfile } from './EditProfile';
 import { useFollow } from '../shared/hooks/useFollow';
 import { useMe } from '../shared/hooks/useMe';
@@ -40,7 +41,14 @@ export const Profile = () => {
   const following = me.following.includes(user?.id);
 
   return (
-    <div>
+    <Stack
+      sx={{
+        borderRight: '1px solid',
+        borderLeft: '1px solid',
+        borderColor: 'divider',
+        minHeight: '100vh',
+      }}
+    >
       <button onClick={goBack}>back</button>
       <img
         style={{ width: 40 }}
@@ -59,6 +67,6 @@ export const Profile = () => {
         </button>
       )}
       {showEditForm && <EditProfile me={me} />}
-    </div>
+    </Stack>
   );
 };
