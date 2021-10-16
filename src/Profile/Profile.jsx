@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { BsArrowLeft } from 'react-icons/bs';
 import { useHistory, useParams } from 'react-router';
+import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import { EditProfile } from './EditProfile';
 import { useFollow } from '../shared/hooks/useFollow';
 import { useMe } from '../shared/hooks/useMe';
 import { useUser } from '../shared/hooks/useUser';
+import { TopBar } from '../shared';
 
 export const Profile = () => {
   const { username } = useParams();
@@ -49,7 +53,27 @@ export const Profile = () => {
         minHeight: '100vh',
       }}
     >
-      <button onClick={goBack}>back</button>
+      <TopBar>
+        <IconButton
+          size="small"
+          color="secondary"
+          edge="start"
+          onClick={goBack}
+        >
+          <BsArrowLeft fontSize="large" />
+        </IconButton>
+
+        <Stack ml={3}>
+          <Typography variant="h6" fontWeight="700" lineHeight={1.2}>
+            {user ? user.username : 'Profile'}
+          </Typography>
+          {user && (
+            <Typography variant="caption" color="text.secondary">
+              33 Tweets
+            </Typography>
+          )}
+        </Stack>
+      </TopBar>
       <img
         style={{ width: 40 }}
         src={user.avatar.url}
