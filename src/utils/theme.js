@@ -110,6 +110,13 @@ export const getDesignTokens = (mode) => ({
         },
       },
     },
+    MuiAppBar: {
+      defaultProps: {
+        enableColorOnDark: true,
+        color: 'background',
+        elevation: 0,
+      },
+    },
     MuiTypography: {
       defaultProps: {
         variantMapping: {
