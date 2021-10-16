@@ -1,21 +1,16 @@
 import { useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-import { followUser, getUser } from '../services/user';
+import { followUser } from '../services/user';
 import { queryKeys } from '../constants';
 import { EditProfile } from './EditProfile';
 import { useMe } from '../shared/hooks/useMe';
+import { useUser } from '../shared/hooks/useUser';
 
 export const Profile = () => {
   const { username } = useParams();
   const { goBack } = useHistory();
-  const {
-    data: user,
-    error,
-    isLoading,
-    isError,
-  } = useQuery([queryKeys.user, username], () => getUser(username));
-
+  const { user, isLoading, isError, error } = useUser(username);
   const queryClient = useQueryClient();
   const { me } = useMe();
 
