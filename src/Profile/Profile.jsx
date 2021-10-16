@@ -1,32 +1,16 @@
 import { useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-import { followUser } from '../services/user';
-import { queryKeys } from '../constants';
 import { EditProfile } from './EditProfile';
+import { useFollow } from '../shared/hooks/useFollow';
 import { useMe } from '../shared/hooks/useMe';
 import { useUser } from '../shared/hooks/useUser';
 
 export const Profile = () => {
   const { username } = useParams();
   const { goBack } = useHistory();
-  const { user, isLoading, isError, error } = useUser(username);
-  const queryClient = useQueryClient();
   const { me } = useMe();
-
-  const { mutate, isLoading: isMutating } = useMutation(followUser, {
-    onSuccess: (data) => {
-      queryClient.setQueryData(queryKeys.me, {
-        ...data.updatedMe,
-        token: me.token,
-      });
-      queryClient.setQueryData(
-        [queryKeys.user, user.username],
-        data.updatedUser
-      );
-      // needs to invalidate/refetch tweets(?)
-    },
-  });
+  const { user, isLoading, isError, error } = useUser(username);
+  const { follow, isFollowing } = useFollow(user);
 
   const [showEditForm, setShowEditForm] = useState(false);
 
@@ -35,7 +19,7 @@ export const Profile = () => {
   };
 
   const handleFollow = () => {
-    mutate(user?.id);
+    follow(user?.id);
   };
 
   if (isLoading) return <p>Loading ...</p>;
@@ -71,7 +55,7 @@ export const Profile = () => {
         <button onClick={toggleEditForm}>Edit Profile</button>
       ) : (
         <button onClick={handleFollow}>
-          {isMutating ? 'Following...' : following ? 'Following' : 'Follow'}
+          {isFollowing ? 'Following...' : following ? 'Following' : 'Follow'}
         </button>
       )}
       {showEditForm && <EditProfile me={me} />}
