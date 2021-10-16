@@ -16,6 +16,7 @@ const App = () => {
   return (
     <Grid container justifyContent="center">
       <Grid
+        component="header"
         item
         lg={4}
         sx={{
@@ -27,7 +28,7 @@ const App = () => {
       >
         <Menu />
       </Grid>
-      <Grid item lg={4}>
+      <Grid component="main" item lg={4}>
         <Switch>
           <Route exact path={['/', '/home']} component={Feed} />
           <Route path="/:username" component={Profile} />
