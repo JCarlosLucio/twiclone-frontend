@@ -10,12 +10,20 @@ export const Register = () => {
     getValues,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm();
 
   const { registerUser, isLoading } = useRegister();
 
   const onSubmit = (formData) => {
-    registerUser(formData);
+    registerUser(formData, {
+      onError: (error) => {
+        const { type, error: message } = error?.response?.data;
+        if (type) {
+          setError(type, { message });
+        }
+      },
+    });
   };
 
   return (
@@ -55,7 +63,8 @@ export const Register = () => {
           (errors.username?.type === 'maxLength' &&
             'Username must be 15 characters or less') ||
           (errors.username?.type === 'pattern' &&
-            'Username must contain only letters, numbers, underscores and no spaces')
+            'Username must contain only letters, numbers, underscores and no spaces') ||
+          errors?.username?.message
         }
         {...register('username', {
           required: true,
@@ -73,7 +82,8 @@ export const Register = () => {
         error={!!errors.email}
         helperText={
           (errors.email?.type === 'required' && 'Email is required') ||
-          (errors.email?.type === 'pattern' && 'Must be a valid email')
+          (errors.email?.type === 'pattern' && 'Must be a valid email') ||
+          errors?.email?.message
         }
         {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
       />
