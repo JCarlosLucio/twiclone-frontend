@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BsArrowLeft } from 'react-icons/bs';
 import { useHistory, useParams } from 'react-router';
+import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -74,23 +75,27 @@ export const Profile = () => {
           )}
         </Stack>
       </TopBar>
-      <img
-        style={{ width: 40 }}
-        src={user.avatar.url}
-        alt={`${user.name} avatar`}
-      />
-      <h1>Profile</h1>
-      <h2>{user.name}</h2>
-      <h3>{`@${user.username}`}</h3>
-      <h2>{`${user.following.length} Following   ${user.followers.length} Followers`}</h2>
-      {isMe ? (
-        <button onClick={toggleEditForm}>Edit Profile</button>
-      ) : (
-        <button onClick={handleFollow}>
-          {isFollowing ? 'Following...' : following ? 'Following' : 'Follow'}
-        </button>
-      )}
-      {showEditForm && <EditProfile me={me} />}
+
+      <Stack>
+        <Avatar
+          size="large"
+          src={user.avatar.url}
+          alt={`${user.name} avatar`}
+        />
+
+        <h1>Profile</h1>
+        <h2>{user.name}</h2>
+        <h3>{`@${user.username}`}</h3>
+        <h2>{`${user.following.length} Following   ${user.followers.length} Followers`}</h2>
+        {isMe ? (
+          <button onClick={toggleEditForm}>Edit Profile</button>
+        ) : (
+          <button onClick={handleFollow}>
+            {isFollowing ? 'Following...' : following ? 'Following' : 'Follow'}
+          </button>
+        )}
+        {showEditForm && <EditProfile me={me} />}
+      </Stack>
     </Stack>
   );
 };
