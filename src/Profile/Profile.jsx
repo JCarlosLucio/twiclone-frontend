@@ -112,19 +112,34 @@ export const Profile = () => {
                 backgroundColor: 'divider',
               }}
             />
+            {user ? (
+              isMe ? (
+                <Button
+                  variant="secondary"
+                  onClick={toggleEditForm}
+                  sx={{ border: '1px solid', borderColor: 'secondary' }}
+                >
+                  Edit profile
+                </Button>
+              ) : (
+                <Button
+                  variant="secondary"
+                  onClick={handleFollow}
+                  sx={{ border: '1px solid', borderColor: 'secondary' }}
+                >
+                  {(isFollowing && 'Following...') ||
+                    (following && 'Following') ||
+                    'Follow'}
+                </Button>
+              )
+            ) : null}
           </Stack>
+
+          <h2>{user.name}</h2>
+          <h3>{`@${user.username}`}</h3>
+          <h2>{`${user.following.length} Following   ${user.followers.length} Followers`}</h2>
         </Stack>
 
-        <h2>{user.name}</h2>
-        <h3>{`@${user.username}`}</h3>
-        <h2>{`${user.following.length} Following   ${user.followers.length} Followers`}</h2>
-        {isMe ? (
-          <button onClick={toggleEditForm}>Edit Profile</button>
-        ) : (
-          <button onClick={handleFollow}>
-            {isFollowing ? 'Following...' : following ? 'Following' : 'Follow'}
-          </button>
-        )}
         {showEditForm && <EditProfile me={me} />}
       </Stack>
     </Stack>
