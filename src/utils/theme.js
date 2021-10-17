@@ -56,8 +56,8 @@ export const getDesignTokens = (mode) => ({
         {
           props: { size: 'large' },
           style: {
-            width: 125,
-            height: 125,
+            width: 140,
+            height: 140,
           },
         },
       ],
