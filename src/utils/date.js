@@ -24,3 +24,6 @@ dayjs.updateLocale('en', {
 });
 
 export const dateFromNow = (date) => dayjs(new Date(date)).fromNow();
+
+export const dateMonthYear = (date) =>
+  dayjs(new Date(date)).format('MMMM YYYY');
