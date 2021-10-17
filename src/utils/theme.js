@@ -52,6 +52,15 @@ export const getDesignTokens = (mode) => ({
           height: 48,
         },
       },
+      variants: [
+        {
+          props: { size: 'large' },
+          style: {
+            width: 125,
+            height: 125,
+          },
+        },
+      ],
     },
     MuiButton: {
       styleOverrides: {
