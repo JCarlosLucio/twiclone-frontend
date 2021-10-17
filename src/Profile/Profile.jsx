@@ -17,7 +17,7 @@ export const Profile = () => {
   const { username } = useParams();
   const { goBack } = useHistory();
   const { me } = useMe();
-  const { user, isLoading, isError, error } = useUser(username);
+  const { user, isLoading } = useUser(username);
   const { follow, isFollowing } = useFollow(user);
 
   const [showEditForm, setShowEditForm] = useState(false);
@@ -31,18 +31,6 @@ export const Profile = () => {
   };
 
   if (isLoading) return <p>Loading ...</p>;
-
-  if (isError) return <p>Error: {error.message}</p>;
-
-  if (!user) {
-    return (
-      <div>
-        <h3>{`@${username}`}</h3>
-        <h3>This account doesn&apos;t exist</h3>
-        <p>Try searching for another</p>
-      </div>
-    );
-  }
 
   const isMe = me.id === user?.id;
   const following = me.following.includes(user?.id);
@@ -135,47 +123,62 @@ export const Profile = () => {
             ) : null}
           </Stack>
 
-          <Stack spacing={2}>
-            <Stack>
-              <Typography variant="h6" fontWeight="700">
-                {user.name}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                lineHeight={0.8}
-              >{`@${user.username}`}</Typography>
-            </Stack>
+          {user ? (
+            <Stack spacing={2}>
+              <Stack>
+                <Typography variant="h6" fontWeight="700">
+                  {user?.name}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  lineHeight={0.8}
+                >{`@${user?.username}`}</Typography>
+              </Stack>
 
-            <Stack direction="row" alignItems="center" spacing={0.5}>
-              <Stack color="text.secondary">
-                <BsCalendar3 />
+              <Stack direction="row" alignItems="center" spacing={0.5}>
+                <Stack color="text.secondary">
+                  <BsCalendar3 />
+                </Stack>
+                <Typography variant="body2" color="text.secondary">
+                  {`Joined ${dateMonthYear(user?.createdAt)}`}
+                </Typography>
               </Stack>
-              <Typography variant="body2" color="text.secondary">
-                {`Joined ${dateMonthYear(user?.createdAt)}`}
-              </Typography>
-            </Stack>
 
-            <Stack direction="row" spacing={3}>
-              <Stack direction="row" alignItems="center" spacing={0.5}>
-                <Typography fontWeight="700">
-                  {user.followers.length}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Followers
-                </Typography>
-              </Stack>
-              <Stack direction="row" alignItems="center" spacing={0.5}>
-                <Typography fontWeight="700">
-                  {user.following.length}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Following
-                </Typography>
+              <Stack direction="row" spacing={3}>
+                <Stack direction="row" alignItems="center" spacing={0.5}>
+                  <Typography fontWeight="700">
+                    {user?.followers?.length}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Followers
+                  </Typography>
+                </Stack>
+                <Stack direction="row" alignItems="center" spacing={0.5}>
+                  <Typography fontWeight="700">
+                    {user?.following?.length}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Following
+                  </Typography>
+                </Stack>
               </Stack>
             </Stack>
-          </Stack>
+          ) : (
+            <Typography fontWeight="700">{`@${username}`}</Typography>
+          )}
         </Stack>
+
+        {!user && (
+          <Stack alignItems="center" my={10}>
+            <Typography variant="h4" fontWeight="700">
+              This account doesn&apos;t exist
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Try searching for another.
+            </Typography>
+          </Stack>
+        )}
 
         {showEditForm && <EditProfile me={me} />}
       </Stack>
