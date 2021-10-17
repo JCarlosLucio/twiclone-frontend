@@ -4,13 +4,10 @@ import { getUser } from '../../services/user';
 import { queryKeys } from '../../constants';
 
 export const useUser = (username) => {
-  const {
-    data: user,
-    error,
-    isLoading,
-    isError,
-  } = useQuery([queryKeys.user, username], () => getUser(username));
-  return { user, isLoading, isError, error };
+  const { data: user, isLoading } = useQuery([queryKeys.user, username], () =>
+    getUser(username)
+  );
+  return { user, isLoading };
 };
 
 useUser.propTypes = {
