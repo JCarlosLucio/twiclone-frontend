@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BsArrowLeft } from 'react-icons/bs';
 import { useHistory, useParams } from 'react-router';
 import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -77,13 +78,43 @@ export const Profile = () => {
       </TopBar>
 
       <Stack>
-        <Avatar
-          size="large"
-          src={user.avatar.url}
-          alt={`${user.name} avatar`}
-        />
+        <Stack>
+          <Stack
+            sx={{
+              height: '100%',
+              backgroundImage: () =>
+                user?.banner?.url ? `url(${user?.banner?.url})` : 'none',
+              backgroundColor: 'backdrop',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          >
+            <Stack sx={{ pb: '190px' }}></Stack>
+          </Stack>
+        </Stack>
+        <Stack>
+          <Stack
+            direction="row"
+            alignItems="flex-start"
+            justifyContent="space-between"
+            px={2}
+            pt={1.25}
+          >
+            <Avatar
+              size="large"
+              src={user?.avatar?.url}
+              alt={`${user?.name} avatar`}
+              sx={{
+                mt: '-80px',
+                border: '4px solid',
+                borderColor: 'background.default',
+                backgroundColor: 'divider',
+              }}
+            />
+          </Stack>
+        </Stack>
 
-        <h1>Profile</h1>
         <h2>{user.name}</h2>
         <h3>{`@${user.username}`}</h3>
         <h2>{`${user.following.length} Following   ${user.followers.length} Followers`}</h2>
