@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BsArrowLeft } from 'react-icons/bs';
+import { BsArrowLeft, BsCalendar3 } from 'react-icons/bs';
 import { useHistory, useParams } from 'react-router';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -7,10 +7,11 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { EditProfile } from './EditProfile';
+import { TopBar } from '../shared';
 import { useFollow } from '../shared/hooks/useFollow';
 import { useMe } from '../shared/hooks/useMe';
 import { useUser } from '../shared/hooks/useUser';
-import { TopBar } from '../shared';
+import { dateMonthYear } from '../utils/date';
 
 export const Profile = () => {
   const { username } = useParams();
@@ -93,13 +94,12 @@ export const Profile = () => {
             <Stack sx={{ pb: '190px' }}></Stack>
           </Stack>
         </Stack>
-        <Stack>
+
+        <Stack px={2} pt={1.25}>
           <Stack
             direction="row"
             alignItems="flex-start"
             justifyContent="space-between"
-            px={2}
-            pt={1.25}
           >
             <Avatar
               size="large"
@@ -135,9 +135,46 @@ export const Profile = () => {
             ) : null}
           </Stack>
 
-          <h2>{user.name}</h2>
-          <h3>{`@${user.username}`}</h3>
-          <h2>{`${user.following.length} Following   ${user.followers.length} Followers`}</h2>
+          <Stack spacing={2}>
+            <Stack>
+              <Typography variant="h6" fontWeight="700">
+                {user.name}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                lineHeight={0.8}
+              >{`@${user.username}`}</Typography>
+            </Stack>
+
+            <Stack direction="row" alignItems="center" spacing={0.5}>
+              <Stack color="text.secondary">
+                <BsCalendar3 />
+              </Stack>
+              <Typography variant="body2" color="text.secondary">
+                {`Joined ${dateMonthYear(user?.createdAt)}`}
+              </Typography>
+            </Stack>
+
+            <Stack direction="row" spacing={3}>
+              <Stack direction="row" alignItems="center" spacing={0.5}>
+                <Typography fontWeight="700">
+                  {user.followers.length}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Followers
+                </Typography>
+              </Stack>
+              <Stack direction="row" alignItems="center" spacing={0.5}>
+                <Typography fontWeight="700">
+                  {user.following.length}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Following
+                </Typography>
+              </Stack>
+            </Stack>
+          </Stack>
         </Stack>
 
         {showEditForm && <EditProfile me={me} />}
