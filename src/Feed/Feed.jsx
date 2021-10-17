@@ -18,6 +18,7 @@ export const Feed = () => {
         borderRight: '1px solid',
         borderLeft: '1px solid',
         borderColor: 'divider',
+        minHeight: '100vh',
       }}
     >
       <TopBar
