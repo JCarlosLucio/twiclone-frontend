@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
+import PropTypes from 'prop-types';
 import { queryKeys } from '../constants';
 import { updateMe } from '../services/auth';
 
@@ -117,4 +118,8 @@ export const EditProfileForm = ({ me }) => {
       </form>
     </div>
   );
+};
+
+EditProfileForm.propTypes = {
+  me: PropTypes.object.isRequired,
 };
