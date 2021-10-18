@@ -1,11 +1,8 @@
 import { useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from 'react-query';
 import PropTypes from 'prop-types';
-import { queryKeys } from '../constants';
-import { updateMe } from '../services/auth';
+import { useUpdateMe } from './hooks/useUpdateMe';
 
 export const EditProfileForm = ({ me }) => {
-  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
@@ -13,12 +10,7 @@ export const EditProfileForm = ({ me }) => {
   } = useForm({
     defaultValues: { name: me.name, bio: me.bio, location: me.location },
   });
-  const { mutateAsync, isLoading } = useMutation(updateMe, {
-    onSuccess: (data) => {
-      queryClient.setQueryData(queryKeys.me, data);
-      queryClient.setQueryData([queryKeys.user, me.username], data);
-    },
-  });
+  const { update, isLoading } = useUpdateMe();
 
   const onSubmit = async (data, e) => {
     const formData = new FormData();
@@ -28,7 +20,7 @@ export const EditProfileForm = ({ me }) => {
     formData.append('avatar', data.avatar[0]);
     formData.append('banner', data.banner[0]);
 
-    await mutateAsync(formData);
+    await update(formData);
     e.target.reset();
   };
 
