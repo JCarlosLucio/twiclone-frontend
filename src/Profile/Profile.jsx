@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { EditProfile } from './EditProfile';
+import { EditProfileForm } from './EditProfileForm';
 import { CustomModal, TopBar } from '../shared';
 import { useFollow } from '../shared/hooks/useFollow';
 import { useMe } from '../shared/hooks/useMe';
@@ -176,7 +176,7 @@ export const Profile = () => {
         )}
 
         <CustomModal open={open} handleClose={handleClose}>
-          <EditProfile me={me} />
+          <EditProfileForm me={me} />
         </CustomModal>
       </Stack>
     </Stack>

@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { queryKeys } from '../constants';
 import { updateMe } from '../services/auth';
 
-export const EditProfile = ({ me }) => {
+export const EditProfileForm = ({ me }) => {
   const queryClient = useQueryClient();
   const {
     register,
