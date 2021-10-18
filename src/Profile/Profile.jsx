@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { BsArrowLeft, BsCalendar3 } from 'react-icons/bs';
 import { useHistory, useParams } from 'react-router';
 import Avatar from '@mui/material/Avatar';
@@ -7,9 +6,10 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { EditProfile } from './EditProfile';
-import { TopBar } from '../shared';
+import { CustomModal, TopBar } from '../shared';
 import { useFollow } from '../shared/hooks/useFollow';
 import { useMe } from '../shared/hooks/useMe';
+import { useModal } from '../shared/hooks/useModal';
 import { useUser } from '../shared/hooks/useUser';
 import { dateMonthYear } from '../utils/date';
 
@@ -19,12 +19,7 @@ export const Profile = () => {
   const { me } = useMe();
   const { user, isLoading } = useUser(username);
   const { follow, isFollowing } = useFollow(user);
-
-  const [showEditForm, setShowEditForm] = useState(false);
-
-  const toggleEditForm = () => {
-    setShowEditForm(!showEditForm);
-  };
+  const { open, handleOpen, handleClose } = useModal(false);
 
   const handleFollow = () => {
     follow(user?.id);
@@ -104,7 +99,7 @@ export const Profile = () => {
               isMe ? (
                 <Button
                   variant="secondary"
-                  onClick={toggleEditForm}
+                  onClick={handleOpen}
                   sx={{ border: '1px solid', borderColor: 'secondary' }}
                 >
                   Edit profile
@@ -180,7 +175,9 @@ export const Profile = () => {
           </Stack>
         )}
 
-        {showEditForm && <EditProfile me={me} />}
+        <CustomModal open={open} handleClose={handleClose}>
+          <EditProfile me={me} />
+        </CustomModal>
       </Stack>
     </Stack>
   );
