@@ -12,6 +12,7 @@ import SnackbarUtils from '../utils/SnackbarUtils';
 
 export const EditProfileForm = ({ me, handleClose }) => {
   const [avatar, setAvatar] = useState();
+  const [banner, setBanner] = useState();
   const {
     register,
     handleSubmit,
@@ -28,7 +29,7 @@ export const EditProfileForm = ({ me, handleClose }) => {
     formData.append('bio', data.bio);
     formData.append('location', data.location);
     formData.append('avatar', avatar);
-    formData.append('banner', data.banner[0]);
+    formData.append('banner', banner);
 
     update(formData, {
       onSuccess: () => {
@@ -102,24 +103,38 @@ export const EditProfileForm = ({ me, handleClose }) => {
 
       <label htmlFor="banner">banner</label>
       <input
-        {...register('banner', {
-          validate: {
-            maxFiles: (files) => files.length <= 1 || 'Max 1 image',
-            maxSize: (files) =>
-              [...files].every((file) => file?.size < 3 * 1024 * 1024) ||
-              'Max 3MB',
-            acceptedFormats: (files) =>
-              [...files].every((file) =>
-                ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'].includes(
-                  file?.type
-                )
-              ) || 'Only PNG, JPG, JPEG e GIF',
-          },
-        })}
         type="file"
         name="banner"
+        accept="image/jpeg,image/png,image/gif"
+        {...register('banner', {
+          onChange: ({ target }) => {
+            const [file] = [...target.files];
+            // resets value of banner
+            setValue('banner', undefined);
+
+            const maxSize = file.size > 3 * 1024 * 1024;
+
+            const acceptedFormats = ![
+              'image/png',
+              'image/jpeg',
+              'image/jpg',
+              'image/gif',
+            ].includes(file?.type);
+
+            if (maxSize) {
+              SnackbarUtils.error('Please choose photos up to 3MB.');
+            }
+            if (acceptedFormats) {
+              SnackbarUtils.error(
+                'Please choose PNG, JPG, JPEG or GIF photos.'
+              );
+            }
+            if (maxSize || acceptedFormats) return;
+
+            setBanner(file);
+          },
+        })}
       />
-      <p style={{ color: 'red' }}>{errors?.banner && errors?.banner.message}</p>
 
       <TextField
         type="text"
