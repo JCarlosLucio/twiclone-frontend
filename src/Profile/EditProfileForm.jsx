@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
 import { useUpdateMe } from './hooks/useUpdateMe';
 
@@ -71,10 +72,18 @@ export const EditProfileForm = ({ me }) => {
       />
       <p style={{ color: 'red' }}>{errors?.banner && errors?.banner.message}</p>
 
-      <label htmlFor="name">name</label>
-      <input
+      <TextField
         type="text"
-        placeholder="name"
+        variant="outlined"
+        size="large"
+        label="Name"
+        placeholder="Name"
+        error={!!errors.name}
+        helperText={
+          (errors.name?.type === 'required' && 'Name is required') ||
+          (errors.name?.type === 'maxLength' &&
+            'Name must be 280 characters or less')
+        }
         {...register('name', { required: true, maxLength: 280 })}
       />
       <label htmlFor="bio">bio</label>
