@@ -86,15 +86,21 @@ export const EditProfileForm = ({ me }) => {
         }
         {...register('name', { required: true, maxLength: 280 })}
       />
-      <label htmlFor="bio">bio</label>
-      <input
+
+      <TextField
         type="text"
-        placeholder="bio"
+        variant="outlined"
+        size="large"
+        label="Bio"
+        placeholder="Bio"
+        error={!!errors.bio}
+        helperText={
+          errors.bio?.type === 'maxLength' &&
+          'Bio must be 160 characters or less'
+        }
         {...register('bio', { maxLength: 160 })}
       />
-      <p style={{ color: 'red' }}>
-        {errors.bio?.type === 'maxLength' && 'max length 160 characters'}
-      </p>
+
       <label htmlFor="location">location</label>
       <input
         type="text"
