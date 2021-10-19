@@ -30,5 +30,5 @@ export const AvatarPreview = ({ defaultAvatar, avatar }) => {
 
 AvatarPreview.propTypes = {
   defaultAvatar: PropTypes.string,
-  avatar: PropTypes.object.isRequired,
+  avatar: PropTypes.object,
 };

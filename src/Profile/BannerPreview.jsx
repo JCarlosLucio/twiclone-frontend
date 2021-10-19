@@ -35,5 +35,5 @@ export const BannerPreview = ({ defaultBanner, banner }) => {
 
 BannerPreview.propTypes = {
   defaultBanner: PropTypes.string,
-  banner: PropTypes.object.isRequired,
+  banner: PropTypes.object,
 };
