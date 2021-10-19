@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { MdOutlineCameraEnhance } from 'react-icons/md';
 import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
@@ -37,39 +39,46 @@ export const EditProfileForm = ({ me, handleClose }) => {
 
   return (
     <Stack component="form" onSubmit={handleSubmit(onSubmit)} spacing={2} m={2}>
-      <label htmlFor="avatar">Avatar</label>
-      <input
-        type="file"
-        name="avatar"
-        {...register('avatar', {
-          onChange: ({ target }) => {
-            const [file] = [...target.files];
-            // resets value of avatar
-            setValue('avatar', undefined);
+      <label htmlFor="avatar-file-input">
+        <input
+          id="avatar-file-input"
+          type="file"
+          name="avatar"
+          accept="image/jpeg,image/png,image/gif"
+          style={{ display: 'none' }}
+          {...register('avatar', {
+            onChange: ({ target }) => {
+              const [file] = [...target.files];
+              // resets value of avatar
+              setValue('avatar', undefined);
 
-            const maxSize = file.size > 3 * 1024 * 1024;
+              const maxSize = file.size > 3 * 1024 * 1024;
 
-            const acceptedFormats = ![
-              'image/png',
-              'image/jpeg',
-              'image/jpg',
-              'image/gif',
-            ].includes(file?.type);
+              const acceptedFormats = ![
+                'image/png',
+                'image/jpeg',
+                'image/jpg',
+                'image/gif',
+              ].includes(file?.type);
 
-            if (maxSize) {
-              SnackbarUtils.error('Please choose photos up to 3MB.');
-            }
-            if (acceptedFormats) {
-              SnackbarUtils.error(
-                'Please choose PNG, JPG, JPEG or GIF photos.'
-              );
-            }
-            if (maxSize || acceptedFormats) return;
+              if (maxSize) {
+                SnackbarUtils.error('Please choose photos up to 3MB.');
+              }
+              if (acceptedFormats) {
+                SnackbarUtils.error(
+                  'Please choose PNG, JPG, JPEG or GIF photos.'
+                );
+              }
+              if (maxSize || acceptedFormats) return;
 
-            setAvatar(file);
-          },
-        })}
-      />
+              setAvatar(file);
+            },
+          })}
+        />
+        <IconButton color="secondary" aria-label="Add avatar" component="span">
+          <MdOutlineCameraEnhance />
+        </IconButton>
+      </label>
 
       <label htmlFor="banner">banner</label>
       <input
