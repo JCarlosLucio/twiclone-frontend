@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
 import { useUpdateMe } from './hooks/useUpdateMe';
 
-export const EditProfileForm = ({ me }) => {
+export const EditProfileForm = ({ me, handleClose }) => {
   const {
     register,
     handleSubmit,
@@ -26,6 +26,7 @@ export const EditProfileForm = ({ me }) => {
     update(formData, {
       onSuccess: () => {
         e.target.reset();
+        handleClose && handleClose();
       },
     });
   };
@@ -124,4 +125,5 @@ export const EditProfileForm = ({ me }) => {
 
 EditProfileForm.propTypes = {
   me: PropTypes.object.isRequired,
+  handleClose: PropTypes.func,
 };

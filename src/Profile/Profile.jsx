@@ -176,7 +176,7 @@ export const Profile = () => {
         )}
 
         <CustomModal open={open} handleClose={handleClose}>
-          <EditProfileForm me={me} />
+          <EditProfileForm me={me} handleClose={handleClose} />
         </CustomModal>
       </Stack>
     </Stack>
