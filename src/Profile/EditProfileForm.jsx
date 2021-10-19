@@ -1,14 +1,18 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
 import { useUpdateMe } from './hooks/useUpdateMe';
+import SnackbarUtils from '../utils/SnackbarUtils';
 
 export const EditProfileForm = ({ me, handleClose }) => {
+  const [avatar, setAvatar] = useState();
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: { name: me.name, bio: me.bio, location: me.location },
@@ -20,7 +24,7 @@ export const EditProfileForm = ({ me, handleClose }) => {
     formData.append('name', data.name);
     formData.append('bio', data.bio);
     formData.append('location', data.location);
-    formData.append('avatar', data.avatar[0]);
+    formData.append('avatar', avatar);
     formData.append('banner', data.banner[0]);
 
     update(formData, {
@@ -35,24 +39,38 @@ export const EditProfileForm = ({ me, handleClose }) => {
     <Stack component="form" onSubmit={handleSubmit(onSubmit)} spacing={2} m={2}>
       <label htmlFor="avatar">Avatar</label>
       <input
-        {...register('avatar', {
-          validate: {
-            maxFiles: (files) => files.length <= 1 || 'Max 1 image',
-            maxSize: (files) =>
-              [...files].every((file) => file?.size < 3 * 1024 * 1024) ||
-              'Max 3MB',
-            acceptedFormats: (files) =>
-              [...files].every((file) =>
-                ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'].includes(
-                  file?.type
-                )
-              ) || 'Only PNG, JPG, JPEG e GIF',
-          },
-        })}
         type="file"
         name="avatar"
+        {...register('avatar', {
+          onChange: ({ target }) => {
+            const [file] = [...target.files];
+            // resets value of avatar
+            setValue('avatar', undefined);
+
+            const maxSize = file.size > 3 * 1024 * 1024;
+
+            const acceptedFormats = ![
+              'image/png',
+              'image/jpeg',
+              'image/jpg',
+              'image/gif',
+            ].includes(file?.type);
+
+            if (maxSize) {
+              SnackbarUtils.error('Please choose photos up to 3MB.');
+            }
+            if (acceptedFormats) {
+              SnackbarUtils.error(
+                'Please choose PNG, JPG, JPEG or GIF photos.'
+              );
+            }
+            if (maxSize || acceptedFormats) return;
+
+            setAvatar(file);
+          },
+        })}
       />
-      <p style={{ color: 'red' }}>{errors?.avatar && errors?.avatar.message}</p>
+
       <label htmlFor="banner">banner</label>
       <input
         {...register('banner', {
