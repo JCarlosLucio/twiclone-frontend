@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MdOutlineCameraEnhance } from 'react-icons/md';
 import { useForm } from 'react-hook-form';
+import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
@@ -21,6 +22,17 @@ export const EditProfileForm = ({ me, handleClose }) => {
   });
   const { update, isLoading } = useUpdateMe();
 
+  const [avatarPreview, setAvatarPreview] = useState(me?.avatar?.url);
+
+  useEffect(() => {
+    if (avatar) {
+      const objectUrl = URL.createObjectURL(avatar);
+      setAvatarPreview(objectUrl);
+      // createdObjectURLs remain in memory if not revoked
+      return () => URL.revokeObjectURL(objectUrl);
+    }
+  }, [avatar]);
+
   const onSubmit = (data, e) => {
     const formData = new FormData();
     formData.append('name', data.name);
@@ -38,47 +50,73 @@ export const EditProfileForm = ({ me, handleClose }) => {
   };
 
   return (
-    <Stack component="form" onSubmit={handleSubmit(onSubmit)} spacing={2} m={2}>
-      <label htmlFor="avatar-file-input">
-        <input
-          id="avatar-file-input"
-          type="file"
-          name="avatar"
-          accept="image/jpeg,image/png,image/gif"
-          style={{ display: 'none' }}
-          {...register('avatar', {
-            onChange: ({ target }) => {
-              const [file] = [...target.files];
-              // resets value of avatar
-              setValue('avatar', undefined);
-
-              const maxSize = file.size > 3 * 1024 * 1024;
-
-              const acceptedFormats = ![
-                'image/png',
-                'image/jpeg',
-                'image/jpg',
-                'image/gif',
-              ].includes(file?.type);
-
-              if (maxSize) {
-                SnackbarUtils.error('Please choose photos up to 3MB.');
-              }
-              if (acceptedFormats) {
-                SnackbarUtils.error(
-                  'Please choose PNG, JPG, JPEG or GIF photos.'
-                );
-              }
-              if (maxSize || acceptedFormats) return;
-
-              setAvatar(file);
-            },
-          })}
+    <Stack
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+      alignItems="flex-start"
+      spacing={2}
+      m={2}
+    >
+      <Stack
+        alignItems="center"
+        justifyContent="center"
+        sx={{ position: 'relative' }}
+      >
+        <Avatar
+          size="large"
+          src={avatarPreview}
+          alt={`Add ${me?.name} avatar`}
+          sx={{
+            border: '4px solid',
+            borderColor: 'background.default',
+            backgroundColor: 'divider',
+          }}
         />
-        <IconButton color="secondary" aria-label="Add avatar" component="span">
-          <MdOutlineCameraEnhance />
-        </IconButton>
-      </label>
+        <label htmlFor="avatar-file-input" style={{ position: 'absolute' }}>
+          <input
+            id="avatar-file-input"
+            type="file"
+            name="avatar"
+            accept="image/jpeg,image/png,image/gif"
+            style={{ display: 'none' }}
+            {...register('avatar', {
+              onChange: ({ target }) => {
+                const [file] = [...target.files];
+                // resets value of avatar
+                setValue('avatar', undefined);
+
+                const maxSize = file.size > 3 * 1024 * 1024;
+
+                const acceptedFormats = ![
+                  'image/png',
+                  'image/jpeg',
+                  'image/jpg',
+                  'image/gif',
+                ].includes(file?.type);
+
+                if (maxSize) {
+                  SnackbarUtils.error('Please choose photos up to 3MB.');
+                }
+                if (acceptedFormats) {
+                  SnackbarUtils.error(
+                    'Please choose PNG, JPG, JPEG or GIF photos.'
+                  );
+                }
+                if (maxSize || acceptedFormats) return;
+
+                setAvatar(file);
+              },
+            })}
+          />
+          <IconButton
+            color="secondary"
+            aria-label="Add avatar"
+            component="span"
+          >
+            <MdOutlineCameraEnhance />
+          </IconButton>
+        </label>
+      </Stack>
 
       <label htmlFor="banner">banner</label>
       <input
@@ -105,6 +143,7 @@ export const EditProfileForm = ({ me, handleClose }) => {
         type="text"
         variant="outlined"
         size="large"
+        fullWidth
         label="Name"
         placeholder="Name"
         error={!!errors.name}
@@ -120,6 +159,7 @@ export const EditProfileForm = ({ me, handleClose }) => {
         type="text"
         variant="outlined"
         size="large"
+        fullWidth
         label="Bio"
         placeholder="Bio"
         error={!!errors.bio}
@@ -133,6 +173,7 @@ export const EditProfileForm = ({ me, handleClose }) => {
       <TextField
         type="text"
         variant="outlined"
+        fullWidth
         size="large"
         label="Location"
         placeholder="Location"
@@ -143,7 +184,8 @@ export const EditProfileForm = ({ me, handleClose }) => {
         }
         {...register('location', { maxLength: 30 })}
       />
-      <Button type="submit" size="large" variant="contained">
+
+      <Button type="submit" size="large" variant="contained" fullWidth>
         {isLoading ? 'Saving...' : 'Save'}
       </Button>
     </Stack>
