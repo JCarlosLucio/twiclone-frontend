@@ -12,7 +12,7 @@ export const EditProfileForm = ({ me }) => {
   });
   const { update, isLoading } = useUpdateMe();
 
-  const onSubmit = async (data, e) => {
+  const onSubmit = (data, e) => {
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('bio', data.bio);
@@ -20,8 +20,11 @@ export const EditProfileForm = ({ me }) => {
     formData.append('avatar', data.avatar[0]);
     formData.append('banner', data.banner[0]);
 
-    await update(formData);
-    e.target.reset();
+    update(formData, {
+      onSuccess: () => {
+        e.target.reset();
+      },
+    });
   };
 
   return (
