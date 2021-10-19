@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { MdOutlineCameraEnhance } from 'react-icons/md';
 import { useForm } from 'react-hook-form';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
+import { AvatarPreview } from './AvatarPreview';
 import { useUpdateMe } from './hooks/useUpdateMe';
 import SnackbarUtils from '../utils/SnackbarUtils';
 
@@ -21,17 +21,6 @@ export const EditProfileForm = ({ me, handleClose }) => {
     defaultValues: { name: me.name, bio: me.bio, location: me.location },
   });
   const { update, isLoading } = useUpdateMe();
-
-  const [avatarPreview, setAvatarPreview] = useState(me?.avatar?.url);
-
-  useEffect(() => {
-    if (avatar) {
-      const objectUrl = URL.createObjectURL(avatar);
-      setAvatarPreview(objectUrl);
-      // createdObjectURLs remain in memory if not revoked
-      return () => URL.revokeObjectURL(objectUrl);
-    }
-  }, [avatar]);
 
   const onSubmit = (data, e) => {
     const formData = new FormData();
@@ -62,16 +51,8 @@ export const EditProfileForm = ({ me, handleClose }) => {
         justifyContent="center"
         sx={{ position: 'relative' }}
       >
-        <Avatar
-          size="large"
-          src={avatarPreview}
-          alt={`Add ${me?.name} avatar`}
-          sx={{
-            border: '4px solid',
-            borderColor: 'background.default',
-            backgroundColor: 'divider',
-          }}
-        />
+        <AvatarPreview defaultAvatar={me?.avatar?.url} avatar={avatar} />
+
         <label htmlFor="avatar-file-input" style={{ position: 'absolute' }}>
           <input
             id="avatar-file-input"
@@ -108,6 +89,7 @@ export const EditProfileForm = ({ me, handleClose }) => {
               },
             })}
           />
+
           <IconButton
             color="secondary"
             aria-label="Add avatar"
