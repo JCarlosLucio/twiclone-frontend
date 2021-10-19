@@ -101,15 +101,19 @@ export const EditProfileForm = ({ me }) => {
         {...register('bio', { maxLength: 160 })}
       />
 
-      <label htmlFor="location">location</label>
-      <input
+      <TextField
         type="text"
-        placeholder="location"
+        variant="outlined"
+        size="large"
+        label="Location"
+        placeholder="Location"
+        error={!!errors.location}
+        helperText={
+          errors.location?.type === 'maxLength' &&
+          'Location must be 30 characters or less'
+        }
         {...register('location', { maxLength: 30 })}
       />
-      <p style={{ color: 'red' }}>
-        {errors.location?.type === 'required' && 'location is required'}
-      </p>
 
       <button type="submit">{isLoading ? 'Saving...' : 'Save'}</button>
     </Stack>
