@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
@@ -114,8 +115,9 @@ export const EditProfileForm = ({ me }) => {
         }
         {...register('location', { maxLength: 30 })}
       />
-
-      <button type="submit">{isLoading ? 'Saving...' : 'Save'}</button>
+      <Button type="submit" size="large" variant="contained">
+        {isLoading ? 'Saving...' : 'Save'}
+      </Button>
     </Stack>
   );
 };
