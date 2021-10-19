@@ -199,7 +199,12 @@ export const EditProfileForm = ({ me, handleClose }) => {
             {...register('location', { maxLength: 30 })}
           />
 
-          <Button type="submit" size="large" variant="contained">
+          <Button
+            type="submit"
+            size="large"
+            variant="contained"
+            color="secondary"
+          >
             {isLoading ? 'Saving...' : 'Save'}
           </Button>
         </Stack>
