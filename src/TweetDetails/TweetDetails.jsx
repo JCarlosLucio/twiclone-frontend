@@ -1,5 +1,6 @@
 import { BsArrowLeft } from 'react-icons/bs';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
 import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
@@ -42,6 +43,34 @@ export const TweetDetails = () => {
           Tweet
         </Typography>
       </TopBar>
+      <Stack px={2} component="article">
+        <Stack direction="row" spacing={1.5} my={2}>
+          <Avatar src={tweet.user.avatar.url} alt={`${tweet.user.name}`} />
+          <Stack
+            alignItems="flex-start"
+            sx={{
+              '& a': {
+                textDecoration: 'none',
+                fontWeight: 700,
+              },
+              '&:hover': {
+                '& a': {
+                  textDecoration: 'underline',
+                },
+              },
+            }}
+          >
+            <Typography
+              color="text.primary"
+              to={`/${tweet.user.username}`}
+              component={Link}
+            >
+              {tweet.user.name}
+            </Typography>
+            <Typography color="text.secondary">{`@${tweet.user.username}`}</Typography>
+          </Stack>
+        </Stack>
+      </Stack>
       <p>{tweet.content}</p>
     </Stack>
   );
