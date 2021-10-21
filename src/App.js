@@ -4,6 +4,7 @@ import { Auth } from './Auth';
 import { Feed } from './Feed';
 import { Menu } from './Menu';
 import { Profile } from './Profile';
+import { TweetDetails } from './TweetDetails';
 import { useMe } from './shared/hooks/useMe';
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
       <Grid component="main" item lg={4}>
         <Switch>
           <Route exact path={['/', '/home']} component={Feed} />
+          <Route path="/:username/status/:tweetId" component={TweetDetails} />
           <Route path="/:username" component={Profile} />
         </Switch>
       </Grid>
