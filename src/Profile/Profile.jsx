@@ -1,5 +1,5 @@
 import { BsArrowLeft, BsCalendar3 } from 'react-icons/bs';
-import { useHistory, useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
