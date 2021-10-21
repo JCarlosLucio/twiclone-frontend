@@ -1,10 +1,15 @@
-import { useParams } from 'react-router-dom';
+import { BsArrowLeft } from 'react-icons/bs';
+import { useHistory, useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
+import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import { useTweetById } from './hooks/useTweetById';
+import { TopBar } from '../shared';
 
 export const TweetDetails = () => {
   const { tweetId } = useParams();
+  const { goBack } = useHistory();
   const { tweet, isLoading } = useTweetById(tweetId);
 
   if (isLoading) {
@@ -24,6 +29,19 @@ export const TweetDetails = () => {
         minHeight: '100vh',
       }}
     >
+      <TopBar>
+        <IconButton
+          size="small"
+          color="secondary"
+          edge="start"
+          onClick={goBack}
+        >
+          <BsArrowLeft fontSize="large" />
+        </IconButton>
+        <Typography ml={3} variant="h6" fontWeight="700">
+          Tweet
+        </Typography>
+      </TopBar>
       <p>{tweet.content}</p>
     </Stack>
   );
