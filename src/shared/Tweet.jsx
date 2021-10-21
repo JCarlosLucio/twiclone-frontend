@@ -2,8 +2,6 @@ import { BsChat, BsHeart, BsHeartFill, BsUpload } from 'react-icons/bs';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
@@ -11,7 +9,7 @@ import { UserHeader } from './UserHeader';
 import { CustomModal, TweetForm } from '../shared';
 import { useLikeTweet } from '../shared/hooks/useLikeTweet';
 import { useModal } from '../shared/hooks/useModal';
-import { prepareForImageList } from '../utils/images';
+import { TweetImages } from './TweetImages';
 
 export const Tweet = ({ tweet }) => {
   const { open, handleOpen, handleClose } = useModal(false);
@@ -24,8 +22,6 @@ export const Tweet = ({ tweet }) => {
     e.preventDefault();
     like();
   };
-
-  const images = prepareForImageList(tweet.images);
 
   return (
     <Stack
@@ -41,23 +37,8 @@ export const Tweet = ({ tweet }) => {
 
         <Stack spacing={1.5}>
           <Typography>{tweet.content}</Typography>
-          {images?.length > 0 && (
-            <ImageList
-              cols={2}
-              variant="quilted"
-              gap={2}
-              rowHeight={139}
-              sx={{ borderRadius: '16px', height: 280 }}
-            >
-              {images.map(({ url, filename, cols, rows }) => {
-                return (
-                  <ImageListItem key={filename} cols={cols} rows={rows}>
-                    <img src={url} alt="Image" loading="lazy" />
-                  </ImageListItem>
-                );
-              })}
-            </ImageList>
-          )}
+
+          <TweetImages images={tweet?.images} />
 
           {/** TODO: Refactor buttons into separate component(s) */}
           <Stack
