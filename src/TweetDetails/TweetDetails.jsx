@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 import { useTweetById } from './hooks/useTweetById';
 
@@ -7,7 +8,11 @@ export const TweetDetails = () => {
   const { tweet, isLoading } = useTweetById(tweetId);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <Stack direction="row" justifyContent="center" sx={{ padding: '16px' }}>
+        <CircularProgress />
+      </Stack>
+    );
   }
 
   return (
