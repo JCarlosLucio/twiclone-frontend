@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useTweetById } from './hooks/useTweetById';
-import { TopBar } from '../shared';
+import { TopBar, TweetImages } from '../shared';
 
 export const TweetDetails = () => {
   const { tweetId } = useParams();
@@ -74,6 +74,14 @@ export const TweetDetails = () => {
         <Typography fontSize="1.4rem" lineHeight={1.3}>
           {tweet.content}
         </Typography>
+
+        {tweet?.images.length === 1 ? (
+          <Stack my={2} sx={{ borderRadius: '16px', overflow: 'hidden' }}>
+            <img src={tweet.images[0].url} alt="Image" />
+          </Stack>
+        ) : (
+          <TweetImages images={tweet.images} />
+        )}
       </Stack>
     </Stack>
   );
