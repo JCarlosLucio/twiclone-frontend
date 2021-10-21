@@ -7,6 +7,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useTweetById } from './hooks/useTweetById';
 import { TopBar, TweetImages } from '../shared';
+import { dateFull } from '../utils/date';
 
 export const TweetDetails = () => {
   const { tweetId } = useParams();
@@ -82,6 +83,18 @@ export const TweetDetails = () => {
         ) : (
           <TweetImages images={tweet.images} />
         )}
+
+        <Typography
+          color="text.secondary"
+          sx={{
+            '&:hover': {
+              textDecoration: 'underline',
+              cursor: 'pointer',
+            },
+          }}
+        >
+          {dateFull(tweet.createdAt)}
+        </Typography>
       </Stack>
     </Stack>
   );
