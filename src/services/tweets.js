@@ -9,6 +9,11 @@ export const getTweets = async (page, limit = 10) => {
   return response.data;
 };
 
+export const getTweetById = async (id) => {
+  const response = await axios.get(`${baseUrl}/${id}`);
+  return response.data;
+};
+
 export const createTweet = async (newTweet) => {
   const response = await axios.post(baseUrl, newTweet, authHeader());
   return response.data;
