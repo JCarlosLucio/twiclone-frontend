@@ -70,8 +70,11 @@ export const TweetDetails = () => {
             <Typography color="text.secondary">{`@${tweet.user.username}`}</Typography>
           </Stack>
         </Stack>
+
+        <Typography fontSize="1.4rem" lineHeight={1.3}>
+          {tweet.content}
+        </Typography>
       </Stack>
-      <p>{tweet.content}</p>
     </Stack>
   );
 };
