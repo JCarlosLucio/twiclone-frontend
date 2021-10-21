@@ -27,3 +27,6 @@ export const dateFromNow = (date) => dayjs(new Date(date)).fromNow();
 
 export const dateMonthYear = (date) =>
   dayjs(new Date(date)).format('MMMM YYYY');
+
+export const dateFull = (date) =>
+  dayjs(new Date(date)).format('h:mm A · MMM D, YYYY');
