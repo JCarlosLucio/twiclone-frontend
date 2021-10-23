@@ -1,12 +1,13 @@
 import { useContext } from 'react';
-import { BsHouse, BsTornado } from 'react-icons/bs';
+import { BsHouse, BsThreeDots, BsTornado } from 'react-icons/bs';
 import { FaRegBell, FaHashtag, FaEllipsisH, FaRegUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
-import { CustomModal, TweetForm } from '../shared';
+import { CustomModal, TweetForm, UserHeader } from '../shared';
 import { useMe } from '../shared/hooks/useMe';
 import { useModal } from '../shared/hooks/useModal';
 import { ColorModeContext } from '../utils/ColorModeProvider';
@@ -82,6 +83,11 @@ export const Menu = () => {
           <Button onClick={colorMode.toggleColorMode}>
             toggle {colorMode.mode}
           </Button>
+          {me && (
+            <Button variant="contained" onClick={logout}>
+              Logout
+            </Button>
+          )}
           <Button
             onClick={handleOpen}
             size="large"
@@ -93,18 +99,23 @@ export const Menu = () => {
         </Stack>
       </Stack>
 
+      <Button
+        color="secondary"
+        size="large"
+        startIcon={<Avatar src={me.avatar.url} alt={`${me.name}`} />}
+        endIcon={
+          <Stack ml={4}>
+            <BsThreeDots fontSize="medium" />
+          </Stack>
+        }
+        sx={{ marginBottom: 1.5 }}
+      >
+        <UserHeader user={me} direction="column" />
+      </Button>
+
       <CustomModal open={open} handleClose={handleClose}>
         <TweetForm fileInputId="modal-file-input" handleClose={handleClose} />
       </CustomModal>
-
-      {me && (
-        <div>
-          {me.name}
-          <Button variant="contained" onClick={logout}>
-            Logout
-          </Button>
-        </div>
-      )}
     </Stack>
   );
 };
