@@ -11,14 +11,15 @@ import {
   CustomModal,
   LikeButton,
   ReplyButton,
+  RetweetButton,
   ShareButton,
   TopBar,
   TweetForm,
   TweetImages,
   UserHeader,
 } from '../shared';
-import { dateFull } from '../utils/date';
 import { useModal } from '../shared/hooks/useModal';
+import { dateFull } from '../utils/date';
 
 export const TweetDetails = () => {
   const { tweetId } = useParams();
@@ -106,13 +107,9 @@ export const TweetDetails = () => {
 
         <Stack spacing={0.5}>
           <Divider />
-          <Stack
-            direction="row"
-            justifyContent="space-around"
-            alignItems="center"
-          >
+          <Stack direction="row" justifyContent="space-around">
             <ReplyButton size="medium" handleClick={handleOpen} />
-
+            <RetweetButton size="medium" />
             <LikeButton
               tweetId={tweet?.id}
               likes={tweet?.likes}
