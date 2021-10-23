@@ -130,6 +130,13 @@ export const getDesignTokens = (mode) => ({
         elevation: 0,
       },
     },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          borderRadius: 2,
+        },
+      },
+    },
     MuiTypography: {
       defaultProps: {
         variantMapping: {
