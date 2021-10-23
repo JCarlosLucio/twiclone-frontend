@@ -12,6 +12,11 @@ export const LikeButton = ({
 }) => {
   const { like, isLiked, likesCount, isLiking } = useLikeTweet(tweetId, likes);
 
+  const handleLike = (e) => {
+    e.stopPropagation();
+    like();
+  };
+
   return (
     <Stack
       direction="row"
@@ -26,7 +31,7 @@ export const LikeButton = ({
       }}
     >
       <IconButton
-        onClick={like}
+        onClick={handleLike}
         disabled={isLiking}
         color={'error'}
         size={size}
