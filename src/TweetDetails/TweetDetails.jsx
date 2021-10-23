@@ -11,6 +11,7 @@ import {
   CustomModal,
   LikeButton,
   ReplyButton,
+  ShareButton,
   TopBar,
   TweetForm,
   TweetImages,
@@ -117,6 +118,7 @@ export const TweetDetails = () => {
               likes={tweet?.likes}
               size="medium"
             />
+            <ShareButton size="medium" />
           </Stack>
           <Divider />
         </Stack>
