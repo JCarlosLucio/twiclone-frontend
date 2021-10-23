@@ -2,11 +2,12 @@ import { BsArrowLeft } from 'react-icons/bs';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import CircularProgress from '@mui/material/CircularProgress';
+import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useTweetById } from './hooks/useTweetById';
-import { TopBar, TweetImages } from '../shared';
+import { LikeButton, TopBar, TweetImages } from '../shared';
 import { dateFull } from '../utils/date';
 
 export const TweetDetails = () => {
@@ -44,8 +45,8 @@ export const TweetDetails = () => {
           Tweet
         </Typography>
       </TopBar>
-      <Stack px={2} component="article">
-        <Stack direction="row" spacing={1.5} my={2}>
+      <Stack px={2} component="article" spacing={2}>
+        <Stack direction="row" spacing={1.5} mt={2}>
           <Avatar src={tweet.user.avatar.url} alt={`${tweet.user.name}`} />
           <Stack
             alignItems="flex-start"
@@ -95,6 +96,24 @@ export const TweetDetails = () => {
         >
           {dateFull(tweet.createdAt)}
         </Typography>
+
+        <Divider />
+
+        {tweet?.likes?.length > 0 && (
+          <>
+            <Stack direction="row" alignItems="center" spacing={0.5}>
+              <Typography fontWeight="700">{tweet?.likes?.length}</Typography>
+              <Typography variant="body1" color="text.secondary">
+                Likes
+              </Typography>
+            </Stack>
+            <Divider />
+          </>
+        )}
+
+        <LikeButton tweetId={tweet?.id} likes={tweet?.likes} size="medium" />
+
+        <Divider />
       </Stack>
     </Stack>
   );
