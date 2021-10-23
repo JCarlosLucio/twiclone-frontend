@@ -1,4 +1,4 @@
-import { BsChat, BsUpload } from 'react-icons/bs';
+import { BsUpload } from 'react-icons/bs';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { Link, useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
@@ -7,6 +7,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import { LikeButton } from './LikeButton';
+import { ReplyButton } from './ReplyButton';
 import { TweetImages } from './TweetImages';
 import { UserHeader } from './UserHeader';
 import { CustomModal, TweetForm } from '../shared';
@@ -59,20 +60,8 @@ export const Tweet = ({ tweet }) => {
             alignItems="center"
             sx={{ fontSize: '13px' }}
           >
-            <Stack
-              direction="row"
-              alignItems="center"
-              spacing={2}
-              sx={{
-                '& button ': { color: 'secondary.main' },
-                '&:hover, &:hover button': { color: 'primary.main' },
-              }}
-            >
-              <IconButton onClick={handleOpen} color="primary" size="small">
-                <BsChat />
-              </IconButton>
-              {tweet.replies.length > 0 && tweet.replies.length}
-            </Stack>
+            <ReplyButton replies={tweet.replies} handleClick={handleOpen} />
+
             <Stack
               direction="row"
               alignItems="center"

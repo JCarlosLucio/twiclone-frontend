@@ -2,6 +2,7 @@ export * from './CharCounter';
 export * from './CustomModal';
 export * from './ImagePreviews';
 export * from './LikeButton';
+export * from './ReplyButton';
 export * from './Tweet';
 export * from './TweetImages';
 export * from './TweetList';
