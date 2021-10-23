@@ -1,5 +1,6 @@
 import { BsChat, BsUpload } from 'react-icons/bs';
 import { AiOutlineRetweet } from 'react-icons/ai';
+import { useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
@@ -13,18 +14,31 @@ import { useModal } from '../shared/hooks/useModal';
 
 export const Tweet = ({ tweet }) => {
   const { open, handleOpen, handleClose } = useModal(false);
+  const history = useHistory();
+
+  const goToTweetDetails = () => {
+    history.push(`/${tweet.user.username}/status/${tweet.id}`);
+  };
 
   return (
     <Stack
       component="article"
       direction="row"
-      alignItems="flex-start"
-      spacing={2}
-      sx={{ borderTop: '1px solid', borderColor: 'divider', p: 2 }}
+      sx={{
+        borderTop: '1px solid',
+        borderColor: 'divider',
+        '&:hover': {
+          backgroundColor: 'background.hover',
+          cursor: 'pointer',
+          transition: 'background-color 0.1s ease-in-out',
+        },
+      }}
     >
-      <Avatar src={tweet.user.avatar.url} alt={`${tweet.user.name}`} />
+      <Stack p={2} onClick={goToTweetDetails}>
+        <Avatar src={tweet.user.avatar.url} alt={`${tweet.user.name}`} />
+      </Stack>
 
-      <Stack sx={{ width: '100%' }}>
+      <Stack py={2} pr={2} sx={{ width: '100%' }} onClick={goToTweetDetails}>
         <UserHeader user={tweet.user} createdAt={tweet.createdAt} withLink />
 
         <Stack spacing={1.5}>
@@ -80,16 +94,15 @@ export const Tweet = ({ tweet }) => {
               <BsUpload />
             </IconButton>
           </Stack>
-
-          <CustomModal open={open} handleClose={handleClose}>
-            <TweetForm
-              tweet={tweet}
-              fileInputId={`reply-file-input-${tweet.id}`}
-              handleClose={handleClose}
-            />
-          </CustomModal>
         </Stack>
       </Stack>
+      <CustomModal open={open} handleClose={handleClose}>
+        <TweetForm
+          tweet={tweet}
+          fileInputId={`reply-file-input-${tweet.id}`}
+          handleClose={handleClose}
+        />
+      </CustomModal>
     </Stack>
   );
 };
