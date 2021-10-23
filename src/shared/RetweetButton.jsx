@@ -1,6 +1,8 @@
 import { AiOutlineRetweet } from 'react-icons/ai';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import Tooltip from '@mui/material/Tooltip';
+
 import PropTypes from 'prop-types';
 
 export const RetweetButton = ({ size = 'small' }) => {
@@ -14,9 +16,11 @@ export const RetweetButton = ({ size = 'small' }) => {
         '&:hover, &:hover button': { color: 'success.main' },
       }}
     >
-      <IconButton color="success" size={size}>
-        <AiOutlineRetweet />
-      </IconButton>
+      <Tooltip title="Retweet" enterDelay={500}>
+        <IconButton color="success" size={size}>
+          <AiOutlineRetweet />
+        </IconButton>
+      </Tooltip>
     </Stack>
   );
 };
