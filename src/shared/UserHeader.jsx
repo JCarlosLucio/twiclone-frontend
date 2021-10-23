@@ -30,12 +30,7 @@ export const UserHeader = ({
         <Typography color="text.primary" sx={{ fontWeight: 700 }}>
           {user.name}
         </Typography>
-        <Typography
-          color="text.secondary"
-          sx={{
-            textDecoration: 'none',
-          }}
-        >{`@${user.username}`}</Typography>
+        <Typography color="text.secondary">{`@${user.username}`}</Typography>
       </Stack>
       {createdAt && (
         <>
