@@ -1,30 +1,22 @@
-import { BsChat, BsHeart, BsHeartFill, BsUpload } from 'react-icons/bs';
+import { BsChat, BsUpload } from 'react-icons/bs';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
+import { LikeButton } from './LikeButton';
+import { TweetImages } from './TweetImages';
 import { UserHeader } from './UserHeader';
 import { CustomModal, TweetForm } from '../shared';
-import { useLikeTweet } from '../shared/hooks/useLikeTweet';
 import { useModal } from '../shared/hooks/useModal';
-import { TweetImages } from './TweetImages';
 
 export const Tweet = ({ tweet }) => {
   const { open, handleOpen, handleClose } = useModal(false);
-  const { like, isLiked, likesCount, isLoading } = useLikeTweet(
-    tweet.id,
-    tweet.likes
-  );
-
-  const handleLike = (e) => {
-    e.preventDefault();
-    like();
-  };
 
   return (
     <Stack
+      component="article"
       direction="row"
       alignItems="flex-start"
       spacing={2}
@@ -74,28 +66,8 @@ export const Tweet = ({ tweet }) => {
                 <AiOutlineRetweet />
               </IconButton>
             </Stack>
-            <Stack
-              direction="row"
-              alignItems="center"
-              spacing={2}
-              sx={{
-                color: isLiked ? 'error.main' : 'secondary.main',
-                '& button ': {
-                  color: isLiked ? 'error.main' : 'secondary.main',
-                },
-                '&:hover, &:hover button': { color: 'error.main' },
-              }}
-            >
-              <IconButton
-                onClick={handleLike}
-                disabled={isLoading}
-                color={'error'}
-                size="small"
-              >
-                {isLiked ? <BsHeartFill /> : <BsHeart />}
-              </IconButton>
-              {likesCount > 0 && likesCount}
-            </Stack>
+
+            <LikeButton tweetId={tweet?.id} likes={tweet?.likes} showCount />
 
             <IconButton
               color="primary"
