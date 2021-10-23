@@ -4,11 +4,16 @@ import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import { dateFromNow } from '../utils/date';
 
-export const UserHeader = ({ user, createdAt, withLink = false }) => {
+export const UserHeader = ({
+  user,
+  createdAt,
+  direction = 'row',
+  withLink = false,
+}) => {
   return (
     <Stack direction="row" alignItems="flex-start" spacing={0.5}>
       <Stack
-        direction="row"
+        direction={direction}
         alignItems="flex-start"
         {...(withLink && {
           to: `/${user.username}`,
