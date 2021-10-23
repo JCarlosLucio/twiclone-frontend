@@ -1,4 +1,3 @@
-import { BsUpload } from 'react-icons/bs';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { Link, useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
@@ -8,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import { LikeButton } from './LikeButton';
 import { ReplyButton } from './ReplyButton';
+import { ShareButton } from './ShareButton';
 import { TweetImages } from './TweetImages';
 import { UserHeader } from './UserHeader';
 import { CustomModal, TweetForm } from '../shared';
@@ -78,16 +78,7 @@ export const Tweet = ({ tweet }) => {
 
             <LikeButton tweetId={tweet?.id} likes={tweet?.likes} showCount />
 
-            <IconButton
-              color="primary"
-              size="small"
-              sx={{
-                color: 'secondary.main',
-                '&:hover': { color: 'primary.main' },
-              }}
-            >
-              <BsUpload />
-            </IconButton>
+            <ShareButton />
           </Stack>
         </Stack>
       </Stack>
