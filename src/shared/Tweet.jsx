@@ -1,6 +1,6 @@
 import { BsChat, BsUpload } from 'react-icons/bs';
 import { AiOutlineRetweet } from 'react-icons/ai';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
@@ -35,7 +35,13 @@ export const Tweet = ({ tweet }) => {
       }}
     >
       <Stack p={2} onClick={goToTweetDetails}>
-        <Avatar src={tweet.user.avatar.url} alt={`${tweet.user.name}`} />
+        <Avatar
+          src={tweet.user.avatar.url}
+          alt={`${tweet.user.name}`}
+          component={Link}
+          to={`/${tweet.user.username}`}
+          onClick={(e) => e.stopPropagation()}
+        />
       </Stack>
 
       <Stack py={2} pr={2} sx={{ width: '100%' }} onClick={goToTweetDetails}>

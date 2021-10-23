@@ -1,5 +1,5 @@
 import { BsArrowLeft } from 'react-icons/bs';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import CircularProgress from '@mui/material/CircularProgress';
 import Divider from '@mui/material/Divider';
@@ -47,7 +47,13 @@ export const TweetDetails = () => {
       </TopBar>
       <Stack px={2} component="article" spacing={2}>
         <Stack direction="row" spacing={1.5} mt={2}>
-          <Avatar src={tweet.user.avatar.url} alt={`${tweet.user.name}`} />
+          <Avatar
+            src={tweet.user.avatar.url}
+            alt={`${tweet.user.name}`}
+            component={Link}
+            to={`/${tweet.user.username}`}
+            onClick={(e) => e.stopPropagation()}
+          />
           <UserHeader user={tweet.user} direction="column" withLink />
         </Stack>
 
