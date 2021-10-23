@@ -6,8 +6,8 @@ import { likeTweet } from '../../services/tweets';
 
 export const useLikeTweet = (tweetId, likes) => {
   const { me } = useMe();
-  const [isLiked, setIsLiked] = useState(likes.includes(me.id));
-  const [likesCount, setLikesCount] = useState(likes.length);
+  const [isLiked, setIsLiked] = useState(likes?.includes(me.id));
+  const [likesCount, setLikesCount] = useState(likes?.length);
 
   const queryClient = useQueryClient();
 
