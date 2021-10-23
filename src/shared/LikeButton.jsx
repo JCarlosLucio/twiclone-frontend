@@ -3,6 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
 import { useLikeTweet } from './hooks/useLikeTweet';
+import Tooltip from '@mui/material/Tooltip';
 
 export const LikeButton = ({
   tweetId,
@@ -30,19 +31,21 @@ export const LikeButton = ({
         '&:hover, &:hover button': { color: 'error.main' },
       }}
     >
-      <IconButton
-        onClick={handleLike}
-        disabled={isLiking}
-        color="error"
-        size={size}
-        sx={{
-          '&:disabled, &.Mui-disabled': {
-            color: 'error.main',
-          },
-        }}
-      >
-        {isLiked ? <BsHeartFill /> : <BsHeart />}
-      </IconButton>
+      <Tooltip title="Like" enterDelay={500}>
+        <IconButton
+          onClick={handleLike}
+          disabled={isLiking}
+          color="error"
+          size={size}
+          sx={{
+            '&:disabled, &.Mui-disabled': {
+              color: 'error.main',
+            },
+          }}
+        >
+          {isLiked ? <BsHeartFill /> : <BsHeart />}
+        </IconButton>
+      </Tooltip>
       {showCount && likesCount > 0 && likesCount}
     </Stack>
   );
