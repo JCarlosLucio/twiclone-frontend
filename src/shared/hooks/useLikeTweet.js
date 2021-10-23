@@ -16,20 +16,24 @@ export const useLikeTweet = (tweetId, likes) => {
     {
       onSuccess: (data) => {
         const tweets = queryClient.getQueryData(queryKeys.tweets);
-        const updatedTweets = {
-          ...tweets,
-          pages: tweets.pages.map((page) => {
-            return {
-              ...page,
-              tweets: page.tweets.map((t) => (t.id === tweetId ? data : t)),
-            };
-          }),
-        };
+        if (tweets) {
+          const updatedTweets = {
+            ...tweets,
+            pages: tweets.pages.map((page) => {
+              return {
+                ...page,
+                tweets: page.tweets.map((t) => (t.id === tweetId ? data : t)),
+              };
+            }),
+          };
+          // updates tweets query in cache, it better than invalidating queries
+          // because it doesn't move the TweetList with more tweets that were probably
+          // added in the meantime, also saves a call to the server
+          queryClient.setQueryData(queryKeys.tweets, updatedTweets);
+        }
 
-        // updates tweets query in cache, it better than invalidating queries
-        // because it doesn't move the TweetList with more tweets that were probably
-        // added in the meantime, also saves a call to the server
-        queryClient.setQueryData(queryKeys.tweets, updatedTweets);
+        // updates the specific tweet with the updated data, is needed when liking from TweetDetails, however it also serves as a prefetch(for TweetDetails) if liked from TweetList
+        queryClient.setQueryData([queryKeys.tweets, tweetId], data);
 
         // updates tweet state locally so if there were other likes
         // from the moment the tweet was loaded to when the like button was clicked
