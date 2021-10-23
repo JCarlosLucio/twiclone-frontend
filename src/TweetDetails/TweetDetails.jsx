@@ -7,12 +7,22 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useTweetById } from './hooks/useTweetById';
-import { LikeButton, TopBar, TweetImages, UserHeader } from '../shared';
+import {
+  CustomModal,
+  LikeButton,
+  ReplyButton,
+  TopBar,
+  TweetForm,
+  TweetImages,
+  UserHeader,
+} from '../shared';
 import { dateFull } from '../utils/date';
+import { useModal } from '../shared/hooks/useModal';
 
 export const TweetDetails = () => {
   const { tweetId } = useParams();
   const { goBack } = useHistory();
+  const { open, handleOpen, handleClose } = useModal(false);
   const { tweet, isLoading } = useTweetById(tweetId);
 
   if (isLoading) {
@@ -81,24 +91,43 @@ export const TweetDetails = () => {
           {dateFull(tweet.createdAt)}
         </Typography>
 
-        <Divider />
-
         {tweet?.likes?.length > 0 && (
           <>
+            <Divider />
             <Stack direction="row" alignItems="center" spacing={0.5}>
               <Typography fontWeight="700">{tweet?.likes?.length}</Typography>
               <Typography variant="body1" color="text.secondary">
                 Likes
               </Typography>
             </Stack>
-            <Divider />
           </>
         )}
 
-        <LikeButton tweetId={tweet?.id} likes={tweet?.likes} size="medium" />
+        <Stack spacing={0.5}>
+          <Divider />
+          <Stack
+            direction="row"
+            justifyContent="space-around"
+            alignItems="center"
+          >
+            <ReplyButton size="medium" handleClick={handleOpen} />
 
-        <Divider />
+            <LikeButton
+              tweetId={tweet?.id}
+              likes={tweet?.likes}
+              size="medium"
+            />
+          </Stack>
+          <Divider />
+        </Stack>
       </Stack>
+      <CustomModal open={open} handleClose={handleClose}>
+        <TweetForm
+          tweet={tweet}
+          fileInputId={`reply-details-file-input-${tweet.id}`}
+          handleClose={handleClose}
+        />
+      </CustomModal>
     </Stack>
   );
 };
