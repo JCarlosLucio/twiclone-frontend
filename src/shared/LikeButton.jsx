@@ -33,7 +33,7 @@ export const LikeButton = ({
       <IconButton
         onClick={handleLike}
         disabled={isLiking}
-        color={'error'}
+        color="error"
         size={size}
         sx={{
           '&:disabled, &.Mui-disabled': {
@@ -52,4 +52,5 @@ LikeButton.propTypes = {
   tweetId: PropTypes.string,
   likes: PropTypes.array,
   size: PropTypes.string,
+  showCount: PropTypes.bool,
 };
