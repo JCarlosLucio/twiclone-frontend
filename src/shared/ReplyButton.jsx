@@ -1,6 +1,7 @@
 import { BsChat } from 'react-icons/bs';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import Tooltip from '@mui/material/Tooltip';
 import PropTypes from 'prop-types';
 
 export const ReplyButton = ({ replies, size = 'small', handleClick }) => {
@@ -14,9 +15,11 @@ export const ReplyButton = ({ replies, size = 'small', handleClick }) => {
         '&:hover, &:hover button': { color: 'primary.main' },
       }}
     >
-      <IconButton onClick={handleClick} color="primary" size={size}>
-        <BsChat />
-      </IconButton>
+      <Tooltip title="Reply" enterDelay={500}>
+        <IconButton onClick={handleClick} color="primary" size={size}>
+          <BsChat />
+        </IconButton>
+      </Tooltip>
       {replies && replies.length > 0 && replies.length}
     </Stack>
   );
