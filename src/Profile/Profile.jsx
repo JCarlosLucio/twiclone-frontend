@@ -51,7 +51,7 @@ export const Profile = () => {
 
         <Stack ml={3}>
           <Typography variant="h6" fontWeight="700" lineHeight={1.2}>
-            {user ? user.username : 'Profile'}
+            {user ? user.name : 'Profile'}
           </Typography>
           {user && (
             <Typography variant="caption" color="text.secondary">
