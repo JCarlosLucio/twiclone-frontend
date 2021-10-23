@@ -1,12 +1,11 @@
-import { AiOutlineRetweet } from 'react-icons/ai';
 import { Link, useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import { LikeButton } from './LikeButton';
 import { ReplyButton } from './ReplyButton';
+import { RetweetButton } from './RetweetButton';
 import { ShareButton } from './ShareButton';
 import { TweetImages } from './TweetImages';
 import { UserHeader } from './UserHeader';
@@ -53,31 +52,10 @@ export const Tweet = ({ tweet }) => {
 
           <TweetImages images={tweet?.images} />
 
-          {/** TODO: Refactor buttons into separate component(s) */}
-          <Stack
-            direction="row"
-            justifyContent="space-around"
-            alignItems="center"
-            sx={{ fontSize: '13px' }}
-          >
+          <Stack direction="row" justifyContent="space-around">
             <ReplyButton replies={tweet.replies} handleClick={handleOpen} />
-
-            <Stack
-              direction="row"
-              alignItems="center"
-              spacing={2}
-              sx={{
-                '& button ': { color: 'secondary.main' },
-                '&:hover, &:hover button': { color: 'success.main' },
-              }}
-            >
-              <IconButton color="success" size="small">
-                <AiOutlineRetweet />
-              </IconButton>
-            </Stack>
-
+            <RetweetButton />
             <LikeButton tweetId={tweet?.id} likes={tweet?.likes} showCount />
-
             <ShareButton />
           </Stack>
         </Stack>
