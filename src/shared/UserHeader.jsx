@@ -37,23 +37,27 @@ export const UserHeader = ({
           }}
         >{`@${user.username}`}</Typography>
       </Stack>
-      <Typography color="text.secondary">·</Typography>
-      <Typography
-        color="text.secondary"
-        sx={{
-          '&:hover': {
-            textDecoration: withLink ? 'underline' : 'none',
-          },
-        }}
-      >
-        {dateFromNow(createdAt)}
-      </Typography>
+      {createdAt && (
+        <>
+          <Typography color="text.secondary">·</Typography>
+          <Typography
+            color="text.secondary"
+            sx={{
+              '&:hover': {
+                textDecoration: withLink ? 'underline' : 'none',
+              },
+            }}
+          >
+            {dateFromNow(createdAt)}
+          </Typography>
+        </>
+      )}
     </Stack>
   );
 };
 
 UserHeader.propTypes = {
   user: PropTypes.object.isRequired,
-  createdAt: PropTypes.string.isRequired,
+  createdAt: PropTypes.string,
   withLink: PropTypes.bool,
 };
