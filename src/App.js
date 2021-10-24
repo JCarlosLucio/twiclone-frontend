@@ -2,7 +2,7 @@ import { Switch, Route } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import { Auth } from './Auth';
 import { Feed } from './Feed';
-import { Menu } from './Menu';
+import { SideBar } from './SideBar';
 import { Profile } from './Profile';
 import { TweetDetails } from './TweetDetails';
 import { useMe } from './shared/hooks/useMe';
@@ -27,7 +27,7 @@ const App = () => {
           positon: 'relative',
         }}
       >
-        <Menu />
+        <SideBar />
       </Grid>
       <Grid component="main" item lg={4}>
         <Switch>

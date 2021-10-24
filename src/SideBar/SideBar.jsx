@@ -12,7 +12,7 @@ import { useMe } from '../shared/hooks/useMe';
 import { useModal } from '../shared/hooks/useModal';
 import { ColorModeContext } from '../utils/ColorModeProvider';
 
-export const Menu = () => {
+export const SideBar = () => {
   const { me, clearUser } = useMe();
   const { open, handleOpen, handleClose } = useModal(false);
   const colorMode = useContext(ColorModeContext);
