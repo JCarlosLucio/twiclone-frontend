@@ -31,7 +31,7 @@ export const LikeButton = ({
         '&:hover, &:hover button': { color: 'error.main' },
       }}
     >
-      <Tooltip title="Like" enterDelay={500}>
+      <Tooltip title={isLiked ? 'Unlike' : 'Like'} enterDelay={500}>
         <IconButton
           onClick={handleLike}
           disabled={isLiking}
