@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
-import { dateFromNow } from '../utils/date';
+import { dateFromNow, dateFull } from '../utils/date';
 
 export const UserHeader = ({
   user,
@@ -35,16 +36,18 @@ export const UserHeader = ({
       {createdAt && (
         <>
           <Typography color="text.secondary">·</Typography>
-          <Typography
-            color="text.secondary"
-            sx={{
-              '&:hover': {
-                textDecoration: withLink ? 'underline' : 'none',
-              },
-            }}
-          >
-            {dateFromNow(createdAt)}
-          </Typography>
+          <Tooltip title={dateFull(createdAt)} enterDelay={500}>
+            <Typography
+              color="text.secondary"
+              sx={{
+                '&:hover': {
+                  textDecoration: withLink ? 'underline' : 'none',
+                },
+              }}
+            >
+              {dateFromNow(createdAt)}
+            </Typography>
+          </Tooltip>
         </>
       )}
     </Stack>
