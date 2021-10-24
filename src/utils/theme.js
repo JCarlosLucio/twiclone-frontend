@@ -49,6 +49,13 @@ export const getDesignTokens = (mode) => ({
     ...(mode === 'light' ? lightTheme : darkTheme),
   },
   components: {
+    MuiAppBar: {
+      defaultProps: {
+        enableColorOnDark: true,
+        color: 'background',
+        elevation: 0,
+      },
+    },
     MuiAvatar: {
       styleOverrides: {
         root: {
@@ -123,11 +130,26 @@ export const getDesignTokens = (mode) => ({
         },
       },
     },
-    MuiAppBar: {
+    MuiMenu: {
       defaultProps: {
-        enableColorOnDark: true,
-        color: 'background',
         elevation: 0,
+      },
+      styleOverrides: {
+        root: {
+          '& .MuiPaper-root': {
+            boxShadow:
+              mode === 'light'
+                ? 'rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px'
+                : 'rgba(255, 255, 255, 0.2) 0px 0px 15px, rgba(255, 255, 255, 0.15) 0px 0px 3px 1px',
+          },
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          padding: '1rem',
+        },
       },
     },
     MuiTooltip: {
