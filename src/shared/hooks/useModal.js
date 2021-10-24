@@ -4,11 +4,15 @@ export const useModal = (initialValue = false) => {
   const [open, setOpen] = useState(initialValue);
 
   const openModal = (e) => {
-    e.stopPropagation();
+    if (e) {
+      e.stopPropagation();
+    }
     setOpen(true);
   };
   const closeModal = (e) => {
-    e.stopPropagation();
+    if (e) {
+      e.stopPropagation();
+    }
     setOpen(false);
   };
 
