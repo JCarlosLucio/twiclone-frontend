@@ -163,9 +163,9 @@ export const EditProfileForm = ({ me, handleClose }) => {
             helperText={
               (errors.name?.type === 'required' && 'Name is required') ||
               (errors.name?.type === 'maxLength' &&
-                'Name must be 280 characters or less')
+                'Name must be 50 characters or less')
             }
-            {...register('name', { required: true, maxLength: 280 })}
+            {...register('name', { required: true, maxLength: 50 })}
           />
 
           <TextField
