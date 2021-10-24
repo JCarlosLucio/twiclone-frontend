@@ -7,6 +7,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import Stack from '@mui/material/Stack';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import { CharCounter } from './CharCounter';
@@ -143,14 +144,17 @@ export const TweetForm = ({ tweet, fileInputId, handleClose }) => {
                     },
                   })}
                 />
-                <IconButton
-                  color="primary"
-                  aria-label="Add photos"
-                  component="span"
-                  disabled={imageList?.length >= 4}
-                >
-                  <BsImage />
-                </IconButton>
+                <Tooltip title="Media" enterDelay={500}>
+                  <IconButton
+                    color="primary"
+                    aria-label="Add photos"
+                    component="span"
+                    disabled={imageList?.length >= 4}
+                    size="small"
+                  >
+                    <BsImage fontSize="large" />
+                  </IconButton>
+                </Tooltip>
               </label>
 
               {charCount > 0 && <CharCounter count={charCount} />}
