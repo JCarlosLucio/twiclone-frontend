@@ -42,11 +42,11 @@ export const Register = () => {
         helperText={
           (errors.name?.type === 'required' && 'Name is required') ||
           (errors.name?.type === 'maxLength' &&
-            'Name must be 128 characters or less')
+            'Name must be 50 characters or less')
         }
         {...register('name', {
           required: true,
-          maxLength: 128,
+          maxLength: 50,
         })}
       />
 
