@@ -7,12 +7,26 @@ import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
 import PropTypes from 'prop-types';
 import { usePopover } from './hooks/usePopover';
+import SnackbarUtils from '../utils/SnackbarUtils';
 
-export const ShareButton = ({ size = 'small' }) => {
+export const ShareButton = ({
+  tweetUsername = '',
+  tweetId = '',
+  size = 'small',
+}) => {
   const { anchorEl, openPopover, closePopover, id } = usePopover(
     null,
     'share-popover'
   );
+
+  const copyLinkToTweet = (e) => {
+    e.stopPropagation();
+    const baseUrl = window.location.origin;
+    const link = `${baseUrl}/${tweetUsername}/status/${tweetId}`;
+    navigator.clipboard.writeText(link);
+    closePopover();
+    SnackbarUtils.info('Copied to clipboard');
+  };
 
   return (
     <>
@@ -41,7 +55,7 @@ export const ShareButton = ({ size = 'small' }) => {
           '& .MuiList-padding': { padding: 0 },
         }}
       >
-        <MenuItem>
+        <MenuItem onClick={copyLinkToTweet}>
           <ListItemIcon>
             <BsLink45Deg fontSize="large" />
           </ListItemIcon>
@@ -53,5 +67,7 @@ export const ShareButton = ({ size = 'small' }) => {
 };
 
 ShareButton.propTypes = {
+  tweetUsername: PropTypes.string,
+  tweetId: PropTypes.string,
   size: PropTypes.string,
 };
