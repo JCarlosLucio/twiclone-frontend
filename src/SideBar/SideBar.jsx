@@ -1,13 +1,16 @@
 import { useContext } from 'react';
-import { BsHouse, BsThreeDots, BsTornado } from 'react-icons/bs';
+import { BsCheck2, BsHouse, BsThreeDots, BsTornado } from 'react-icons/bs';
 import { FaRegBell, FaHashtag, FaEllipsisH, FaRegUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Popover from '@mui/material/Popover';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import { CustomModal, TweetForm, UserHeader } from '../shared';
 import { useMe } from '../shared/hooks/useMe';
 import { useModal } from '../shared/hooks/useModal';
@@ -114,24 +117,24 @@ export const SideBar = () => {
       >
         <UserHeader user={me} direction="column" />
       </Button>
-      <Popover
+      <Menu
         id={id}
         open={!!anchorEl}
         anchorEl={anchorEl}
         onClose={closePopover}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        transformOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
-        <Button variant="contained" onClick={logout}>
-          Logout
-        </Button>
-      </Popover>
+        <Stack direction="row" alignItems="center" spacing={2} p={2}>
+          <Avatar src={me.avatar.url} alt={`${me.name}`} />
+          <UserHeader user={me} direction="column" />
+          <Typography color="primary">
+            <BsCheck2 fontSize="large" />
+          </Typography>
+        </Stack>
+        <Divider />
+        <MenuItem onClick={logout}>Log out {`@${me.username}`}</MenuItem>
+      </Menu>
       <CustomModal open={open} handleClose={closeModal}>
         <TweetForm fileInputId="modal-file-input" handleClose={closeModal} />
       </CustomModal>
