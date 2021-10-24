@@ -56,7 +56,10 @@ export const Tweet = ({ tweet }) => {
             <ReplyButton replies={tweet.replies} handleClick={openModal} />
             <RetweetButton />
             <LikeButton tweetId={tweet?.id} likes={tweet?.likes} showCount />
-            <ShareButton />
+            <ShareButton
+              tweetId={tweet.id}
+              tweetUsername={tweet.user.username}
+            />
           </Stack>
         </Stack>
       </Stack>

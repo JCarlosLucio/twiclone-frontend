@@ -115,7 +115,11 @@ export const TweetDetails = () => {
               likes={tweet?.likes}
               size="medium"
             />
-            <ShareButton size="medium" />
+            <ShareButton
+              size="medium"
+              tweetId={tweet.id}
+              tweetUsername={tweet.user.username}
+            />
           </Stack>
           <Divider />
         </Stack>
