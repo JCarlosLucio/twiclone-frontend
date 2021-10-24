@@ -6,15 +6,21 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import Popover from '@mui/material/Popover';
 import Stack from '@mui/material/Stack';
 import { CustomModal, TweetForm, UserHeader } from '../shared';
 import { useMe } from '../shared/hooks/useMe';
 import { useModal } from '../shared/hooks/useModal';
+import { usePopover } from '../shared/hooks/usePopover';
 import { ColorModeContext } from '../utils/ColorModeProvider';
 
 export const SideBar = () => {
   const { me, clearUser } = useMe();
   const { open, openModal, closeModal } = useModal(false);
+  const { anchorEl, openPopover, closePopover, id } = usePopover(
+    null,
+    'me-popover'
+  );
   const colorMode = useContext(ColorModeContext);
 
   const logout = () => {
@@ -83,11 +89,6 @@ export const SideBar = () => {
           <Button onClick={colorMode.toggleColorMode}>
             toggle {colorMode.mode}
           </Button>
-          {me && (
-            <Button variant="contained" onClick={logout}>
-              Logout
-            </Button>
-          )}
           <Button
             onClick={openModal}
             size="large"
@@ -100,6 +101,7 @@ export const SideBar = () => {
       </Stack>
 
       <Button
+        onClick={openPopover}
         color="secondary"
         size="large"
         startIcon={<Avatar src={me.avatar.url} alt={`${me.name}`} />}
@@ -112,7 +114,24 @@ export const SideBar = () => {
       >
         <UserHeader user={me} direction="column" />
       </Button>
-
+      <Popover
+        id={id}
+        open={!!anchorEl}
+        anchorEl={anchorEl}
+        onClose={closePopover}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+      >
+        <Button variant="contained" onClick={logout}>
+          Logout
+        </Button>
+      </Popover>
       <CustomModal open={open} handleClose={closeModal}>
         <TweetForm fileInputId="modal-file-input" handleClose={closeModal} />
       </CustomModal>
