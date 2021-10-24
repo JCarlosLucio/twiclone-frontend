@@ -1,5 +1,4 @@
 import { useQuery } from 'react-query';
-import PropTypes from 'prop-types';
 import { getTweetById } from '../../services/tweets';
 import { queryKeys } from '../../constants';
 
@@ -8,8 +7,4 @@ export const useTweetById = (id) => {
     getTweetById(id)
   );
   return { tweet, isLoading };
-};
-
-useTweetById.propTypes = {
-  id: PropTypes.string.isRequired,
 };

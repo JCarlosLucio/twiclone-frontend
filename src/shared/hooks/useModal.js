@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 export const useModal = (initialValue = false) => {
@@ -14,8 +13,4 @@ export const useModal = (initialValue = false) => {
   };
 
   return { open, handleOpen, handleClose };
-};
-
-useModal.propTypes = {
-  initialValue: PropTypes.bool,
 };

@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from 'react-query';
-import PropTypes from 'prop-types';
 import { followUser } from '../../services/user';
 import { queryKeys } from '../../constants';
 import { useMe } from './useMe';
@@ -22,8 +21,4 @@ export const useFollow = (user) => {
   });
 
   return { follow, isFollowing };
-};
-
-useFollow.propTypes = {
-  user: PropTypes.object.isRequired,
 };
