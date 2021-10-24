@@ -94,7 +94,11 @@ export const TweetForm = ({ tweet, fileInputId, handleClose }) => {
               <ImagePreviews imageList={imageList} removeImage={removeImage} />
             )}
 
-            <Stack direction="row" alignItems="center" spacing={2}>
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+            >
               <label htmlFor={fileInputId}>
                 <input
                   id={fileInputId}
@@ -157,18 +161,23 @@ export const TweetForm = ({ tweet, fileInputId, handleClose }) => {
                 </Tooltip>
               </label>
 
-              {charCount > 0 && <CharCounter count={charCount} />}
+              <Stack direction="row" alignItems="center" spacing={2}>
+                {charCount > 0 && <CharCounter count={charCount} />}
 
-              <Button
-                type="submit"
-                size="medium"
-                variant="contained"
-                disabled={
-                  !((charCount > 0 && charCount <= 280) || imageList.length > 0)
-                }
-              >
-                {isLoading ? 'Tweeting...' : tweet ? 'Reply' : 'Tweet'}
-              </Button>
+                <Button
+                  type="submit"
+                  size="medium"
+                  variant="contained"
+                  disabled={
+                    !(
+                      (charCount > 0 && charCount <= 280) ||
+                      imageList.length > 0
+                    )
+                  }
+                >
+                  {isLoading ? 'Tweeting...' : tweet ? 'Reply' : 'Tweet'}
+                </Button>
+              </Stack>
             </Stack>
           </Stack>
         </Stack>
