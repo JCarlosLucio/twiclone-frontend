@@ -24,7 +24,7 @@ import { dateFull } from '../utils/date';
 export const TweetDetails = () => {
   const { tweetId } = useParams();
   const { goBack } = useHistory();
-  const { open, handleOpen, handleClose } = useModal(false);
+  const { open, openModal, closeModal } = useModal(false);
   const { tweet, isLoading } = useTweetById(tweetId);
 
   if (isLoading) {
@@ -108,7 +108,7 @@ export const TweetDetails = () => {
         <Stack spacing={0.5}>
           <Divider />
           <Stack direction="row" justifyContent="space-around">
-            <ReplyButton size="medium" handleClick={handleOpen} />
+            <ReplyButton size="medium" handleClick={openModal} />
             <RetweetButton size="medium" />
             <LikeButton
               tweetId={tweet?.id}
@@ -120,11 +120,11 @@ export const TweetDetails = () => {
           <Divider />
         </Stack>
       </Stack>
-      <CustomModal open={open} handleClose={handleClose}>
+      <CustomModal open={open} handleClose={closeModal}>
         <TweetForm
           tweet={tweet}
           fileInputId={`reply-details-file-input-${tweet.id}`}
-          handleClose={handleClose}
+          handleClose={closeModal}
         />
       </CustomModal>
     </Stack>

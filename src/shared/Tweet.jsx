@@ -13,7 +13,7 @@ import { CustomModal, TweetForm } from '../shared';
 import { useModal } from '../shared/hooks/useModal';
 
 export const Tweet = ({ tweet }) => {
-  const { open, handleOpen, handleClose } = useModal(false);
+  const { open, openModal, closeModal } = useModal(false);
   const history = useHistory();
 
   const goToTweetDetails = () => {
@@ -53,18 +53,18 @@ export const Tweet = ({ tweet }) => {
           <TweetImages images={tweet?.images} />
 
           <Stack direction="row" justifyContent="space-around">
-            <ReplyButton replies={tweet.replies} handleClick={handleOpen} />
+            <ReplyButton replies={tweet.replies} handleClick={openModal} />
             <RetweetButton />
             <LikeButton tweetId={tweet?.id} likes={tweet?.likes} showCount />
             <ShareButton />
           </Stack>
         </Stack>
       </Stack>
-      <CustomModal open={open} handleClose={handleClose}>
+      <CustomModal open={open} handleClose={closeModal}>
         <TweetForm
           tweet={tweet}
           fileInputId={`reply-file-input-${tweet.id}`}
-          handleClose={handleClose}
+          handleClose={closeModal}
         />
       </CustomModal>
     </Stack>

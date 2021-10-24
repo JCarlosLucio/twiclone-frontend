@@ -14,7 +14,7 @@ import { ColorModeContext } from '../utils/ColorModeProvider';
 
 export const SideBar = () => {
   const { me, clearUser } = useMe();
-  const { open, handleOpen, handleClose } = useModal(false);
+  const { open, openModal, closeModal } = useModal(false);
   const colorMode = useContext(ColorModeContext);
 
   const logout = () => {
@@ -89,7 +89,7 @@ export const SideBar = () => {
             </Button>
           )}
           <Button
-            onClick={handleOpen}
+            onClick={openModal}
             size="large"
             variant="contained"
             fullWidth
@@ -113,8 +113,8 @@ export const SideBar = () => {
         <UserHeader user={me} direction="column" />
       </Button>
 
-      <CustomModal open={open} handleClose={handleClose}>
-        <TweetForm fileInputId="modal-file-input" handleClose={handleClose} />
+      <CustomModal open={open} handleClose={closeModal}>
+        <TweetForm fileInputId="modal-file-input" handleClose={closeModal} />
       </CustomModal>
     </Stack>
   );

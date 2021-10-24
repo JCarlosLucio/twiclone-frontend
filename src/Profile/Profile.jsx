@@ -19,7 +19,7 @@ export const Profile = () => {
   const { me } = useMe();
   const { user, isLoading } = useUser(username);
   const { follow, isFollowing } = useFollow(user);
-  const { open, handleOpen, handleClose } = useModal(false);
+  const { open, openModal, closeModal } = useModal(false);
 
   const handleFollow = () => {
     follow(user?.id);
@@ -99,7 +99,7 @@ export const Profile = () => {
               isMe ? (
                 <Button
                   variant="secondary"
-                  onClick={handleOpen}
+                  onClick={openModal}
                   sx={{ border: '1px solid', borderColor: 'secondary' }}
                 >
                   Edit profile
@@ -175,8 +175,8 @@ export const Profile = () => {
           </Stack>
         )}
 
-        <CustomModal open={open} handleClose={handleClose}>
-          <EditProfileForm me={me} handleClose={handleClose} />
+        <CustomModal open={open} handleClose={closeModal}>
+          <EditProfileForm me={me} handleClose={closeModal} />
         </CustomModal>
       </Stack>
     </Stack>

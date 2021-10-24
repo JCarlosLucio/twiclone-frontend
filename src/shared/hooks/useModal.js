@@ -3,14 +3,14 @@ import { useState } from 'react';
 export const useModal = (initialValue = false) => {
   const [open, setOpen] = useState(initialValue);
 
-  const handleOpen = (e) => {
+  const openModal = (e) => {
     e.stopPropagation();
     setOpen(true);
   };
-  const handleClose = (e) => {
+  const closeModal = (e) => {
     e.stopPropagation();
     setOpen(false);
   };
 
-  return { open, handleOpen, handleClose };
+  return { open, openModal, closeModal };
 };
