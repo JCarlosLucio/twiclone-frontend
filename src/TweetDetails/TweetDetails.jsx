@@ -124,12 +124,17 @@ export const TweetDetails = () => {
           </Stack>
           <Divider />
         </Stack>
+
+        <TweetForm
+          tweet={tweet}
+          fileInputId={`reply-details-file-input-${tweet.id}`}
+        />
       </Stack>
       <TweetList id={tweet.id} />
       <CustomModal open={open} handleClose={closeModal}>
         <TweetForm
           tweet={tweet}
-          fileInputId={`reply-details-file-input-${tweet.id}`}
+          fileInputId={`reply-details-modal-file-input-${tweet.id}`}
           handleClose={closeModal}
           showParent
         />
