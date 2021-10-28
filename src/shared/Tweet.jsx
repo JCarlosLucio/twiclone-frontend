@@ -68,6 +68,7 @@ export const Tweet = ({ tweet }) => {
           tweet={tweet}
           fileInputId={`reply-file-input-${tweet.id}`}
           handleClose={closeModal}
+          showParent
         />
       </CustomModal>
     </Stack>
