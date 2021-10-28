@@ -8,17 +8,45 @@ export const useCreateTweet = () => {
   const { mutate: create, isLoading } = useMutation(createTweet, {
     onSuccess: (data) => {
       const tweets = queryClient.getQueryData(queryKeys.tweets);
-      const updatedTweets = {
-        ...tweets,
-        pages: tweets.pages.map((page) => {
-          return {
-            ...page,
-            tweets: [data, ...page.tweets],
-          };
-        }),
-      };
+      if (tweets) {
+        const updatedTweets = {
+          ...tweets,
+          pages: tweets.pages.map((page) => {
+            return {
+              ...page,
+              tweets: [data, ...page.tweets],
+            };
+          }),
+        };
 
-      queryClient.setQueryData(queryKeys.tweets, updatedTweets);
+        queryClient.setQueryData(queryKeys.tweets, updatedTweets);
+      }
+
+      // For adding a reply to a replies query
+      if (data.parent) {
+        const replies = queryClient.getQueryData([
+          queryKeys.tweets,
+          data.parent,
+          queryKeys.replies,
+        ]);
+
+        if (replies) {
+          const updatedReplies = {
+            ...replies,
+            pages: replies.pages.map((page) => {
+              return {
+                ...page,
+                tweets: [data, ...page.tweets],
+              };
+            }),
+          };
+
+          queryClient.setQueryData(
+            [queryKeys.tweets, data.parent, queryKeys.replies],
+            updatedReplies
+          );
+        }
+      }
     },
   });
 
