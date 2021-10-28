@@ -1,12 +1,11 @@
-import { BsArrowLeft, BsCalendar3 } from 'react-icons/bs';
-import { useHistory, useParams } from 'react-router-dom';
+import { BsCalendar3 } from 'react-icons/bs';
+import { useParams } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { EditProfileForm } from './EditProfileForm';
-import { CustomModal, Loading, TopBar } from '../shared';
+import { BackButton, CustomModal, Loading, TopBar } from '../shared';
 import { useFollow } from '../shared/hooks/useFollow';
 import { useMe } from '../shared/hooks/useMe';
 import { useModal } from '../shared/hooks/useModal';
@@ -15,7 +14,6 @@ import { dateMonthYear } from '../utils/date';
 
 export const Profile = () => {
   const { username } = useParams();
-  const { goBack } = useHistory();
   const { me } = useMe();
   const { user, isLoading } = useUser(username);
   const { follow, isFollowing } = useFollow(user);
@@ -38,16 +36,9 @@ export const Profile = () => {
       }}
     >
       <TopBar>
-        <IconButton
-          size="small"
-          color="secondary"
-          edge="start"
-          onClick={goBack}
-        >
-          <BsArrowLeft fontSize="large" />
-        </IconButton>
+        <BackButton />
 
-        <Stack ml={3}>
+        <Stack>
           <Typography variant="h6" fontWeight="700" lineHeight={1.2}>
             {user ? user.name : 'Profile'}
           </Typography>

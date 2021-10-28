@@ -1,12 +1,11 @@
-import { BsArrowLeft } from 'react-icons/bs';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useTweetById } from './hooks/useTweetById';
 import {
+  BackButton,
   CustomModal,
   LikeButton,
   Loading,
@@ -24,7 +23,6 @@ import { dateFull } from '../utils/date';
 
 export const TweetDetails = () => {
   const { tweetId } = useParams();
-  const { goBack } = useHistory();
   const { open, openModal, closeModal } = useModal(false);
   const { tweet, isLoading } = useTweetById(tweetId);
 
@@ -38,15 +36,9 @@ export const TweetDetails = () => {
       }}
     >
       <TopBar>
-        <IconButton
-          size="small"
-          color="secondary"
-          edge="start"
-          onClick={goBack}
-        >
-          <BsArrowLeft fontSize="large" />
-        </IconButton>
-        <Typography ml={3} variant="h6" fontWeight="700">
+        <BackButton />
+
+        <Typography variant="h6" fontWeight="700">
           Tweet
         </Typography>
       </TopBar>
