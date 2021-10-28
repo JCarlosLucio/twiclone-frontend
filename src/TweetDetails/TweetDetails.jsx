@@ -5,7 +5,6 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useTweetById } from './hooks/useTweetById';
 import {
-  BackButton,
   CustomModal,
   LikeButton,
   Loading,
@@ -35,9 +34,7 @@ export const TweetDetails = () => {
         minHeight: '100vh',
       }}
     >
-      <TopBar>
-        <BackButton />
-
+      <TopBar withBackButton>
         <Typography variant="h6" fontWeight="700">
           Tweet
         </Typography>

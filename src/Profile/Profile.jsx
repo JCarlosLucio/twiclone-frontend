@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { EditProfileForm } from './EditProfileForm';
-import { BackButton, CustomModal, Loading, TopBar } from '../shared';
+import { CustomModal, Loading, TopBar } from '../shared';
 import { useFollow } from '../shared/hooks/useFollow';
 import { useMe } from '../shared/hooks/useMe';
 import { useModal } from '../shared/hooks/useModal';
@@ -35,9 +35,7 @@ export const Profile = () => {
         minHeight: '100vh',
       }}
     >
-      <TopBar>
-        <BackButton />
-
+      <TopBar withBackButton>
         <Stack>
           <Typography variant="h6" fontWeight="700" lineHeight={1.2}>
             {user ? user.name : 'Profile'}
