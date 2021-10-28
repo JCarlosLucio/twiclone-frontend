@@ -16,6 +16,7 @@ import {
   TopBar,
   TweetForm,
   TweetImages,
+  TweetList,
   UserHeader,
 } from '../shared';
 import { useModal } from '../shared/hooks/useModal';
@@ -124,6 +125,7 @@ export const TweetDetails = () => {
           <Divider />
         </Stack>
       </Stack>
+      <TweetList id={tweet.id} />
       <CustomModal open={open} handleClose={closeModal}>
         <TweetForm
           tweet={tweet}
