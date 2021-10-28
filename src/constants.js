@@ -5,4 +5,5 @@ export const queryKeys = {
   me: 'me',
   user: 'user',
   tweets: 'tweets',
+  replies: 'replies',
 };
