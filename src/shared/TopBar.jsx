@@ -1,14 +1,20 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import PropTypes from 'prop-types';
+import { BackButton } from './BackButton';
 
-export const TopBar = ({ children, barClick, justifyContent, padding }) => {
+export const TopBar = ({
+  children,
+  barClick,
+  justifyContent = 'flex-start',
+  padding = '0 15px',
+  withBackButton = false,
+}) => {
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (barClick) {
-      barClick();
-    }
+    barClick && barClick();
   };
+
   return (
     <AppBar
       component="div"
@@ -22,12 +28,9 @@ export const TopBar = ({ children, barClick, justifyContent, padding }) => {
     >
       <Toolbar
         disableGutters
-        sx={{
-          justifyContent: justifyContent || 'flex-start',
-          padding: padding || '0 15px',
-          minHeight: '53px !important',
-        }}
+        sx={{ justifyContent, padding, minHeight: '53px !important' }}
       >
+        {withBackButton && <BackButton />}
         {children}
       </Toolbar>
     </AppBar>
@@ -39,4 +42,5 @@ TopBar.propTypes = {
   barClick: PropTypes.func,
   justifyContent: PropTypes.string,
   padding: PropTypes.string,
+  withBackButton: PropTypes.bool,
 };
