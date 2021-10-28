@@ -1,12 +1,13 @@
 import InfiniteScroll from 'react-infinite-scroll-component';
 import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
+import PropTypes from 'prop-types';
 import { useInfiniteTweets } from './hooks/useInfiniteTweets';
 import { Tweet } from './Tweet';
 
-export const TweetList = () => {
+export const TweetList = ({ id }) => {
   const { data, fetchNextPage, hasNextPage, isLoading, isError, error } =
-    useInfiniteTweets();
+    useInfiniteTweets(id);
 
   if (isLoading) {
     return (
@@ -37,4 +38,8 @@ export const TweetList = () => {
       })}
     </InfiniteScroll>
   );
+};
+
+TweetList.propTypes = {
+  id: PropTypes.string,
 };
