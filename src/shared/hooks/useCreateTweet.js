@@ -11,12 +11,10 @@ export const useCreateTweet = () => {
       if (tweets) {
         const updatedTweets = {
           ...tweets,
-          pages: tweets.pages.map((page) => {
-            return {
-              ...page,
-              tweets: [data, ...page.tweets],
-            };
-          }),
+          // adds tweet/reply to only the first page of tweets
+          pages: tweets.pages.map((page, i) =>
+            i === 0 ? { ...page, tweets: [data, ...page.tweets] } : page
+          ),
         };
 
         queryClient.setQueryData(queryKeys.tweets, updatedTweets);
@@ -33,12 +31,10 @@ export const useCreateTweet = () => {
         if (replies) {
           const updatedReplies = {
             ...replies,
-            pages: replies.pages.map((page) => {
-              return {
-                ...page,
-                tweets: [data, ...page.tweets],
-              };
-            }),
+            // adds reply to only the first page of replies
+            pages: replies.pages.map((page, i) =>
+              i === 0 ? { ...page, tweets: [data, ...page.tweets] } : page
+            ),
           };
 
           queryClient.setQueryData(
