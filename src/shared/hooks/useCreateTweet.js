@@ -11,10 +11,25 @@ export const useCreateTweet = () => {
       if (tweets) {
         const updatedTweets = {
           ...tweets,
-          // adds tweet/reply to only the first page of tweets
-          pages: tweets.pages.map((page, i) =>
-            i === 0 ? { ...page, tweets: [data, ...page.tweets] } : page
-          ),
+          pages: tweets.pages
+            // updates replies count in parent tweet if tweet is reply
+            .map((page) => {
+              if (data.parent) {
+                return {
+                  ...page,
+                  tweets: page.tweets.map((t) =>
+                    t.id === data.parent
+                      ? { ...t, replies: [...t.replies, t.id] }
+                      : t
+                  ),
+                };
+              }
+              return page;
+            })
+            // adds tweet/reply to only the first page of tweets
+            .map((page, i) =>
+              i === 0 ? { ...page, tweets: [data, ...page.tweets] } : page
+            ),
         };
 
         queryClient.setQueryData(queryKeys.tweets, updatedTweets);
