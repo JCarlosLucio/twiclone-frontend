@@ -17,7 +17,12 @@ import { useCreateTweet } from './hooks/useCreateTweet';
 import { useMe } from './hooks/useMe';
 import SnackbarUtils from '../utils/SnackbarUtils';
 
-export const TweetForm = ({ tweet, fileInputId, handleClose }) => {
+export const TweetForm = ({
+  tweet,
+  fileInputId,
+  handleClose,
+  showParent = false,
+}) => {
   const { me } = useMe();
   const [imageList, setImageList] = useState([]);
   const [charCount, setCharCount] = useState(0);
@@ -54,7 +59,7 @@ export const TweetForm = ({ tweet, fileInputId, handleClose }) => {
 
   return (
     <Stack>
-      {tweet && (
+      {tweet && showParent && (
         <Stack direction="row" spacing={2} sx={{ p: 2 }}>
           <Stack alignItems="center">
             <Avatar src={tweet.user.avatar.url} alt={`${tweet.user.name}`} />
@@ -190,4 +195,5 @@ TweetForm.propTypes = {
   tweet: PropTypes.object,
   fileInputId: PropTypes.string.isRequired,
   handleClose: PropTypes.func,
+  showParent: PropTypes.bool,
 };
