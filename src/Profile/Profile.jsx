@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { EditProfileForm } from './EditProfileForm';
-import { CustomModal, TopBar } from '../shared';
+import { CustomModal, Loading, TopBar } from '../shared';
 import { useFollow } from '../shared/hooks/useFollow';
 import { useMe } from '../shared/hooks/useMe';
 import { useModal } from '../shared/hooks/useModal';
@@ -25,7 +25,7 @@ export const Profile = () => {
     follow(user?.id);
   };
 
-  if (isLoading) return <p>Loading ...</p>;
+  if (isLoading) return <Loading />;
 
   const isMe = me.id === user?.id;
   const following = me.following.includes(user?.id);

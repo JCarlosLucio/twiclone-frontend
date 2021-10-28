@@ -1,7 +1,6 @@
 import { BsArrowLeft } from 'react-icons/bs';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
-import CircularProgress from '@mui/material/CircularProgress';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
@@ -10,6 +9,7 @@ import { useTweetById } from './hooks/useTweetById';
 import {
   CustomModal,
   LikeButton,
+  Loading,
   ReplyButton,
   RetweetButton,
   ShareButton,
@@ -29,11 +29,7 @@ export const TweetDetails = () => {
   const { tweet, isLoading } = useTweetById(tweetId);
 
   if (isLoading) {
-    return (
-      <Stack direction="row" justifyContent="center" sx={{ padding: '16px' }}>
-        <CircularProgress />
-      </Stack>
-    );
+    return <Loading />;
   }
 
   return (
