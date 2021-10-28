@@ -1,3 +1,4 @@
+export * from './BackButton';
 export * from './CharCounter';
 export * from './CustomModal';
 export * from './ImagePreviews';
