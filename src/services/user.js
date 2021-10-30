@@ -23,3 +23,11 @@ export const followUser = async (userId) => {
   }
   return null;
 };
+
+export const getWhoToFollow = async (userId) => {
+  if (userId) {
+    const response = await axios.get(`${baseUrl}/${userId}/whotofollow`);
+    return response.data;
+  }
+  return null;
+};
