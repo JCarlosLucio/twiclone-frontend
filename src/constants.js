@@ -6,4 +6,5 @@ export const queryKeys = {
   user: 'user',
   tweets: 'tweets',
   replies: 'replies',
+  whotofollow: 'whotofollow',
 };
