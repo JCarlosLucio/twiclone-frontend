@@ -6,6 +6,7 @@ import { SideBar } from './SideBar';
 import { Profile } from './Profile';
 import { TweetDetails } from './TweetDetails';
 import { useMe } from './shared/hooks/useMe';
+import { WhoToFollow } from './WhoToFollow';
 
 const App = () => {
   const { me } = useMe();
@@ -38,6 +39,7 @@ const App = () => {
       </Grid>
       <Grid item lg={4}>
         <h1>News</h1>
+        <WhoToFollow />
       </Grid>
     </Grid>
   );
