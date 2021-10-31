@@ -15,12 +15,13 @@ export const UserHeader = ({
     <Stack direction="row" alignItems="flex-start" spacing={0.5}>
       <Stack
         direction={direction}
-        alignItems="flex-start"
+        alignItems={direction === 'row' ? 'center' : 'flex-start'}
         {...(withLink && {
           to: `/${user.username}`,
           onClick: (e) => e.stopPropagation(),
         })}
         component={withLink ? Link : 'div'}
+        spacing={direction === 'row' ? 0.5 : 0}
         sx={{
           textDecoration: 'none',
           '&:hover span:first-of-type': {
@@ -31,7 +32,10 @@ export const UserHeader = ({
         <Typography color="text.primary" sx={{ fontWeight: 700 }}>
           {user.name}
         </Typography>
-        <Typography color="text.secondary">{`@${user.username}`}</Typography>
+        <Typography
+          color="text.secondary"
+          variant="body2"
+        >{`@${user.username}`}</Typography>
       </Stack>
       {createdAt && (
         <>
