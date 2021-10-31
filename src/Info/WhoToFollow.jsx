@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -11,6 +11,7 @@ import { useWhoToFollow } from './hooks/useWhoToFollow';
 
 export const WhoToFollow = () => {
   const { users, isLoading } = useWhoToFollow();
+  const history = useHistory();
 
   if (isLoading) return <Loading />;
 
@@ -22,6 +23,7 @@ export const WhoToFollow = () => {
         borderRadius: '1rem',
         '& .MuiListItem-root:hover': {
           bgcolor: 'background.hover',
+          cursor: 'pointer',
         },
       }}
       aria-label="who to follow"
@@ -34,8 +36,7 @@ export const WhoToFollow = () => {
       {users.map((user) => (
         <ListItemButton
           key={user?.id}
-          component={Link}
-          to={`/${user?.username}`}
+          onClick={() => history.push(`/${user?.username}`)}
         >
           <ListItemAvatar>
             <Avatar src={user?.avatar?.url} alt={`${user?.name}`} />
