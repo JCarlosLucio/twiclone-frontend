@@ -15,9 +15,17 @@ export const WhoToFollow = () => {
 
   return (
     <List
-      sx={{ maxWidth: 350, borderRadius: '1rem' }}
+      sx={{
+        bgcolor: 'background',
+        maxWidth: 350,
+        borderRadius: '1rem',
+        '& .MuiListItem-root:hover': {
+          bgcolor: 'background.hover',
+        },
+      }}
+      aria-label="who to follow"
       subheader={
-        <ListSubheader component="div" sx={{ px: 2, py: 0.5 }}>
+        <ListSubheader sx={{ px: 2, py: 0.5 }}>
           <Typography variant="h6">Who to follow</Typography>
         </ListSubheader>
       }
