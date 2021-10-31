@@ -5,8 +5,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { EditProfileForm } from './EditProfileForm';
-import { CustomModal, Loading, TopBar } from '../shared';
-import { useFollow } from '../shared/hooks/useFollow';
+import { CustomModal, FollowButton, Loading, TopBar } from '../shared';
 import { useMe } from '../shared/hooks/useMe';
 import { useModal } from '../shared/hooks/useModal';
 import { useUser } from '../shared/hooks/useUser';
@@ -16,15 +15,9 @@ export const Profile = () => {
   const { username } = useParams();
   const { me } = useMe();
   const { user, isLoading } = useUser(username);
-  const { follow, isFollowing } = useFollow(user);
   const { open, openModal, closeModal } = useModal(false);
 
-  const handleFollow = () => {
-    follow(user?.id);
-  };
-
   const isMe = me.id === user?.id;
-  const following = me.following.includes(user?.id);
 
   return (
     <Stack
@@ -96,15 +89,7 @@ export const Profile = () => {
                       Edit profile
                     </Button>
                   ) : (
-                    <Button
-                      variant="secondary"
-                      onClick={handleFollow}
-                      sx={{ border: '1px solid', borderColor: 'secondary' }}
-                    >
-                      {(isFollowing && 'Following...') ||
-                        (following && 'Following') ||
-                        'Follow'}
-                    </Button>
+                    <FollowButton user={user} />
                   )
                 ) : null}
               </Stack>
