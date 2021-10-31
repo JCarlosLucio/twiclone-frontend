@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -31,7 +32,11 @@ export const WhoToFollow = () => {
       }
     >
       {users.map((user) => (
-        <ListItemButton key={user?.id}>
+        <ListItemButton
+          key={user?.id}
+          component={Link}
+          to={`/${user?.username}`}
+        >
           <ListItemAvatar>
             <Avatar src={user?.avatar?.url} alt={`${user?.name}`} />
           </ListItemAvatar>
