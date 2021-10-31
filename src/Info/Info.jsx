@@ -9,7 +9,7 @@ export const Info = () => {
       sx={{
         position: 'fixed',
         height: '100%',
-        width: '275px',
+        width: '350px',
         p: '0 1rem',
       }}
     >
