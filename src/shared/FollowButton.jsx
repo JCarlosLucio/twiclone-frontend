@@ -3,7 +3,7 @@ import { useFollow } from '../shared/hooks/useFollow';
 import { useMe } from '../shared/hooks/useMe';
 import PropTypes from 'prop-types';
 
-export const FollowButton = ({ user }) => {
+export const FollowButton = ({ user, variant = 'outlined' }) => {
   const { me } = useMe();
 
   const { follow, isFollowing } = useFollow(user);
@@ -16,11 +16,7 @@ export const FollowButton = ({ user }) => {
   };
 
   return (
-    <Button
-      variant="secondary"
-      onClick={handleFollow}
-      sx={{ border: '1px solid', borderColor: 'secondary' }}
-    >
+    <Button variant={variant} color="secondary" onClick={handleFollow}>
       {(isFollowing && 'Following...') ||
         (following && 'Following') ||
         'Follow'}
@@ -30,4 +26,5 @@ export const FollowButton = ({ user }) => {
 
 FollowButton.propTypes = {
   user: PropTypes.object.isRequired,
+  variant: PropTypes.string,
 };
