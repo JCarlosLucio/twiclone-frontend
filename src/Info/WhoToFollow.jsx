@@ -6,8 +6,8 @@ import ListItemButton from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import { Loading, UserHeader } from '../shared';
 import { useWhoToFollow } from './hooks/useWhoToFollow';
+import { FollowButton, Loading, UserHeader } from '../shared';
 
 export const WhoToFollow = () => {
   const { users, isLoading } = useWhoToFollow();
@@ -37,6 +37,7 @@ export const WhoToFollow = () => {
         <ListItemButton
           key={user?.id}
           onClick={() => history.push(`/${user?.username}`)}
+          secondaryAction={<FollowButton user={user} variant="contained" />}
         >
           <ListItemAvatar>
             <Avatar src={user?.avatar?.url} alt={`${user?.name}`} />
