@@ -11,6 +11,7 @@ const lightTheme = {
   },
   background: {
     hover: 'rgba(0, 0, 0, 0.03)',
+    secondary: 'rgb(247, 249, 249)',
   },
   divider: '#eff3f4',
   text: {
@@ -29,6 +30,7 @@ const darkTheme = {
     default: '#000',
     paper: '#000',
     hover: 'rgba(255, 255, 255, 0.03)',
+    secondary: 'rgb(21, 24, 28)',
   },
   text: {
     primary: '#d9d9d9',
