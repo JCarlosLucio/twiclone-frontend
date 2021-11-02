@@ -18,8 +18,8 @@ export const WhoToFollow = () => {
   return (
     <List
       sx={{
-        bgcolor: 'background',
-        maxWidth: 350,
+        bgcolor: 'background.secondary',
+        width: '100%',
         borderRadius: '1rem',
         '& .MuiListItem-root:hover': {
           bgcolor: 'background.hover',
