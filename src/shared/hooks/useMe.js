@@ -23,7 +23,7 @@ export const useMe = () => {
 
     // reset user to null in ReactQuery client
     queryClient.setQueryData(queryKeys.me, null);
-    queryClient.setQueryData(queryKeys.whotofollow, null);
+    queryClient.removeQueries(queryKeys.whotofollow);
   };
 
   return { me, updateUser, clearUser };
