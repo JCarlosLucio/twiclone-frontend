@@ -1,12 +1,13 @@
+import { useState } from 'react';
 import Button from '@mui/material/Button';
+import PropTypes from 'prop-types';
 import { useFollow } from '../shared/hooks/useFollow';
 import { useMe } from '../shared/hooks/useMe';
-import PropTypes from 'prop-types';
 
-export const FollowButton = ({ user, variant = 'outlined' }) => {
+export const FollowButton = ({ user }) => {
   const { me } = useMe();
-
   const { follow, isFollowing } = useFollow(user);
+  const [isHovered, setIsHovered] = useState(false);
 
   const following = me.following.includes(user?.id);
 
@@ -16,9 +17,24 @@ export const FollowButton = ({ user, variant = 'outlined' }) => {
   };
 
   return (
-    <Button variant={variant} color="secondary" onClick={handleFollow}>
+    <Button
+      variant={following ? 'outlined' : 'contained'}
+      onClick={handleFollow}
+      color="secondary"
+      sx={{
+        minWidth: following ? '100px' : 'auto',
+        ':hover': following && {
+          borderColor: 'error.main',
+          color: 'error.main',
+          bgcolor: '#d32f2f25',
+        },
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {(isFollowing && 'Following...') ||
-        (following && 'Following') ||
+        (following && !isHovered && 'Following') ||
+        (following && isHovered && 'Unfollow') ||
         'Follow'}
     </Button>
   );
@@ -26,5 +42,4 @@ export const FollowButton = ({ user, variant = 'outlined' }) => {
 
 FollowButton.propTypes = {
   user: PropTypes.object.isRequired,
-  variant: PropTypes.string,
 };

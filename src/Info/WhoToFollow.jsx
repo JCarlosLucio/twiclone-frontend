@@ -37,7 +37,7 @@ export const WhoToFollow = () => {
         <ListItemButton
           key={user?.id}
           onClick={() => history.push(`/${user?.username}`)}
-          secondaryAction={<FollowButton user={user} variant="contained" />}
+          secondaryAction={<FollowButton user={user} />}
         >
           <ListItemAvatar>
             <Avatar src={user?.avatar?.url} alt={`${user?.name}`} />
