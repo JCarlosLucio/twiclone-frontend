@@ -10,7 +10,7 @@ export const Info = () => {
         position: 'fixed',
         height: '100%',
         width: '350px',
-        p: '0 1rem',
+        p: '1rem',
       }}
     >
       <WhoToFollow />
