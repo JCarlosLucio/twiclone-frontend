@@ -1,14 +1,14 @@
 import { BsArrowLeft } from 'react-icons/bs';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 
 export const BackButton = () => {
-  const { goBack } = useHistory();
+  const navigate = useNavigate();
 
   const handleBack = (e) => {
     e.stopPropagation();
-    goBack();
+    navigate(-1);
   };
 
   return (

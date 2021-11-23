@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -11,7 +11,7 @@ import { FollowButton, Loading, UserHeader } from '../shared';
 
 export const WhoToFollow = () => {
   const { users, isLoading } = useWhoToFollow();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   if (isLoading) return <Loading />;
 
@@ -36,7 +36,7 @@ export const WhoToFollow = () => {
       {users.map((user) => (
         <ListItemButton
           key={user?.id}
-          onClick={() => history.push(`/${user?.username}`)}
+          onClick={() => navigate(`/${user?.username}`)}
           secondaryAction={<FollowButton user={user} />}
         >
           <ListItemAvatar>

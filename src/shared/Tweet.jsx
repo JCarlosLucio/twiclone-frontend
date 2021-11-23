@@ -1,4 +1,4 @@
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -14,10 +14,10 @@ import { useModal } from '../shared/hooks/useModal';
 
 export const Tweet = ({ tweet }) => {
   const { open, openModal, closeModal } = useModal(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const goToTweetDetails = () => {
-    history.push(`/${tweet.user.username}/status/${tweet.id}`);
+    navigate(`/${tweet.user.username}/status/${tweet.id}`);
   };
 
   return (
