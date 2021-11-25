@@ -1,18 +1,25 @@
 import { useState } from 'react';
 import { BsTornado } from 'react-icons/bs';
+import { Navigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { Login } from './Login';
 import { Register } from './Register';
+import { useMe } from '../shared/hooks/useMe';
 
 export const Auth = () => {
   const [mode, setMode] = useState('login');
+  const { me } = useMe();
 
   const toggleMode = () => {
     setMode(mode === 'login' ? 'register' : 'login');
   };
+
+  if (me) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
