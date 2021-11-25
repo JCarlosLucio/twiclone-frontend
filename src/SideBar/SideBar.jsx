@@ -57,7 +57,7 @@ export const SideBar = () => {
       }}
     >
       <Stack spacing={2} sx={{ width: '100%' }}>
-        <Box>
+        <Box pt={1}>
           <IconButton
             component={Link}
             to={'/home'}
