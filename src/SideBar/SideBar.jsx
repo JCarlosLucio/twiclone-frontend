@@ -1,6 +1,20 @@
 import { useContext } from 'react';
-import { BsCheck2, BsHouse, BsThreeDots, BsTornado } from 'react-icons/bs';
-import { FaRegBell, FaHashtag, FaEllipsisH, FaRegUser } from 'react-icons/fa';
+import {
+  BsCheck2,
+  BsHouse,
+  BsHouseFill,
+  BsThreeDots,
+  BsTornado,
+} from 'react-icons/bs';
+import {
+  FaBell,
+  FaEllipsisH,
+  FaHashtag,
+  FaRegBell,
+  FaRegUser,
+  FaUser,
+} from 'react-icons/fa';
+import { RiHashtag } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -16,6 +30,7 @@ import { useMe } from '../shared/hooks/useMe';
 import { useModal } from '../shared/hooks/useModal';
 import { usePopover } from '../shared/hooks/usePopover';
 import { ColorModeContext } from '../utils/ColorModeProvider';
+import { NavButton } from './NavButton';
 
 export const SideBar = () => {
   const { me, clearUser } = useMe();
@@ -53,39 +68,43 @@ export const SideBar = () => {
           </IconButton>
         </Box>
         <Stack
+          component="nav"
           alignItems="flex-start"
           spacing={2}
           sx={{
             '& a, & button': {
               fontSize: 20,
-              fontWeight: 400,
             },
           }}
         >
-          <Button
-            component={Link}
-            to={'/home'}
-            color="secondary"
-            size="large"
+          <NavButton
+            to="/home"
             startIcon={<BsHouse />}
+            activeIcon={<BsHouseFill />}
           >
             Home
-          </Button>
-          <Button color="secondary" size="large" startIcon={<FaHashtag />}>
+          </NavButton>
+          <NavButton
+            to="/explore"
+            startIcon={<RiHashtag />}
+            activeIcon={<FaHashtag />}
+          >
             Explore
-          </Button>
-          <Button color="secondary" size="large" startIcon={<FaRegBell />}>
+          </NavButton>
+          <NavButton
+            to="/notifications"
+            startIcon={<FaRegBell />}
+            activeIcon={<FaBell />}
+          >
             Notifications
-          </Button>
-          <Button
-            component={Link}
+          </NavButton>
+          <NavButton
             to={`/${me.username}`}
-            color="secondary"
-            size="large"
             startIcon={<FaRegUser />}
+            activeIcon={<FaUser />}
           >
             Profile
-          </Button>
+          </NavButton>
           <Button color="secondary" size="large" startIcon={<FaEllipsisH />}>
             More
           </Button>
