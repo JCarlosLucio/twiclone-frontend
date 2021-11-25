@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import { SideBar } from './SideBar';
 import { useMe } from './shared/hooks/useMe';
@@ -6,9 +6,10 @@ import { Info } from './Info';
 
 export const Home = () => {
   const { me } = useMe();
+  const location = useLocation();
 
   if (!me) {
-    return <Navigate to="/auth" />;
+    return <Navigate to="/auth" state={{ from: location }} />;
   }
 
   return (

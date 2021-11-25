@@ -1,16 +1,18 @@
 import { useMutation } from 'react-query';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { register } from '../../services/auth';
 import { useMe } from '../../shared/hooks/useMe';
 
 export const useRegister = () => {
   const { updateUser } = useMe();
+  const location = useLocation();
   const navigate = useNavigate();
+  const from = location.state?.from?.pathname || '/';
 
   const { mutate: registerUser, isLoading } = useMutation(register, {
     onSuccess: (data) => {
       updateUser(data);
-      navigate('/');
+      navigate(from, { replace: true });
     },
   });
 
