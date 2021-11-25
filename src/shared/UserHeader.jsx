@@ -23,13 +23,22 @@ export const UserHeader = ({
         component={withLink ? Link : 'div'}
         spacing={direction === 'row' ? 0.5 : 0}
         sx={{
+          maxWidth: '600px',
           textDecoration: 'none',
           '&:hover span:first-of-type': {
             textDecoration: withLink ? 'underline 2px' : 'none',
           },
         }}
       >
-        <Typography color="text.primary" sx={{ fontWeight: 700 }}>
+        <Typography
+          color="text.primary"
+          noWrap
+          sx={{
+            fontWeight: 700,
+            textOverflow: 'ellipsis',
+            maxWidth: direction === 'row' ? '420px' : '120px',
+          }}
+        >
           {user.name}
         </Typography>
         <Typography
