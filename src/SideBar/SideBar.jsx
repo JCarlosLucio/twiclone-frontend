@@ -8,12 +8,12 @@ import {
 } from 'react-icons/bs';
 import {
   FaBell,
-  FaEllipsisH,
   FaHashtag,
   FaRegBell,
   FaRegUser,
   FaUser,
 } from 'react-icons/fa';
+import { IoEllipsisHorizontalCircle } from 'react-icons/io5';
 import { RiHashtag } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
@@ -105,7 +105,12 @@ export const SideBar = () => {
           >
             Profile
           </NavButton>
-          <Button color="secondary" size="large" startIcon={<FaEllipsisH />}>
+          <Button
+            color="secondary"
+            size="large"
+            startIcon={<IoEllipsisHorizontalCircle />}
+            sx={{ fontWeight: 400 }}
+          >
             More
           </Button>
           <Button onClick={colorMode.toggleColorMode}>
