@@ -5,7 +5,7 @@ import { getDesignTokens } from './theme';
 
 export const ColorModeContext = createContext({
   mode: '',
-  toggleColorMode: () => {},
+  setMode: () => {},
 });
 
 const ColorModeProvider = ({ children }) => {
@@ -16,13 +16,10 @@ const ColorModeProvider = ({ children }) => {
     () => ({
       mode,
       // The dark mode switch would invoke this method
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-      },
+      setMode,
     }),
-    []
+    [mode]
   );
-
   // Update the theme only if the mode changes
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
