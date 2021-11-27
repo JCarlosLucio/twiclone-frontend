@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { BsHouse, BsHouseFill, BsTornado } from 'react-icons/bs';
 import {
   FaBell,
@@ -7,7 +6,6 @@ import {
   FaRegUser,
   FaUser,
 } from 'react-icons/fa';
-import { IoEllipsisHorizontalCircle } from 'react-icons/io5';
 import { RiHashtag } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -17,15 +15,13 @@ import Stack from '@mui/material/Stack';
 import { CustomModal, TweetForm } from '../shared';
 import { useMe } from '../shared/hooks/useMe';
 import { useModal } from '../shared/hooks/useModal';
-import { ColorModeContext } from '../utils/ColorModeProvider';
+import { MoreButton } from './MoreButton';
 import { NavButton } from './NavButton';
 import { SessionButton } from './SessionButton';
 
 export const SideBar = () => {
   const { me } = useMe();
   const { open, openModal, closeModal } = useModal(false);
-
-  const colorMode = useContext(ColorModeContext);
 
   return (
     <Stack
@@ -87,17 +83,9 @@ export const SideBar = () => {
           >
             Profile
           </NavButton>
-          <Button
-            color="secondary"
-            size="large"
-            startIcon={<IoEllipsisHorizontalCircle />}
-            sx={{ fontWeight: 400 }}
-          >
-            More
-          </Button>
-          <Button onClick={colorMode.toggleColorMode}>
-            toggle {colorMode.mode}
-          </Button>
+
+          <MoreButton />
+
           <Button
             onClick={openModal}
             size="large"
