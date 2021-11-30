@@ -106,8 +106,16 @@ export const Profile = () => {
 
               {user ? (
                 <Stack spacing={2}>
-                  <Stack>
-                    <Typography variant="h6" fontWeight="700">
+                  <Stack sx={{ flex: 1, minWidth: 0 }}>
+                    <Typography
+                      variant="h6"
+                      fontWeight="700"
+                      sx={{
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    >
                       {user?.name}
                     </Typography>
                     <Typography
