@@ -29,8 +29,18 @@ export const Profile = () => {
       }}
     >
       <TopBar withBackButton>
-        <Stack>
-          <Typography variant="h6" fontWeight="700" lineHeight={1.2}>
+        <Stack sx={{ flex: 1, minWidth: 0 }}>
+          <Typography
+            variant="h6"
+            fontWeight="700"
+            lineHeight={1.2}
+            noWrap
+            sx={{
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
             {user ? user.name : 'Profile'}
           </Typography>
           {user && (
