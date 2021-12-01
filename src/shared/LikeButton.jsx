@@ -32,19 +32,21 @@ export const LikeButton = ({
       }}
     >
       <Tooltip title={isLiked ? 'Unlike' : 'Like'} enterDelay={500}>
-        <IconButton
-          onClick={handleLike}
-          disabled={isLiking}
-          color="error"
-          size={size}
-          sx={{
-            '&:disabled, &.Mui-disabled': {
-              color: 'error.main',
-            },
-          }}
-        >
-          {isLiked ? <BsHeartFill /> : <BsHeart />}
-        </IconButton>
+        <span>
+          <IconButton
+            onClick={handleLike}
+            disabled={isLiking}
+            color="error"
+            size={size}
+            sx={{
+              '&:disabled, &.Mui-disabled': {
+                color: 'error.main',
+              },
+            }}
+          >
+            {isLiked ? <BsHeartFill /> : <BsHeart />}
+          </IconButton>
+        </span>
       </Tooltip>
       {showCount && likesCount > 0 && likesCount}
     </Stack>
