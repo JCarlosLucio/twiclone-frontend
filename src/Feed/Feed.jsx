@@ -1,6 +1,7 @@
 import { BsStars } from 'react-icons/bs';
 import { FiFeather } from 'react-icons/fi';
 import { useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
@@ -16,6 +17,11 @@ export const Feed = () => {
   };
 
   const matches = useMediaQuery((theme) => theme.breakpoints.up('sm'));
+  const navigate = useNavigate();
+
+  const goToComposeTweet = () => {
+    navigate('/compose/tweet');
+  };
 
   return (
     <Stack
@@ -48,6 +54,7 @@ export const Feed = () => {
           color="primary"
           size="large"
           sx={{ position: 'fixed', bottom: 20, right: 20 }}
+          onClick={goToComposeTweet}
         >
           <FiFeather fontSize={28} />
         </Fab>
