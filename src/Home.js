@@ -1,5 +1,6 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { SideBar } from './SideBar';
 import { useMe } from './shared/hooks/useMe';
 import { Info } from './Info';
@@ -7,6 +8,7 @@ import { Info } from './Info';
 export const Home = () => {
   const { me } = useMe();
   const location = useLocation();
+  const matches = useMediaQuery((theme) => theme.breakpoints.up('md'));
 
   if (!me) {
     return <Navigate to="/auth" state={{ from: location }} />;
@@ -33,9 +35,12 @@ export const Home = () => {
       <Grid component="main" item lg={4} md={8} sm={8} xs={12}>
         <Outlet />
       </Grid>
-      <Grid item lg={4} md={0} sm={0} xs={0}>
-        <Info />
-      </Grid>
+
+      {matches && (
+        <Grid item lg={4} md={0} sm={0} xs={0}>
+          <Info />
+        </Grid>
+      )}
     </Grid>
   );
 };
