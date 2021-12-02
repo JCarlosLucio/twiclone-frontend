@@ -1,5 +1,7 @@
 import { BsStars } from 'react-icons/bs';
+import { FiFeather } from 'react-icons/fi';
 import { useQueryClient } from 'react-query';
+import Fab from '@mui/material/Fab';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -40,6 +42,16 @@ export const Feed = () => {
       {matches && <TweetForm fileInputId="feed-file-input" />}
 
       <TweetList />
+
+      {!matches && (
+        <Fab
+          color="primary"
+          size="large"
+          sx={{ position: 'fixed', bottom: 20, right: 20 }}
+        >
+          <FiFeather fontSize={28} />
+        </Fab>
+      )}
     </Stack>
   );
 };
