@@ -3,6 +3,7 @@ import { useQueryClient } from 'react-query';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { queryKeys } from '../constants';
 import { TopBar, TweetForm, TweetList } from '../shared';
 
@@ -11,6 +12,8 @@ export const Feed = () => {
   const refetchTweets = async () => {
     await queryClient.refetchQueries([queryKeys.tweets], { active: true });
   };
+
+  const matches = useMediaQuery((theme) => theme.breakpoints.up('sm'));
 
   return (
     <Stack
@@ -34,7 +37,8 @@ export const Feed = () => {
         </IconButton>
       </TopBar>
 
-      <TweetForm fileInputId="feed-file-input" />
+      {matches && <TweetForm fileInputId="feed-file-input" />}
+
       <TweetList />
     </Stack>
   );
