@@ -25,6 +25,7 @@ export const TweetList = ({ id }) => {
           <b>Yay! You have seen it all</b>
         </p>
       }
+      style={{ overflow: 'clip' }}
     >
       {data.pages.map((pageData) => {
         return pageData.tweets.map((tweet) => {
