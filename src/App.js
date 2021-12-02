@@ -1,9 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
 import { Auth } from './Auth';
+import { ComposeTweet } from './ComposeTweet';
 import { Feed } from './Feed';
+import { Home } from './Home';
 import { Profile } from './Profile';
 import { TweetDetails } from './TweetDetails';
-import { Home } from './Home';
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Route path="/" element={<Home />}>
         <Route path="" element={<Feed />} />
         <Route path="home" element={<Feed />} />
+        <Route path="/compose/tweet" element={<ComposeTweet />} />
         <Route path="/:username/status/:tweetId" element={<TweetDetails />} />
         <Route path="/:username" element={<Profile />} />
       </Route>
