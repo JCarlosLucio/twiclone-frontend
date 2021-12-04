@@ -5,17 +5,6 @@ import storage from '../../utils/storage';
 
 export const useMe = () => {
   const queryClient = useQueryClient();
-  const { data: me = storage.loadUser() } = useQuery(queryKeys.me, getMe, {
-    enabled: !!storage.loadUser(),
-  });
-
-  const updateUser = (newUser) => {
-    // update user(me) in localStorage
-    storage.saveUser(newUser);
-
-    // populate user profile in ReactQuery client
-    queryClient.setQueryData(queryKeys.me, newUser);
-  };
 
   const clearUser = () => {
     // update user(me) in localStorage
@@ -24,6 +13,26 @@ export const useMe = () => {
     // reset user to null in ReactQuery client
     queryClient.setQueryData(queryKeys.me, null);
     queryClient.removeQueries(queryKeys.whotofollow);
+  };
+
+  const { data: me = storage.loadUser() } = useQuery(queryKeys.me, getMe, {
+    enabled: !!storage.loadUser(),
+    onSuccess: (received) => {
+      if (received) {
+        storage.saveUser(received);
+      } else {
+        clearUser();
+      }
+    },
+    onError: clearUser,
+  });
+
+  const updateUser = (newUser) => {
+    // update user(me) in localStorage
+    storage.saveUser(newUser);
+
+    // populate user profile in ReactQuery client
+    queryClient.setQueryData(queryKeys.me, newUser);
   };
 
   return { me, updateUser, clearUser };
