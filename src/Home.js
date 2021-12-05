@@ -8,7 +8,7 @@ import { Info } from './Info';
 export const Home = () => {
   const { me } = useMe();
   const location = useLocation();
-  const matches = useMediaQuery((theme) => theme.breakpoints.up('md'));
+  const matches = useMediaQuery((theme) => theme.breakpoints.up('lg'));
 
   if (!me) {
     return <Navigate to="/auth" state={{ from: location }} />;
@@ -20,8 +20,8 @@ export const Home = () => {
         component="header"
         item
         lg={4}
-        md={4}
-        sm={4}
+        md={2}
+        sm={2}
         xs={0}
         sx={{
           display: 'flex',
@@ -32,7 +32,7 @@ export const Home = () => {
       >
         <SideBar />
       </Grid>
-      <Grid component="main" item lg={4} md={8} sm={8} xs={12}>
+      <Grid component="main" item lg={4} md={8} sm={10} xs={12}>
         <Outlet />
       </Grid>
 
