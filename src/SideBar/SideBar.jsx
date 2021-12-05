@@ -7,11 +7,13 @@ import {
   FaUser,
 } from 'react-icons/fa';
 import { RiHashtag } from 'react-icons/ri';
+import { FiFeather } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { CustomModal, TweetForm } from '../shared';
 import { useMe } from '../shared/hooks/useMe';
 import { useModal } from '../shared/hooks/useModal';
@@ -22,6 +24,7 @@ import { SessionButton } from './SessionButton';
 export const SideBar = () => {
   const { me } = useMe();
   const { open, openModal, closeModal } = useModal(false);
+  const matches = useMediaQuery((theme) => theme.breakpoints.up('md'));
 
   return (
     <Stack
@@ -86,14 +89,29 @@ export const SideBar = () => {
 
           <MoreButton />
 
-          <Button
-            onClick={openModal}
-            size="large"
-            variant="contained"
-            fullWidth
-          >
-            Tweet
-          </Button>
+          {matches ? (
+            <Button
+              onClick={openModal}
+              size="large"
+              variant="contained"
+              fullWidth
+            >
+              Tweet
+            </Button>
+          ) : (
+            <IconButton
+              onClick={openModal}
+              variant="contained"
+              color="primary"
+              size="large"
+              sx={{
+                bgcolor: 'primary.main',
+                color: '#fff',
+              }}
+            >
+              <FiFeather fontSize={34} />
+            </IconButton>
+          )}
         </Stack>
       </Stack>
 
