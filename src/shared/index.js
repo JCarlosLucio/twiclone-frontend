@@ -1,6 +1,7 @@
 export * from './BackButton';
 export * from './CharCounter';
 export * from './CustomModal';
+export * from './CustomDrawer';
 export * from './FollowButton';
 export * from './ImagePreviews';
 export * from './LikeButton';
