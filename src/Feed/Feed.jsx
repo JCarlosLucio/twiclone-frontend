@@ -64,20 +64,22 @@ export const Feed = () => {
       <TweetList />
 
       {!matches && (
-        <Fab
-          color="primary"
-          size="large"
-          sx={{ position: 'fixed', bottom: 20, right: 20 }}
-          onClick={goToComposeTweet}
-        >
-          <FiFeather fontSize={28} />
-        </Fab>
+        <>
+          <Fab
+            color="primary"
+            size="large"
+            sx={{ position: 'fixed', bottom: 20, right: 20 }}
+            onClick={goToComposeTweet}
+          >
+            <FiFeather fontSize={28} />
+          </Fab>
+          <CustomDrawer
+            open={open}
+            handleOpen={openDrawer}
+            handleClose={closeDrawer}
+          />
+        </>
       )}
-      <CustomDrawer
-        open={open}
-        handleOpen={openDrawer}
-        handleClose={closeDrawer}
-      />
     </Stack>
   );
 };
