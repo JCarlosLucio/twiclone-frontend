@@ -1,11 +1,14 @@
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 
 export const NavButton = ({ children, to, startIcon, activeIcon }) => {
   const resolved = useResolvedPath(to);
   const match = useMatch({ path: resolved.pathname, end: true });
+  const matches = useMediaQuery((theme) => theme.breakpoints.up('md'));
 
-  return (
+  return matches ? (
     <Button
       component={Link}
       to={to}
@@ -18,5 +21,9 @@ export const NavButton = ({ children, to, startIcon, activeIcon }) => {
     >
       {children}
     </Button>
+  ) : (
+    <IconButton component={Link} to={to} color="secondary" size="large">
+      {match ? activeIcon : startIcon}
+    </IconButton>
   );
 };
