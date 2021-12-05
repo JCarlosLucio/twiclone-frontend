@@ -51,7 +51,16 @@ export const CustomDrawer = ({ open, handleOpen, handleClose }) => {
             to={`/${me.username}`}
             size="medium"
           />
-          <Stack sx={{ flex: 1, minWidth: 0 }}>
+          <Stack
+            component={Link}
+            to={`/${me.username}`}
+            sx={{
+              flex: 1,
+              minWidth: 0,
+              color: 'text.primary',
+              textDecoration: 'none',
+            }}
+          >
             <Typography
               variant="h6"
               fontWeight="700"
