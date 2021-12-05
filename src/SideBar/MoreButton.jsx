@@ -4,6 +4,7 @@ import { IoEllipsisHorizontalCircle } from 'react-icons/io5';
 import Button from '@mui/material/Button';
 import FormLabel from '@mui/material/FormLabel';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu from '@mui/material/Menu';
@@ -11,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Stack from '@mui/material/Stack';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { CustomModal } from '../shared';
 import { useModal } from '../shared/hooks/useModal';
 import { usePopover } from '../shared/hooks/usePopover';
@@ -23,6 +25,7 @@ export const MoreButton = () => {
     'more-popover'
   );
   const colorMode = useContext(ColorModeContext);
+  const matches = useMediaQuery((theme) => theme.breakpoints.up('md'));
 
   const handleThemeChange = ({ target }) => {
     colorMode.setMode(target.value);
@@ -30,15 +33,21 @@ export const MoreButton = () => {
 
   return (
     <>
-      <Button
-        onClick={openPopover}
-        color="secondary"
-        size="large"
-        startIcon={<IoEllipsisHorizontalCircle />}
-        sx={{ fontWeight: 400 }}
-      >
-        More
-      </Button>
+      {matches ? (
+        <Button
+          onClick={openPopover}
+          color="secondary"
+          size="large"
+          startIcon={<IoEllipsisHorizontalCircle />}
+          sx={{ fontWeight: 400 }}
+        >
+          More
+        </Button>
+      ) : (
+        <IconButton onClick={openPopover} color="secondary" size="large">
+          <IoEllipsisHorizontalCircle />
+        </IconButton>
+      )}
       <Menu
         id={id}
         open={!!anchorEl}
