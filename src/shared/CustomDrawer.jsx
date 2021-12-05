@@ -1,6 +1,7 @@
 import { FaHashtag, FaPaintBrush, FaRegUser } from 'react-icons/fa';
 import { BsX } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
@@ -41,7 +42,50 @@ export const CustomDrawer = ({ open, handleOpen, handleClose }) => {
         </IconButton>
       </Stack>
       <Divider />
-      <List sx={{ maxWidth: '70%', minWidth: '280px' }}>
+      <Stack px={2} pt={2}>
+        <Stack spacing={1}>
+          <Avatar
+            src={me.avatar.url}
+            alt={`${me.name}`}
+            component={Link}
+            to={`/${me.username}`}
+            size="medium"
+          />
+          <Stack sx={{ flex: 1, minWidth: 0 }}>
+            <Typography
+              variant="h6"
+              fontWeight="700"
+              sx={{
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
+              {me.name}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              lineHeight={0.8}
+            >{`@${me.username}`}</Typography>
+          </Stack>
+        </Stack>
+        <Stack direction="row" spacing={3} pt={2}>
+          <Stack direction="row" alignItems="center" spacing={0.5}>
+            <Typography fontWeight="700">{me?.followers?.length}</Typography>
+            <Typography variant="body2" color="text.secondary">
+              Followers
+            </Typography>
+          </Stack>
+          <Stack direction="row" alignItems="center" spacing={0.5}>
+            <Typography fontWeight="700">{me?.following?.length}</Typography>
+            <Typography variant="body2" color="text.secondary">
+              Following
+            </Typography>
+          </Stack>
+        </Stack>
+      </Stack>
+      <List>
         <ListItem
           component={Link}
           to={`/${me.username}`}
