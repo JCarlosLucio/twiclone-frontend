@@ -26,10 +26,7 @@ export const TopBar = ({
       }}
       onClick={handleClick}
     >
-      <Toolbar
-        disableGutters
-        sx={{ justifyContent, padding, minHeight: '53px !important' }}
-      >
+      <Toolbar disableGutters sx={{ justifyContent, padding }}>
         {withBackButton && <BackButton />}
         {children}
       </Toolbar>
