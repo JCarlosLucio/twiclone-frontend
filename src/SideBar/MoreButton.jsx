@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { BsBrush } from 'react-icons/bs';
+import { FaPaintBrush } from 'react-icons/fa';
 import { IoEllipsisHorizontalCircle } from 'react-icons/io5';
 import Button from '@mui/material/Button';
 import FormLabel from '@mui/material/FormLabel';
@@ -62,7 +62,7 @@ export const MoreButton = () => {
       >
         <MenuItem onClick={openModal}>
           <ListItemIcon>
-            <BsBrush fontSize="large" />
+            <FaPaintBrush fontSize="large" />
           </ListItemIcon>
           <ListItemText>Display</ListItemText>
         </MenuItem>
