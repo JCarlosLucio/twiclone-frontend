@@ -29,15 +29,14 @@ export const SideBar = () => {
   return (
     <Stack
       justifyContent="space-between"
-      alignItems="flex-end"
+      alignItems={matches ? 'flex-end' : 'flex-end'}
       sx={{
         position: 'fixed',
         height: '100%',
-        width: '275px',
         p: '0 1rem',
       }}
     >
-      <Stack spacing={2} sx={{ width: '100%' }}>
+      <Stack spacing={2} sx={{ width: matches ? '100%' : 'auto' }}>
         <Box pt={1}>
           <IconButton
             component={Link}
@@ -50,7 +49,7 @@ export const SideBar = () => {
         </Box>
         <Stack
           component="nav"
-          alignItems="flex-start"
+          alignItems={matches ? 'flex-start' : 'center'}
           spacing={2}
           sx={{
             '& a, & button': {
