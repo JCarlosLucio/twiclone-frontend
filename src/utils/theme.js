@@ -133,6 +133,8 @@ export const getDesignTokens = (mode) => ({
       styleOverrides: {
         root: {
           '& .MuiPaper-root': {
+            maxWidth: '70%',
+            minWidth: '280px',
             boxShadow:
               mode === 'light'
                 ? 'rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px'
