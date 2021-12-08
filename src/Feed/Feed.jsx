@@ -43,12 +43,14 @@ export const Feed = () => {
         padding="0 10px 0 16px"
       >
         <Stack direction="row" spacing={2} alignItems="center">
-          <Avatar
-            onClick={openDrawer}
-            size="small"
-            src={me.avatar.url}
-            alt={`${me.name}`}
-          />
+          {!matches && (
+            <Avatar
+              onClick={openDrawer}
+              size="small"
+              src={me.avatar.url}
+              alt={`${me.name}`}
+            />
+          )}
 
           <Typography variant="h6" sx={{ fontWeight: 700 }}>
             Home
