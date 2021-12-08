@@ -19,7 +19,8 @@ export const Home = () => {
       <Grid
         component="header"
         item
-        lg={4}
+        xl={4}
+        lg={3}
         md={2}
         sm={2}
         xs={0}
@@ -32,12 +33,12 @@ export const Home = () => {
       >
         <SideBar />
       </Grid>
-      <Grid component="main" item lg={4} md={8} sm={10} xs={12}>
+      <Grid component="main" item xl={4} lg={5} md={8} sm={10} xs={12}>
         <Outlet />
       </Grid>
 
       {matches && (
-        <Grid item lg={4} md={0} sm={0} xs={0}>
+        <Grid item xl={4} lg={3} md={0} sm={0} xs={0}>
           <Info />
         </Grid>
       )}
