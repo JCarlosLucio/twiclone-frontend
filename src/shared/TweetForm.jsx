@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BsImage } from 'react-icons/bs';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
@@ -28,6 +29,7 @@ export const TweetForm = ({
   const [charCount, setCharCount] = useState(0);
   const { create, isLoading } = useCreateTweet();
   const { register, handleSubmit, setValue } = useForm();
+  const navigate = useNavigate();
 
   const removeImage = (index) => {
     const withoutImage = imageList.filter((_, i) => i !== index);
@@ -41,6 +43,16 @@ export const TweetForm = ({
     handleClose && handleClose();
   };
 
+  const action = (data) => (
+    <Button
+      variant="text"
+      sx={{ color: 'white' }}
+      onClick={() => navigate(`/${data.user.username}/status/${data.id}`)}
+    >
+      View
+    </Button>
+  );
+
   const onSubmit = (data) => {
     const formData = new FormData();
     if (tweet?.id) {
@@ -53,7 +65,12 @@ export const TweetForm = ({
     });
 
     create(formData, {
-      onSuccess: resetForm,
+      onSuccess: (data) => {
+        resetForm();
+        SnackbarUtils.info('Your Tweet was sent.', {
+          action: () => action(data),
+        });
+      },
     });
   };
 
