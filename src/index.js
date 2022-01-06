@@ -12,7 +12,12 @@ import App from './App';
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeProvider>
-      <SnackbarProvider>
+      <SnackbarProvider
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+      >
         <SnackbarUtilsConfigurator />
         <QueryClientProvider client={queryClient}>
           <Router>
