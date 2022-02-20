@@ -18,7 +18,10 @@ export const Register = () => {
   const onSubmit = (formData) => {
     registerUser(formData, {
       onError: (error) => {
-        const { type, error: message } = error?.response?.data;
+        const { type, error: message } = error?.response?.data ?? {
+          type: null,
+          error: '',
+        };
         if (type) {
           setError(type, { message });
         }
