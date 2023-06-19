@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from 'react-query';
+
 import { queryKeys } from '../../constants';
 import { getTweets } from '../../services/tweets';
 
@@ -10,7 +11,7 @@ export const useInfiniteTweets = (id) => {
       {
         getNextPageParam: (page) =>
           page.currentPage >= page.lastPage ? undefined : page.currentPage + 1,
-      }
+      },
     );
   return { data, fetchNextPage, hasNextPage, isLoading, isError, error };
 };

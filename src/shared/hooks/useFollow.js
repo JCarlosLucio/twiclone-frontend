@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query';
-import { followUser } from '../../services/user';
+
 import { queryKeys } from '../../constants';
+import { followUser } from '../../services/user';
 import { useMe } from './useMe';
 
 export const useFollow = (user) => {
@@ -15,7 +16,7 @@ export const useFollow = (user) => {
       });
       queryClient.setQueryData(
         [queryKeys.user, user.username],
-        data.updatedUser
+        data.updatedUser,
       );
     },
   });

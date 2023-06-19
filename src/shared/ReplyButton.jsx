@@ -1,8 +1,8 @@
-import { BsChat } from 'react-icons/bs';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 import PropTypes from 'prop-types';
+import { BsChat } from 'react-icons/bs';
 
 export const ReplyButton = ({ replies, size = 'small', handleClick }) => {
   return (

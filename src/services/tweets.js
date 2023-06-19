@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { API_URL } from '../constants';
 import { authHeader } from './auth-header';
 
@@ -8,7 +9,7 @@ export const getTweets = async (page, limit = 10, id) => {
   // get replies
   if (id) {
     const response = await axios.get(
-      `${baseUrl}/${id}/replies/?page=${page}&limit=${limit}`
+      `${baseUrl}/${id}/replies/?page=${page}&limit=${limit}`,
     );
     return response.data;
   }

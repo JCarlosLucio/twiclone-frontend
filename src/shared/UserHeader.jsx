@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 import { dateFromNow, dateFull } from '../utils/date';
 
 export const UserHeader = ({

@@ -1,4 +1,3 @@
-/* eslint-env node */
 module.exports = {
   env: {
     node: true,
@@ -14,23 +13,21 @@ module.exports = {
     ecmaVersion: 2021,
     sourceType: 'module',
   },
-  plugins: ['react', 'jest', 'prettier'],
+  plugins: ['simple-import-sort', 'react', 'jest'],
   rules: {
-    'prettier/prettier': 'error',
-    indent: ['error', 2, { SwitchCase: 1 }],
-    'linebreak-style': ['error', 'unix'],
-    allowAllPropertiesOnSameLine: 'off',
-    quotes: ['error', 'single', { avoidEscape: true }],
-    semi: ['error', 'always'],
     eqeqeq: 'error',
-    'no-trailing-spaces': 'error',
-    'object-curly-spacing': ['error', 'always'],
-    'arrow-spacing': ['error', { before: true, after: true }],
     'no-console': 'warn',
-    'no-unused-vars': 'warn',
+    'no-var': 'error',
+    'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    allowAllPropertiesOnSameLine: 'off',
+
+    // react
     'react/prop-types': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
+    // simple-import-sort
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
   },
   settings: {
     react: {

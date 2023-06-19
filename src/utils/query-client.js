@@ -1,4 +1,5 @@
 import { QueryClient } from 'react-query';
+
 import SnackbarUtils from './SnackbarUtils';
 
 const queryErrorHandler = (error) => {

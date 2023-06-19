@@ -1,9 +1,8 @@
-import { AiOutlineRetweet } from 'react-icons/ai';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
-
 import PropTypes from 'prop-types';
+import { AiOutlineRetweet } from 'react-icons/ai';
 
 export const RetweetButton = ({ size = 'small' }) => {
   return (

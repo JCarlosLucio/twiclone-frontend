@@ -1,6 +1,7 @@
-import PropTypes from 'prop-types';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import PropTypes from 'prop-types';
+
 import { prepareForImageList } from '../utils/images';
 
 export const TweetImages = ({ images }) => {

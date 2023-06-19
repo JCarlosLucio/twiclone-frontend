@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 
 export const AvatarPreview = ({ defaultAvatar, avatar }) => {
   const [avatarPreview, setAvatarPreview] = useState(defaultAvatar);

@@ -1,6 +1,7 @@
-import { createContext, useMemo, useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createContext, useMemo, useState } from 'react';
+
 import { getDesignTokens } from './theme';
 
 export const ColorModeContext = createContext({
@@ -18,7 +19,7 @@ const ColorModeProvider = ({ children }) => {
       // The dark mode switch would invoke this method
       setMode,
     }),
-    [mode]
+    [mode],
   );
   // Update the theme only if the mode changes
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);

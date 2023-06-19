@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 
 export const BannerPreview = ({ defaultBanner, banner }) => {
   const [bannerPreview, setBannerPreview] = useState(defaultBanner);

@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { authHeader } from './auth-header';
+
 import { API_URL } from '../constants';
+import { authHeader } from './auth-header';
 
 const baseUrl = `${API_URL}/users`;
 
@@ -17,7 +18,7 @@ export const followUser = async (userId) => {
     const response = await axios.post(
       `${baseUrl}/${userId}/follow`,
       null,
-      authHeader()
+      authHeader(),
     );
     return response.data;
   }
