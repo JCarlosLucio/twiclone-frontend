@@ -1,7 +1,7 @@
-import { Link, useMatch, useResolvedPath } from 'react-router-dom';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 
 export const NavButton = ({ children, to, startIcon, activeIcon }) => {
   const resolved = useResolvedPath(to);

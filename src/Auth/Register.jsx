@@ -1,7 +1,8 @@
-import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import { useForm } from 'react-hook-form';
+
 import { useRegister } from './hooks/useRegister';
 
 export const Register = () => {

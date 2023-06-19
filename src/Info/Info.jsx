@@ -1,4 +1,5 @@
 import Stack from '@mui/material/Stack';
+
 import { WhoToFollow } from './WhoToFollow';
 
 export const Info = () => {

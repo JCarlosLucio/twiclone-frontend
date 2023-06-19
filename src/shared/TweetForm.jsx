@@ -1,7 +1,3 @@
-import { useState } from 'react';
-import { BsImage } from 'react-icons/bs';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
@@ -11,12 +7,17 @@ import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { BsImage } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+
+import SnackbarUtils from '../utils/SnackbarUtils';
 import { CharCounter } from './CharCounter';
-import { ImagePreviews } from './ImagePreviews';
-import { UserHeader } from './UserHeader';
 import { useCreateTweet } from './hooks/useCreateTweet';
 import { useMe } from './hooks/useMe';
-import SnackbarUtils from '../utils/SnackbarUtils';
+import { ImagePreviews } from './ImagePreviews';
+import { UserHeader } from './UserHeader';
 
 export const TweetForm = ({
   tweet,

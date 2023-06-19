@@ -1,6 +1,3 @@
-import { FaHashtag, FaPaintBrush, FaRegUser } from 'react-icons/fa';
-import { BsX } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -11,6 +8,10 @@ import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Typography from '@mui/material/Typography';
+import { BsX } from 'react-icons/bs';
+import { FaHashtag, FaPaintBrush, FaRegUser } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+
 import { useMe } from '../shared/hooks/useMe';
 
 export const CustomDrawer = ({ open, handleOpen, handleClose }) => {

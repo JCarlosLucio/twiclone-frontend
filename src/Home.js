@@ -1,9 +1,10 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { SideBar } from './SideBar';
-import { useMe } from './shared/hooks/useMe';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+
 import { Info } from './Info';
+import { useMe } from './shared/hooks/useMe';
+import { SideBar } from './SideBar';
 
 export const Home = () => {
   const { me } = useMe();

@@ -1,13 +1,14 @@
-import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemButton from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import { useWhoToFollow } from './hooks/useWhoToFollow';
+import { useNavigate } from 'react-router-dom';
+
 import { FollowButton, Loading, UserHeader } from '../shared';
+import { useWhoToFollow } from './hooks/useWhoToFollow';
 
 export const WhoToFollow = () => {
   const { users, isLoading } = useWhoToFollow();

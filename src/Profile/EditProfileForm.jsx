@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import { MdOutlineCameraEnhance } from 'react-icons/md';
-import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
-import { AvatarPreview } from './AvatarPreview';
-import { useUpdateMe } from './hooks/useUpdateMe';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { MdOutlineCameraEnhance } from 'react-icons/md';
+
 import SnackbarUtils from '../utils/SnackbarUtils';
+import { AvatarPreview } from './AvatarPreview';
 import { BannerPreview } from './BannerPreview';
+import { useUpdateMe } from './hooks/useUpdateMe';
 
 export const EditProfileForm = ({ me, handleClose }) => {
   const [avatar, setAvatar] = useState();

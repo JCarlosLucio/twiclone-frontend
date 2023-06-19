@@ -1,15 +1,16 @@
-import { BsCalendar3 } from 'react-icons/bs';
-import { useParams } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { EditProfileForm } from './EditProfileForm';
+import { BsCalendar3 } from 'react-icons/bs';
+import { useParams } from 'react-router-dom';
+
 import { CustomModal, FollowButton, Loading, TopBar } from '../shared';
 import { useMe } from '../shared/hooks/useMe';
 import { useModal } from '../shared/hooks/useModal';
 import { useUser } from '../shared/hooks/useUser';
 import { dateMonthYear } from '../utils/date';
+import { EditProfileForm } from './EditProfileForm';
 
 export const Profile = () => {
   const { username } = useParams();

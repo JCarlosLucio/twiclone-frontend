@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+
 import { Auth } from './Auth';
 import { ComposeTweet } from './ComposeTweet';
 import { Feed } from './Feed';

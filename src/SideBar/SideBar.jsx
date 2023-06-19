@@ -1,3 +1,8 @@
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { BsHouse, BsHouseFill, BsTornado } from 'react-icons/bs';
 import {
   FaBell,
@@ -6,14 +11,10 @@ import {
   FaRegUser,
   FaUser,
 } from 'react-icons/fa';
-import { RiHashtag } from 'react-icons/ri';
 import { FiFeather } from 'react-icons/fi';
+import { RiHashtag } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Stack from '@mui/material/Stack';
-import useMediaQuery from '@mui/material/useMediaQuery';
+
 import { CustomModal, TweetForm } from '../shared';
 import { useMe } from '../shared/hooks/useMe';
 import { useModal } from '../shared/hooks/useModal';

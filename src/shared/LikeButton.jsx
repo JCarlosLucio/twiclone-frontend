@@ -1,9 +1,10 @@
-import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
-import PropTypes from 'prop-types';
-import { useLikeTweet } from './hooks/useLikeTweet';
 import Tooltip from '@mui/material/Tooltip';
+import PropTypes from 'prop-types';
+import { BsHeart, BsHeartFill } from 'react-icons/bs';
+
+import { useLikeTweet } from './hooks/useLikeTweet';
 
 export const LikeButton = ({
   tweetId,

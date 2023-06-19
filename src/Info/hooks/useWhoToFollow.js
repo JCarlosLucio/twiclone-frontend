@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query';
+
 import { queryKeys } from '../../constants';
 import { getWhoToFollow } from '../../services/user';
 import { useMe } from '../../shared/hooks/useMe';

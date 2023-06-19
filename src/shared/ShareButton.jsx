@@ -1,13 +1,14 @@
-import { BsLink45Deg, BsUpload } from 'react-icons/bs';
 import IconButton from '@mui/material/IconButton';
-import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
 import PropTypes from 'prop-types';
-import { usePopover } from './hooks/usePopover';
+import { BsLink45Deg, BsUpload } from 'react-icons/bs';
+
 import SnackbarUtils from '../utils/SnackbarUtils';
+import { usePopover } from './hooks/usePopover';
 
 export const ShareButton = ({
   tweetUsername = '',

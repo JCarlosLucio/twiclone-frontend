@@ -1,9 +1,9 @@
-import { Link, useParams } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { useTweetById } from './hooks/useTweetById';
+import { Link, useParams } from 'react-router-dom';
+
 import {
   CustomModal,
   LikeButton,
@@ -19,6 +19,7 @@ import {
 } from '../shared';
 import { useModal } from '../shared/hooks/useModal';
 import { dateFull } from '../utils/date';
+import { useTweetById } from './hooks/useTweetById';
 
 export const TweetDetails = () => {
   const { tweetId } = useParams();

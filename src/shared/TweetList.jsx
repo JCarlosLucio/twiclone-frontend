@@ -1,8 +1,9 @@
-import InfiniteScroll from 'react-infinite-scroll-component';
 import PropTypes from 'prop-types';
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 import { useInfiniteTweets } from './hooks/useInfiniteTweets';
-import { Tweet } from './Tweet';
 import { Loading } from './Loading';
+import { Tweet } from './Tweet';
 
 export const TweetList = ({ id }) => {
   const { data, fetchNextPage, hasNextPage, isLoading, isError, error } =

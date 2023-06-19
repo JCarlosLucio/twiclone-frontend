@@ -1,4 +1,3 @@
-import { BsCheck2, BsThreeDots } from 'react-icons/bs';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
@@ -8,6 +7,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { BsCheck2, BsThreeDots } from 'react-icons/bs';
+
 import { UserHeader } from '../shared';
 import { useMe } from '../shared/hooks/useMe';
 import { usePopover } from '../shared/hooks/usePopover';

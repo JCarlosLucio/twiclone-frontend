@@ -1,9 +1,9 @@
-import { BsX } from 'react-icons/bs';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
+import { BsX } from 'react-icons/bs';
 
 export const CustomModal = ({ children, open, handleClose }) => {
   return (

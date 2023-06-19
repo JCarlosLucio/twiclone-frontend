@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
-import { BsXCircleFill } from 'react-icons/bs';
 import IconButton from '@mui/material/IconButton';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { BsXCircleFill } from 'react-icons/bs';
+
 import { prepareForImageList } from '../utils/images';
 
 export const ImagePreviews = ({ imageList, removeImage }) => {

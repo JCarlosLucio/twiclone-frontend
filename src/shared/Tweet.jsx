@@ -1,16 +1,17 @@
-import { Link, useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { CustomModal, TweetForm } from '../shared';
+import { useModal } from '../shared/hooks/useModal';
 import { LikeButton } from './LikeButton';
 import { ReplyButton } from './ReplyButton';
 import { RetweetButton } from './RetweetButton';
 import { ShareButton } from './ShareButton';
 import { TweetImages } from './TweetImages';
 import { UserHeader } from './UserHeader';
-import { CustomModal, TweetForm } from '../shared';
-import { useModal } from '../shared/hooks/useModal';
 
 export const Tweet = ({ tweet }) => {
   const { open, openModal, closeModal } = useModal(false);

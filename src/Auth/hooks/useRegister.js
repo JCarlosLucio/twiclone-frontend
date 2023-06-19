@@ -1,5 +1,6 @@
 import { useMutation } from 'react-query';
 import { useLocation, useNavigate } from 'react-router';
+
 import { register } from '../../services/auth';
 import { useMe } from '../../shared/hooks/useMe';
 

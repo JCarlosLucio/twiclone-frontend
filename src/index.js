@@ -1,13 +1,14 @@
+import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { SnackbarProvider } from 'notistack';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import App from './App';
 import ColorModeProvider from './utils/ColorModeProvider';
 import { queryClient } from './utils/query-client';
 import { SnackbarUtilsConfigurator } from './utils/SnackbarUtils';
-import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>

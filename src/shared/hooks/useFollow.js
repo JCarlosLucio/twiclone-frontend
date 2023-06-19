@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query';
-import { followUser } from '../../services/user';
+
 import { queryKeys } from '../../constants';
+import { followUser } from '../../services/user';
 import { useMe } from './useMe';
 
 export const useFollow = (user) => {
