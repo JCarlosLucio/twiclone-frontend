@@ -25,7 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "format": "prettier --list-different --write \"./src/**/*.{js,jsx,md}\""
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
