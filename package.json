@@ -25,7 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint .",
+    "lint": "eslint ./src --ext .jsx,.js --fix",
     "format": "prettier --list-different --write \"./src/**/*.{js,jsx,md}\""
   },
   "dependencies": {
@@ -50,6 +50,7 @@
     "@testing-library/user-event": "^14.4.3",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-jest": "^27.2.2",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "prettier": "^2.8.8",
     "web-vitals": "^3.3.2"
   }

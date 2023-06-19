@@ -13,7 +13,7 @@ module.exports = {
     ecmaVersion: 2021,
     sourceType: 'module',
   },
-  plugins: ['react', 'jest'],
+  plugins: ['simple-import-sort', 'react', 'jest'],
   rules: {
     eqeqeq: 'error',
     'no-console': 'warn',
@@ -25,6 +25,9 @@ module.exports = {
     'react/prop-types': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
+    // simple-import-sort
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
   },
   settings: {
     react: {
