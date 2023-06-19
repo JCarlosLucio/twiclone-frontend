@@ -16,7 +16,7 @@ export const SessionButton = () => {
   const { me, clearUser } = useMe();
   const { anchorEl, openPopover, closePopover, id } = usePopover(
     null,
-    'me-popover'
+    'me-popover',
   );
   const matches = useMediaQuery((theme) => theme.breakpoints.up('md'));
 

@@ -6,7 +6,7 @@ import { useMe } from '../../shared/hooks/useMe';
 export const useWhoToFollow = () => {
   const { me } = useMe();
   const { data: users, isLoading } = useQuery([queryKeys.whotofollow], () =>
-    getWhoToFollow(me.id)
+    getWhoToFollow(me.id),
   );
   return { users, isLoading };
 };

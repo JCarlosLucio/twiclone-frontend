@@ -20,7 +20,7 @@ export const useCreateTweet = () => {
                   tweets: page.tweets.map((t) =>
                     t.id === data.parent
                       ? { ...t, replies: [...t.replies, t.id] }
-                      : t
+                      : t,
                   ),
                 };
               }
@@ -28,7 +28,7 @@ export const useCreateTweet = () => {
             })
             // adds tweet/reply to only the first page of tweets
             .map((page, i) =>
-              i === 0 ? { ...page, tweets: [data, ...page.tweets] } : page
+              i === 0 ? { ...page, tweets: [data, ...page.tweets] } : page,
             ),
         };
 
@@ -48,13 +48,13 @@ export const useCreateTweet = () => {
             ...replies,
             // adds reply to only the first page of replies
             pages: replies.pages.map((page, i) =>
-              i === 0 ? { ...page, tweets: [data, ...page.tweets] } : page
+              i === 0 ? { ...page, tweets: [data, ...page.tweets] } : page,
             ),
           };
 
           queryClient.setQueryData(
             [queryKeys.tweets, data.parent, queryKeys.replies],
-            updatedReplies
+            updatedReplies,
           );
         }
       }

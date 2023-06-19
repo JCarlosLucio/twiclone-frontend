@@ -140,7 +140,7 @@ export const TweetForm = ({
                         files.length > 4 || files.length + imageList.length > 4;
 
                       const maxSize = files.some(
-                        (file) => file?.size > 3 * 1024 * 1024
+                        (file) => file?.size > 3 * 1024 * 1024,
                       );
 
                       const acceptedFormats = files.some(
@@ -150,7 +150,7 @@ export const TweetForm = ({
                             'image/jpeg',
                             'image/jpg',
                             'image/gif',
-                          ].includes(file?.type)
+                          ].includes(file?.type),
                       );
 
                       if (maxSize) {
@@ -158,7 +158,7 @@ export const TweetForm = ({
                       }
                       if (acceptedFormats) {
                         SnackbarUtils.error(
-                          'Please choose PNG, JPG, JPEG or GIF photos'
+                          'Please choose PNG, JPG, JPEG or GIF photos',
                         );
                       }
                       if (maxFiles) {

@@ -76,7 +76,7 @@ export const EditProfileForm = ({ me, handleClose }) => {
                 }
                 if (acceptedFormats) {
                   SnackbarUtils.error(
-                    'Please choose PNG, JPG, JPEG or GIF photos.'
+                    'Please choose PNG, JPG, JPEG or GIF photos.',
                   );
                 }
                 if (maxSize || acceptedFormats) return;
@@ -131,7 +131,7 @@ export const EditProfileForm = ({ me, handleClose }) => {
                     }
                     if (acceptedFormats) {
                       SnackbarUtils.error(
-                        'Please choose PNG, JPG, JPEG or GIF photos.'
+                        'Please choose PNG, JPG, JPEG or GIF photos.',
                       );
                     }
                     if (maxSize || acceptedFormats) return;

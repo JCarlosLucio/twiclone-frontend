@@ -18,7 +18,7 @@ const ColorModeProvider = ({ children }) => {
       // The dark mode switch would invoke this method
       setMode,
     }),
-    [mode]
+    [mode],
   );
   // Update the theme only if the mode changes
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);

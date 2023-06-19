@@ -43,7 +43,7 @@ export const useLikeTweet = (tweetId, likes) => {
 
         // TODO: probably needs to be made into an optimistic update
       },
-    }
+    },
   );
 
   return { like, isLiked, likesCount, isLiking };

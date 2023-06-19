@@ -4,7 +4,7 @@ import { queryKeys } from '../../constants';
 
 export const useUser = (username) => {
   const { data: user, isLoading } = useQuery([queryKeys.user, username], () =>
-    getUser(username)
+    getUser(username),
   );
   return { user, isLoading };
 };

@@ -17,7 +17,7 @@ export const followUser = async (userId) => {
     const response = await axios.post(
       `${baseUrl}/${userId}/follow`,
       null,
-      authHeader()
+      authHeader(),
     );
     return response.data;
   }

@@ -28,5 +28,5 @@ ReactDOM.render(
       </SnackbarProvider>
     </ColorModeProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

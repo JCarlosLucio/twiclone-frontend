@@ -15,7 +15,7 @@ export const useFollow = (user) => {
       });
       queryClient.setQueryData(
         [queryKeys.user, user.username],
-        data.updatedUser
+        data.updatedUser,
       );
     },
   });

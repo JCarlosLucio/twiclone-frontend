@@ -16,7 +16,7 @@ export const ShareButton = ({
 }) => {
   const { anchorEl, openPopover, closePopover, id } = usePopover(
     null,
-    'share-popover'
+    'share-popover',
   );
 
   const copyLinkToTweet = (e) => {

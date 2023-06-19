@@ -22,7 +22,7 @@ export const MoreButton = () => {
   const { open, openModal, closeModal } = useModal(false);
   const { anchorEl, openPopover, closePopover, id } = usePopover(
     null,
-    'more-popover'
+    'more-popover',
   );
   const colorMode = useContext(ColorModeContext);
   const matches = useMediaQuery((theme) => theme.breakpoints.up('md'));
