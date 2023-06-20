@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { queryKeys } from '../../constants';
 import { getMe } from '../../services/auth';

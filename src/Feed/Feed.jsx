@@ -4,9 +4,9 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useQueryClient } from '@tanstack/react-query';
 import { BsStars } from 'react-icons/bs';
 import { FiFeather } from 'react-icons/fi';
-import { useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
 import { queryKeys } from '../constants';

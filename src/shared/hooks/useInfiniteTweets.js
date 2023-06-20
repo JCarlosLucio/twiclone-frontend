@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { queryKeys } from '../../constants';
 import { getTweets } from '../../services/tweets';

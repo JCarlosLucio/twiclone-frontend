@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useLocation, useNavigate } from 'react-router';
 
 import { register } from '../../services/auth';

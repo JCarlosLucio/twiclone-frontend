@@ -1,5 +1,5 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
 
 import { queryKeys } from '../../constants';
 import { likeTweet } from '../../services/tweets';
