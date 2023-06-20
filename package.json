@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "private": true,
-  "description": "Twiclone (Twitter Clone)",
+  "description": "The frontend for Twiclone (a Twitter clone)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JCarlosLucio/twiclone-frontend.git"
