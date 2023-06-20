@@ -2,7 +2,7 @@ module.exports = {
   env: {
     node: true,
     browser: true,
-    es6: true,
+    es2020: true,
     'jest/globals': true,
   },
   extends: ['eslint:recommended', 'plugin:react/recommended', 'prettier'],
@@ -10,7 +10,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2021,
+    ecmaVersion: 'latest',
     sourceType: 'module',
   },
   plugins: ['simple-import-sort', 'react', 'jest'],
