@@ -19,7 +19,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['simple-import-sort', 'react', 'jest'],
+  plugins: ['simple-import-sort', 'react', 'react-refresh', 'jest'],
   rules: {
     eqeqeq: 'error',
     'no-console': 'warn',
@@ -31,6 +31,10 @@ module.exports = {
     'react/prop-types': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
+
+    // react-refresh
+    'react-refresh/only-export-components': 'warn',
+
     // simple-import-sort
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
