@@ -16,7 +16,7 @@ export const useMe = () => {
     queryClient.removeQueries(queryKeys.whotofollow);
   };
 
-  const { data: me = storage.loadUser() } = useQuery(queryKeys.me, getMe, {
+  const { data: me = storage.loadUser() } = useQuery([queryKeys.me], getMe, {
     enabled: !!storage.loadUser(),
     onSuccess: (received) => {
       if (received) {
