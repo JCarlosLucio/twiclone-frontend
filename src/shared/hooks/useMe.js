@@ -12,8 +12,8 @@ export const useMe = () => {
     storage.clearUser();
 
     // reset user to null in ReactQuery client
-    queryClient.setQueryData(queryKeys.me, null);
-    queryClient.removeQueries(queryKeys.whotofollow);
+    queryClient.setQueryData([queryKeys.me], null);
+    queryClient.removeQueries([queryKeys.whotofollow]);
   };
 
   const { data: me = storage.loadUser() } = useQuery([queryKeys.me], getMe, {
@@ -33,7 +33,7 @@ export const useMe = () => {
     storage.saveUser(newUser);
 
     // populate user profile in ReactQuery client
-    queryClient.setQueryData(queryKeys.me, newUser);
+    queryClient.setQueryData([queryKeys.me], newUser);
   };
 
   return { me, updateUser, clearUser };

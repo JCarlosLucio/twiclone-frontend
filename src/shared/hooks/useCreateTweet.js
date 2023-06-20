@@ -8,7 +8,7 @@ export const useCreateTweet = () => {
 
   const { mutate: create, isLoading } = useMutation(createTweet, {
     onSuccess: (data) => {
-      const tweets = queryClient.getQueryData(queryKeys.tweets);
+      const tweets = queryClient.getQueryData([queryKeys.tweets]);
       if (tweets) {
         const updatedTweets = {
           ...tweets,
@@ -33,7 +33,7 @@ export const useCreateTweet = () => {
             ),
         };
 
-        queryClient.setQueryData(queryKeys.tweets, updatedTweets);
+        queryClient.setQueryData([queryKeys.tweets], updatedTweets);
       }
 
       // For adding a reply to a replies query
