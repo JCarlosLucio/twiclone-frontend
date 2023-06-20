@@ -1,6 +1,7 @@
 {
   "name": "twiclone-frontend",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "description": "Twiclone (Twitter Clone)",
   "repository": {
