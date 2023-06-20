@@ -20,7 +20,6 @@ export const queryClient = new QueryClient({
       refetchOnMount: false,
       refetchOnReconnect: false,
       retry: 1,
-      notifyOnChangeProps: 'tracked',
     },
     mutations: {
       onError: queryErrorHandler,
