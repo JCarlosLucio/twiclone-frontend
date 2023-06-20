@@ -30,7 +30,7 @@ export const Auth = () => {
         md={7}
         lg={8}
         sx={{
-          backgroundImage: 'url(https://source.unsplash.com/random)',
+          backgroundImage: 'url(https://picsum.photos/1200/1000)',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
