@@ -1,4 +1,4 @@
-import { QueryClient } from 'react-query';
+import { QueryClient } from '@tanstack/react-query';
 
 import SnackbarUtils from './SnackbarUtils';
 
@@ -20,7 +20,6 @@ export const queryClient = new QueryClient({
       refetchOnMount: false,
       refetchOnReconnect: false,
       retry: 1,
-      notifyOnChangeProps: 'tracked',
     },
     mutations: {
       onError: queryErrorHandler,

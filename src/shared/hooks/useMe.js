@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { queryKeys } from '../../constants';
 import { getMe } from '../../services/auth';
@@ -12,11 +12,11 @@ export const useMe = () => {
     storage.clearUser();
 
     // reset user to null in ReactQuery client
-    queryClient.setQueryData(queryKeys.me, null);
-    queryClient.removeQueries(queryKeys.whotofollow);
+    queryClient.setQueryData([queryKeys.me], null);
+    queryClient.removeQueries([queryKeys.whotofollow]);
   };
 
-  const { data: me = storage.loadUser() } = useQuery(queryKeys.me, getMe, {
+  const { data: me = storage.loadUser() } = useQuery([queryKeys.me], getMe, {
     enabled: !!storage.loadUser(),
     onSuccess: (received) => {
       if (received) {
@@ -33,7 +33,7 @@ export const useMe = () => {
     storage.saveUser(newUser);
 
     // populate user profile in ReactQuery client
-    queryClient.setQueryData(queryKeys.me, newUser);
+    queryClient.setQueryData([queryKeys.me], newUser);
   };
 
   return { me, updateUser, clearUser };

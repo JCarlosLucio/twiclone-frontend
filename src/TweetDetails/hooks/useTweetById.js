@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { queryKeys } from '../../constants';
 import { getTweetById } from '../../services/tweets';

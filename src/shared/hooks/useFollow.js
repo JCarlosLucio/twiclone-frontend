@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { queryKeys } from '../../constants';
 import { followUser } from '../../services/user';
@@ -10,7 +10,7 @@ export const useFollow = (user) => {
 
   const { mutate: follow, isLoading: isFollowing } = useMutation(followUser, {
     onSuccess: (data) => {
-      queryClient.setQueryData(queryKeys.me, {
+      queryClient.setQueryData([queryKeys.me], {
         ...data.updatedMe,
         token: me.token,
       });
