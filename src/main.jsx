@@ -1,6 +1,6 @@
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -10,7 +10,7 @@ import ColorModeProvider from './utils/ColorModeProvider';
 import { queryClient } from './utils/query-client';
 import { SnackbarUtilsConfigurator } from './utils/SnackbarUtils';
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ColorModeProvider>
       <SnackbarProvider
@@ -29,5 +29,4 @@ ReactDOM.render(
       </SnackbarProvider>
     </ColorModeProvider>
   </React.StrictMode>,
-  document.getElementById('root'),
 );
