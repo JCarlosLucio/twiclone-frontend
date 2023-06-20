@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+# 🌪️ Twiclone Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Version](https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000)
+![Prerequisite](https://img.shields.io/badge/node-%3E%3D%2016.0-blue.svg)
+[![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://github.com/JCarlosLucio/twiclone-frontend#readme)
 
-## Available Scripts
+> The frontend for Twiclone (a Twitter clone).  
+> The backend can be found
+> [here](https://github.com/JCarlosLucio/twiclone-backend).
 
-In the project directory, you can run:
+## ✨ Demo
 
-### `npm start`
+[![TWICLONE Homepage](../media/twiclone-desktop.webp?raw=true)](https://jcarloslucio.github.io/twiclone-frontend/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 📜 Docs
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+To run add a `.env` file with the environment variables from `.env.example`.  
+Also make sure
+[twiclone's server](https://github.com/JCarlosLucio/twiclone-backend) is
+running.
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- node >= 16.0
 
-### `npm run build`
+### Install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Build
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Builds the app for production to the `dist` folder.
 
-### `npm run eject`
+```sh
+npm run build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Develop
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Runs the app in development mode. Opens
+[http://localhost:5173/](http://localhost:5173/) to view it in the browser.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```sh
+npm run dev
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Preview
 
-## Learn More
+Locally preview the production build. Open
+[http://localhost:3000/](http://localhost:3000/) to view it in the browser.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```sh
+npm run preview
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Lint
 
-### Code Splitting
+Runs eslint to fix linting errors.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```sh
+npm run lint
+```
 
-### Analyzing the Bundle Size
+### Format
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Format the application with prettier.
 
-### Making a Progressive Web App
+```sh
+npm run format
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📖 Lessons Learned
 
-### Advanced Configuration
+- Setting up services to consume Twiclone's API with
+  [Axios](https://axios-http.com/).
+- Using [React Query](https://tanstack.com/query/latest) for asynchronous state
+  management.
+- Styling and Theming the application with [MUI](https://mui.com/).
+- Adding dark mode using [MUI](https://mui.com/), and
+  [ContextAPI](https://react.dev/learn/passing-data-deeply-with-context).
+- Migrating from [CRA](https://create-react-app.dev/) to
+  [Vite](https://vitejs.dev/).
+- Setting up the app to be a [PWA](https://web.dev/progressive-web-apps/) with
+  [VitePWA](https://github.com/vite-pwa/vite-plugin-pwa).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## ✏️ TODO
 
-### Deployment
+- Deploy to [Netlify](https://www.netlify.com/) /
+  [GitHub Pages](https://pages.github.com/).
+- Upgrade to the latest
+  [@tanstack/react-query](https://tanstack.com/query/latest/docs/react/overview)
+  package.
+- Add e2e tests with [Playwright](https://playwright.dev/) or
+  [Cypress](https://www.cypress.io/).
+- Migrate to [Typescript](https://www.typescriptlang.org/).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Author
 
-### `npm run build` fails to minify
+👤 **Juan Carlos Lucio**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Github: [@JCarlosLucio](https://github.com/JCarlosLucio)
