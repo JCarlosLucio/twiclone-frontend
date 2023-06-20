@@ -174,7 +174,6 @@ export const EditProfileForm = ({ me, handleClose }) => {
             variant="outlined"
             size="large"
             multiline
-            maxRows={3}
             rows={3}
             label="Bio"
             placeholder="Bio"
