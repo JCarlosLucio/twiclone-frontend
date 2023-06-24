@@ -71,6 +71,20 @@ Format the application with prettier.
 npm run format
 ```
 
+## 🚀 Deployment
+
+Deployed to [Netlify](https://www.netlify.com/).
+
+1. Start a new netlify project.
+2. Pick your Git hosting service. ex. GitHub.
+3. Select your repository.
+4. Click Build your site.
+5. Add `environment variables` from `.env.example`.
+
+### Triggering a Deploy
+
+Deploys are triggered on `push` or `pull_request` merge to `master` branch.
+
 ## 📖 Lessons Learned
 
 - Setting up services to consume Twiclone's API with
