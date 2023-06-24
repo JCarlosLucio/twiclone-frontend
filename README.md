@@ -87,11 +87,11 @@ npm run format
 
 ## ✏️ TODO
 
-- Deploy to [Netlify](https://www.netlify.com/) /
-  [GitHub Pages](https://pages.github.com/).
-- Upgrade to the latest
+- ~~Deploy to [Netlify](https://www.netlify.com/) /
+  [GitHub Pages](https://pages.github.com/).~~
+- ~~Upgrade to the latest
   [@tanstack/react-query](https://tanstack.com/query/latest/docs/react/overview)
-  package.
+  package.~~
 - Add e2e tests with [Playwright](https://playwright.dev/) or
   [Cypress](https://www.cypress.io/).
 - Migrate to [Typescript](https://www.typescriptlang.org/).
