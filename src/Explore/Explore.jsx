@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { BsTornado } from 'react-icons/bs';
+import { FaHashtag } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 import { TopBar } from '../shared';
@@ -44,7 +44,7 @@ export const Explore = () => {
         sx={{ flex: 1 }}
       >
         <Stack justifyContent="center" alignItems="center" spacing={4}>
-          <BsTornado size={96} />
+          <FaHashtag size={96} />
           <Typography
             variant="h5"
             fontWeight="700"
