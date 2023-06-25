@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Auth } from './Auth';
 import { ComposeTweet } from './ComposeTweet';
@@ -22,6 +22,7 @@ const App = () => {
         <Route path="/:username" element={<Profile />} />
       </Route>
       <Route path="/auth" element={<Auth />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 };
