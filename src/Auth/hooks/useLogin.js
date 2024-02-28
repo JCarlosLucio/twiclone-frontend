@@ -10,7 +10,8 @@ export const useLogin = () => {
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || '/';
 
-  const { mutate: loginUser, isLoading } = useMutation(login, {
+  const { mutate: loginUser, isLoading } = useMutation({
+    mutationFn: login,
     onSuccess: (data) => {
       updateUser(data);
       navigate(from, { replace: true });

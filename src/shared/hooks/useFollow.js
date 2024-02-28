@@ -8,7 +8,8 @@ export const useFollow = (user) => {
   const queryClient = useQueryClient();
   const { me } = useMe();
 
-  const { mutate: follow, isLoading: isFollowing } = useMutation(followUser, {
+  const { mutate: follow, isLoading: isFollowing } = useMutation({
+    mutationFn: followUser,
     onSuccess: (data) => {
       queryClient.setQueryData([queryKeys.me], {
         ...data.updatedMe,
