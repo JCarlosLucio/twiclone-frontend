@@ -8,7 +8,8 @@ export const useUpdateMe = () => {
   const queryClient = useQueryClient();
   const { me } = useMe();
 
-  const { mutate: update, isLoading } = useMutation(updateMe, {
+  const { mutate: update, isLoading } = useMutation({
+    mutationFn: updateMe,
     onSuccess: (data) => {
       queryClient.setQueryData([queryKeys.me], data);
       queryClient.setQueryData([queryKeys.user, me.username], data);

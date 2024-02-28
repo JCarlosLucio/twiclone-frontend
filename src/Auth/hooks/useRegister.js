@@ -10,7 +10,8 @@ export const useRegister = () => {
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || '/';
 
-  const { mutate: registerUser, isLoading } = useMutation(register, {
+  const { mutate: registerUser, isLoading } = useMutation({
+    mutationFn: register,
     onSuccess: (data) => {
       updateUser(data);
       navigate(from, { replace: true });

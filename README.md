@@ -10,7 +10,7 @@
 
 ## ✨ Demo
 
-[![TWICLONE Homepage](../media/twiclone-desktop.webp?raw=true)](https://jcarloslucio.github.io/twiclone-frontend/)
+[![TWICLONE Homepage](../media/twiclone-desktop.webp?raw=true)](https://twiclone.pages.dev/)
 
 ## 📜 Docs
 
@@ -73,13 +73,17 @@ npm run format
 
 ## 🚀 Deployment
 
-Deployed to [Netlify](https://www.netlify.com/).
+Deployed to [Cloudflare Pages](https://pages.cloudflare.com/).
 
-1. Start a new netlify project.
-2. Pick your Git hosting service. ex. GitHub.
+1. `Connect to Git` in **Cloudflare Dashboard > Workers & Pages > Pages**.
+2. Pick your `Git` hosting service. ex. GitHub / Gitlab.
 3. Select your repository.
-4. Click Build your site.
-5. Add `environment variables` from `.env.example`.
+4. Select the corresponding framework preset in the build setting.
+5. Deploy site.
+6. Add `environment variables` from `.env.example` in **Settings**.
+7. Setup a Custom domain in **Custom domains**.
+
+[More on deployment to Cloudflare Pages...](https://vitejs.dev/guide/static-deploy.html#cloudflare-pages)
 
 ### Triggering a Deploy
 
@@ -101,8 +105,10 @@ Deploys are triggered on `push` or `pull_request` merge to `master` branch.
 
 ## ✏️ TODO
 
-- ~~Deploy to [Netlify](https://www.netlify.com/) /
-  [GitHub Pages](https://pages.github.com/).~~
+- ~~Deploy to [Cloudflare Pages](https://pages.cloudflare.com/)
+  /[GitHub Pages](https://pages.github.com/).~~
+- ~~Migrate deployment from [Netlify](https://www.netlify.com/) to
+  [Cloudflare Pages](https://pages.cloudflare.com/)~~
 - ~~Upgrade to the latest
   [@tanstack/react-query](https://tanstack.com/query/latest/docs/react/overview)
   package.~~

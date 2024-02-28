@@ -6,7 +6,8 @@ import { createTweet } from '../../services/tweets';
 export const useCreateTweet = () => {
   const queryClient = useQueryClient();
 
-  const { mutate: create, isLoading } = useMutation(createTweet, {
+  const { mutate: create, isLoading } = useMutation({
+    mutationFn: createTweet,
     onSuccess: (data) => {
       const tweets = queryClient.getQueryData([queryKeys.tweets]);
       if (tweets) {
