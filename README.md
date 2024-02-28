@@ -76,12 +76,15 @@ npm run format
 Deployed to [Cloudflare Pages](https://pages.cloudflare.com/).
 
 1. `Connect to Git` in **Cloudflare Dashboard > Workers & Pages > Pages**.
-2. Pick your `Git` hosting service. ex. GitHub / Gitlab.
+2. Pick your `Git` hosting service. ex. `GitHub` / `Gitlab`.
 3. Select your repository.
-4. Select the corresponding framework preset in the build setting.
-5. Deploy site.
-6. Add `environment variables` from `.env.example` in **Settings**.
-7. Setup a Custom domain in **Custom domains**.
+4. Pick your `Project name`.
+5. Select the corresponding `Framework preset` in the build setting.
+6. Add `Build command` ex. `npm run build`.
+7. Add `Build output directory` ex. `dist`.
+8. Add `Environment variables` from `.env.example`.
+9. Deploy site.
+10. Setup a Custom domain in **Custom domains**.
 
 [More on deployment to Cloudflare Pages...](https://vitejs.dev/guide/static-deploy.html#cloudflare-pages)
 
